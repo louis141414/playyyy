@@ -8,9 +8,9 @@ Play 100+ popular games **directly in your browser**, with **no ads, lightning-f
 
 <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="20" alt="Party Parrot"> *No downloads, no emulators, just pure gaming fun!* <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="20" alt="Party Parrot">
 
-[![GitHub Stars](https://img.shields.io/github/stars/louishermanpaelinck/playyyy?style=flat-square)](https://github.com/louishermanpaelinck/playyyy/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/louishermanpaelinck/playyyy?style=flat-square)](https://github.com/louishermanpaelinck/playyyy/issues)
-[![License](https://img.shields.io/github/license/louishermanpaelinck/playyyy?style=flat-square)](#license)
+[![GitHub Stars](https://img.shields.io/github/stars/louishermanpaelinck/playyyy)](https://github.com/louishermanpaelinck/playyyy/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/louishermanpaelinck/playyyy)](https://github.com/louishermanpaelinck/playyyy/issues)
+[![License](https://img.shields.io/github/license/louishermanpaelinck/playyyy)](#license)
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="300">
 
