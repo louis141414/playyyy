@@ -221,6 +221,142 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     renderHome();
+
+    // Save / Load buttons (export/import cookies)
+    const saveBtn = document.getElementById('save-data-btn');
+    const loadBtn = document.getElementById('load-data-btn');
+    const fileInput = document.getElementById('load-file-input');
+
+    function parseCookies() {
+      const raw = document.cookie || '';
+      if (!raw) return {};
+      return raw.split('; ').reduce((acc, cookie) => {
+        const eq = cookie.indexOf('=');
+        if (eq < 0) return acc;
+        const name = decodeURIComponent(cookie.substring(0, eq));
+        const value = decodeURIComponent(cookie.substring(eq + 1));
+        acc[name] = value;
+        return acc;
+      }, {});
+    }
+
+    function downloadJSON(data, filename) {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
+
+    function snapshotStorage(storage) {
+      const out = {};
+      try {
+        for (let i = 0; i < storage.length; i++) {
+          const key = storage.key(i);
+          out[key] = storage.getItem(key);
+        }
+      } catch (err) {
+        // Access to storage might be denied in some contexts
+      }
+      return out;
+    }
+
+    function exportCookiesToFile() {
+      const cookies = parseCookies();
+      const local = snapshotStorage(window.localStorage);
+      const session = snapshotStorage(window.sessionStorage);
+      const data = {
+        meta: {
+          hostname: location.hostname,
+          generatedAt: new Date().toISOString()
+        },
+        cookies,
+        localStorage: local,
+        sessionStorage: session
+      };
+      const filename = `playyyy-save-${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+      console.log('Exporting save:', {
+        cookiesCount: Object.keys(cookies).length,
+        localStorageCount: Object.keys(local).length,
+        sessionStorageCount: Object.keys(session).length,
+        filename
+      });
+      downloadJSON(data, filename);
+      alert(`Export ready: ${Object.keys(cookies).length} cookies, ${Object.keys(local).length} localStorage keys, ${Object.keys(session).length} sessionStorage keys. File: ${filename}`);
+    }
+
+    function importCookiesFromFile(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          // Support older exports which might be just a cookie map
+          const cookieMap = parsed && parsed.cookies ? parsed.cookies : (parsed && parsed.cookies === undefined ? parsed : {});
+
+          const cookieCount = cookieMap && typeof cookieMap === 'object' ? Object.keys(cookieMap).length : 0;
+          const localCount = parsed && parsed.localStorage && typeof parsed.localStorage === 'object' ? Object.keys(parsed.localStorage).length : 0;
+          const sessionCount = parsed && parsed.sessionStorage && typeof parsed.sessionStorage === 'object' ? Object.keys(parsed.sessionStorage).length : 0;
+
+          console.log('Importing save file:', { cookieCount, localCount, sessionCount, fileName: file.name });
+
+          // Ask user to confirm before applying
+          const ok = confirm(`Load save file ${file.name}?\nThis will set ${cookieCount} cookies, ${localCount} localStorage keys and ${sessionCount} sessionStorage keys on ${location.hostname}. Continue?`);
+          if (!ok) return;
+
+          // Set cookies with a 1 year expiry and path=/ to restore broadly
+          const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+          if (cookieMap && typeof cookieMap === 'object') {
+            Object.keys(cookieMap).forEach(name => {
+              const value = String(cookieMap[name]);
+              try {
+                document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; path=/; expires=${expires}`;
+              } catch (e) {
+                console.warn('Failed to set cookie', name, e);
+              }
+            });
+          }
+
+          // Restore localStorage and sessionStorage if present
+          if (parsed && parsed.localStorage && typeof parsed.localStorage === 'object') {
+            try {
+              Object.keys(parsed.localStorage).forEach(k => {
+                window.localStorage.setItem(k, parsed.localStorage[k]);
+              });
+            } catch (e) {
+              console.warn('Failed to set localStorage keys', e);
+            }
+          }
+
+          if (parsed && parsed.sessionStorage && typeof parsed.sessionStorage === 'object') {
+            try {
+              Object.keys(parsed.sessionStorage).forEach(k => {
+                window.sessionStorage.setItem(k, parsed.sessionStorage[k]);
+              });
+            } catch (e) {
+              console.warn('Failed to set sessionStorage keys', e);
+            }
+          }
+
+          alert('Save loaded — cookies and storage set. Reload pages if needed.');
+        } catch (err) {
+          console.error(err);
+          alert('Failed to load save file — invalid JSON. Open devtools console for details.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    if (saveBtn) saveBtn.addEventListener('click', exportCookiesToFile);
+    if (loadBtn) loadBtn.addEventListener('click', () => fileInput && fileInput.click());
+    if (fileInput) fileInput.addEventListener('change', e => {
+      const f = e.target.files && e.target.files[0];
+      if (f) importCookiesFromFile(f);
+      fileInput.value = '';
+    });
   } else if (document.getElementById('game-iframe')) {
     renderGame();
   }
