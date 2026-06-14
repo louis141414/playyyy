@@ -1,5 +1,5 @@
 // script.js
-const JSON_URL = "https://raw.githubusercontent.com/louishermanpaelinck/bookmarklet-apps/refs/heads/main/Iframer/code.json";
+const JSON_URL = "games.json";
 const FAVORITES_KEY = 'playyyy-favorites';
 
 let allGamesCache = null;
