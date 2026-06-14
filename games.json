@@ -1,0 +1,6 @@
+[
+  {"name": "Chess", "url": "./games/chess/index.html"},
+  {"name": "10 Minutes Till Dawn", "url": "./games/10minutestilldawn/index.html"},
+  {"name": "1 on 1 Soccer", "url": "./games/1on1soccer/index.html"},
+  {"name": "1v1.lol", "url": "./games/1v1lol/index.html"}
+]
