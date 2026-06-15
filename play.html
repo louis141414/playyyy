@@ -6,24 +6,26 @@
   <title>Playyyy</title>
   <link rel="stylesheet" href="style.css">
   <!-- Default Statcounter code for playyyy -->
-   <script type="text/javascript">
-   var sc_project=13299407; 
-   var sc_invisible=1; 
-   var sc_security="d0abe929"; 
-   </script>
-   <script type="text/javascript"
-   src="https://www.statcounter.com/counter/counter.js" async></script>
-   <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
-    Statcounter" href="https://statcounter.com/" target="_blank"><img
-    class="statcounter" src="https://c.statcounter.com/13299407/0/d0abe929/1/"
-    alt="Web Analytics Made Easy - Statcounter"
-    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-    <!-- End of Statcounter Code -->
+  <script type="text/javascript">
+    var sc_project=13299407;
+    var sc_invisible=1;
+    var sc_security="d0abe929";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank">
+        <img class="statcounter" src="https://c.statcounter.com/13299407/0/d0abe929/1/" alt="Web Analytics Made Easy - Statcounter" referrerPolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
+  </noscript>
+  <!-- End of Statcounter Code -->
 </head>
 <body>
   <header>
     <h1 id="game-title">Loading...</h1>
     <a href="index.html" style="color:#00ff9d; text-decoration:none;">← Back to Home</a>
+    <button id="fullscreen-btn" onclick="toggleFullscreen()" style="background: none; border: none; color: #00ff9d; font-size: 1.2em; cursor: pointer; margin-left: 10px;">⛶</button>
   </header>
 
   <div id="game-container" class="glass">
@@ -32,5 +34,17 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    function toggleFullscreen() {
+      const iframe = document.getElementById('game-iframe');
+      if (!document.fullscreenElement) {
+        iframe.requestFullscreen().catch(err => {
+          console.error(`Error enabling fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  </script>
 </body>
 </html>
