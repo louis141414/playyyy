@@ -85,7 +85,6 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-[![Statcounter](https://c.statcounter.com/13299407/0/d0abe929/0/)](https://statcounter.com/)
 Louis Paelinck – [@louishermanpaelinck](https://github.com/louishermanpaelinck)
 
 Project Link: [https://github.com/louishermanpaelinck/playyyy](https://github.com/louishermanpaelinck/playyyy)
