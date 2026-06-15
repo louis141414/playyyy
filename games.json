@@ -21,7 +21,6 @@
     { "name": "Duck Life", "url": "./games/ducklife/index.html" },
     { "name": "Fireboy and Watergirl", "url": "./games/fireboywatergirl/index.html" },
     { "name": "Flappy Bird", "url": "./games/flappy/index.html" },
-    { "name": "Friday Night Funkin'", "url": "./games/fnf/index.html" },
     { "name": "Fortnite (Browser)", "url": "./games/fortnite/index.html" },
     { "name": "Fruit Ninja", "url": "./games/fruitninja/index.html" },
     { "name": "Geometry Dash", "url": "./games/geometrydashsky/index.html" },
