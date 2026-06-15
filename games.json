@@ -1,4 +1,5 @@
 [
+    { "name": "Level Devil", "url": "./games/leveldevil/index.html" },
     { "name": "Drive Mad", "url": "./games/drivemad/index.html" },
     { "name": "2048", "url": "./games/2048/index.html" },
     { "name": "Among Us", "url": "./games/amongus/index.html" },
