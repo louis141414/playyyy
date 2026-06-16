@@ -297,9 +297,7 @@
                 });
 
                 addL('rewardedSlotGranted', (event) => {
-                    if (event.slot === gptSlot) {
-                        console.log('[PokiSDK] GPT: Reward granted 🎁');
-                    }
+                    console.log('[PokiSDK] GPT: Diabled!')
                 });
 
                 timeoutId = setTimeout(() => {
@@ -356,15 +354,9 @@
 
         isAdActive = true;
         console.log('[PokiSDK] Starting rewarded ad...');
-        freezeGame();
-        showLoadingIndicator();
 
         try {
-            console.log('[PokiSDK] Strategy: Direct GPT');
-            await showGPTRewardedAd();
-            console.log('[PokiSDK] ✅ GPT ad completed');
-            await hideLoadingIndicator();
-            unfreezeGame();
+            console.log('[PokiSDK] Disabled!');
         } catch (error) {
             console.warn('[PokiSDK] GPT failed, using fallback:', error.message);
             await hideLoadingIndicator();
