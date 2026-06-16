@@ -81,10 +81,22 @@ function createGameCard(game) {
   const footer = document.createElement('div');
   footer.className = 'card-footer';
 
+  const titleContainer = document.createElement('div');
+  titleContainer.className = 'card-title-container';
+
   const titleLink = document.createElement('a');
   titleLink.href = `play.html?game=${encodeURIComponent(game.name)}`;
   titleLink.textContent = game.name;
   titleLink.className = 'card-title-link';
+
+  titleContainer.appendChild(titleLink);
+
+  if (game.tag) {
+    const tag = document.createElement('span');
+    tag.className = 'card-tag';
+    tag.textContent = game.tag;
+    titleContainer.appendChild(tag);
+  }
 
   const favoriteButton = document.createElement('button');
   favoriteButton.type = 'button';
@@ -97,7 +109,7 @@ function createGameCard(game) {
     toggleFavorite(game.name);
   });
 
-  footer.appendChild(titleLink);
+  footer.appendChild(titleContainer);
   footer.appendChild(favoriteButton);
 
   link.appendChild(thumbnail);
