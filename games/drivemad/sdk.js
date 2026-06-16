@@ -4,7 +4,7 @@
 
     const CONFIG = {
         adUnits: {
-            rewarded: '/21849154601,22866254644/Ad.Plus-Rewarded'
+            rewarded: null
         },
     fallbackVideosUrl: [],
         loadingGifUrl: '../../scripts/ads/thumb_anim.gif',
