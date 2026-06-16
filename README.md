@@ -10,9 +10,9 @@ Play 100+ popular games **directly in your browser**, with **no ads, lightning-f
 
 try it on [here!](https://t.ly/lTF-_)
 
-[![GitHub Stars](https://img.shields.io/github/stars/louishermanpaelinck/playyyy)](https://github.com/louishermanpaelinck/playyyy/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/louishermanpaelinck/playyyy)](https://github.com/louishermanpaelinck/playyyy/issues)
-[![License](https://img.shields.io/github/license/louishermanpaelinck/playyyy)](#license)
+[![GitHub Stars](https://img.shields.io/github/stars/louis141414/playyyy)](https://github.com/louishermanpaelinck/playyyy/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/louis141414/playyyy)](https://github.com/louishermanpaelinck/playyyy/issues)
+[![License](https://img.shields.io/github/license/louis141414/playyyy)](#license)
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
@@ -38,7 +38,7 @@ try it on [here!](https://t.ly/lTF-_)
 - **100+ High-Quality Games** – From classics like *2048* and *Slope* to modern hits like *Drift Hunters* and *Territorial.io*.
 - **Full-Screen Mode** – Immerse yourself in every game.
 - **Pure Vanilla Code** – No heavy frameworks, just fast, lightweight, and efficient code.
-- **Open Source** – Contribute, suggest, or request new features via [GitHub Issues](https://github.com/louishermanpaelinck/playyyy/issues)!
+- **Open Source** – Contribute, suggest, or request new features via [GitHub Issues](https://github.com/louis141414/playyyy/issues)!
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
@@ -85,9 +85,9 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-Louis Paelinck – [@louishermanpaelinck](https://github.com/louishermanpaelinck)
+Louis Paelinck – [@louis141414](https://github.com/louis141414)
 
-Project Link: [https://github.com/louishermanpaelinck/playyyy](https://github.com/louishermanpaelinck/playyyy)
+Project Link: [https://github.com/louis141414/playyyy](https://github.com/Louis141414/playyyy)
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 </div>
