@@ -280,20 +280,11 @@
                 });
 
                 addL('rewardedSlotReady', (event) => {
-                    if (event.slot === gptSlot) {
-                        console.log('[PokiSDK] GPT: Ad ready');
-                        adStarted = true;
-                        clearTimeout(timeoutId);
-                        hideLoadingIndicator().then(() => event.makeRewardedVisible());
-                    }
+                    console.log('[PokiSDK] GPT: Diabled!')
                 });
 
                 addL('rewardedSlotClosed', (event) => {
-                    if (event.slot === gptSlot) {
-                        console.log('[PokiSDK] GPT: Ad closed');
-                        cleanup();
-                        resolve();
-                    }
+                    console.log('[PokiSDK] GPT: Diabled!')
                 });
 
                 addL('rewardedSlotGranted', (event) => {
@@ -301,11 +292,7 @@
                 });
 
                 timeoutId = setTimeout(() => {
-                    if (!adStarted) {
-                        console.warn('[PokiSDK] GPT: Timeout');
-                        cleanup();
-                        reject(new Error('timeout'));
-                    }
+                    console.log('[PokiSDK] GPT: Diabled!')
                 }, CONFIG.adTimeout);
 
                 window.googletag.display(gptSlot);
@@ -350,23 +337,7 @@
     }
 
     async function showRewardedAd() {
-        if (isAdActive) return true;
-
-        isAdActive = true;
-        console.log('[PokiSDK] Starting rewarded ad...');
-
-        try {
-            console.log('[PokiSDK] Disabled!');
-        } catch (error) {
-            console.warn('[PokiSDK] GPT failed, using fallback:', error.message);
-            await hideLoadingIndicator();
-            await playFallbackVideo();
-        }
-
-        isAdActive = false;
-        console.log('[PokiSDK] Rewarding user');
-
-        return true;
+        console.log('[PokiSDK] GPT: Diabled!')
     }
 
     const noop = () => {};
