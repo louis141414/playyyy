@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="25011401/theme/game.css">
+	<title>Escape Road</title>
+	<style type="text/css">
+		.jss1:before {
+			top: 0;
+			width: 100%;
+			filter: blur(16px);
+			height: 100%;
+			content: "";
+			display: block;
+			opacity: .5;
+			z-index: 0;
+			position: absolute;
+			background-size: cover;
+			background-image: url("25011401/loading.png")
+		}
+	</style> 
+	<script nonce="MzQ1OTIwMjkzMCwyNTQ0NzYxMTI4">
+		var versionFolder = "25011401/";
+		var buildUrl = "./Build";
+		var loaderUrl = buildUrl + "/escape-road-v25011401.loader.js";
+		var config = {
+			dataUrl: buildUrl + "/escape-road-v25011401.data.unityweb",
+			frameworkUrl: buildUrl + "/escape-road-v25011401.framework.js.unityweb",
+			codeUrl: buildUrl + "/escape-road-v25011401.wasm.unityweb",
+			streamingAssetsUrl: versionFolder+"StreamingAssets",
+			companyName: "1games.io",
+			productName: "Escape Road",
+			productVersion: "25011401",
+			pubId: ""
+		};
+		config.hostindex = 2;
+		config.gameId = "escape-road";
+		config.eventLog=true;
+		config.buildAPI = "https://event.azgame.io/apiaz/event";
+		let currentDate = new Date();
+		let endLogDate = new Date("2025-09-26T03:00:30.737Z");
+		if(currentDate>endLogDate){
+			config.eventLog=false;
+		}
+		config.enableMoreGame="yes";
+		config.enablePromotion = true;
+		config.gdHost=isHostOnGD();
+		if(config.gdHost){
+			config.enableMoreGame="no";
+			config.enablePromotion = false;
+			config.eventLog = false;
+			config.sdkType = "gd";
+			config.gdGameId = "USE_GD_GAME_ID_CODE";
+		}else{
+		}		
+		function isHostOnGD() {
+			let domainParts = window.location.hostname.split('.');
+			let mainDomain = domainParts.slice(-2).join('.');
+			return true;
+		}
+		
+	</script>
+	<script id="gmsoft-jssdks" src="./gmsoftsdk_v5.js" nonce="MzQ1OTIwMjkzMCwyNTQ0NzYxMTI4"></script>
+</head>
+
+<body>
+<div id="unity-container" style="display: none;">
+	<canvas id="unity-canvas"></canvas> 
+</div>
+<div id="loadingBlock" style="">
+	<div class="jss31 jss34 jss1">
+	<div style="position: absolute; font-family: Arial, Helvetica, sans-serif;	bottom: 10px; right: 10px; font-size: 18px; color: #ffffff; opacity: 0.5;">25011401</div>
+		<div class="spinner"></div>
+		<div class="jss31 jss34 jss48" style="flex: 1 1 0%;">
+			<div class="jss32">
+				<div class="jss7 jss9 jss20 jss3">
+					<div class="jss125">
+						<div class="jss123">
+						 <img src="25011401/logo.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--PRODUCT_VERSION:25011401END-->
+		<div class="jss31 jss34" style="flex: 3 1 0%;">
+			<div class="jss32">
+				<div class="jss31 jss34 jss39 jss50 gameloader">
+					<div class="jss32">
+						<div class="gameloader-game-name">Escape Road</div>
+					</div>
+					<div class="jss32">
+						<div class="jss32 gameloader-logo">
+							<img id="game-logo" src="25011401/loading.png">
+						</div>
+					</div>
+					<div class="jss32">
+						<div>
+							<div class="gameloader-progressbar">
+								<div class="gameloader-progressbar-progress" id="progress_fill"
+										 style="width: 0%;"></div>
+							</div>
+							<div class="gameloader-progress-info">Game Loading...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<script nonce="MzQ1OTIwMjkzMCwyNTQ0NzYxMTI4"> 
+		var progressElement = document.getElementById('progress_fill');
+		var container =	document.getElementById("unity-container");
+		var canvas =	document.getElementById("unity-canvas");
+		var loadingBar = document.querySelector("#loadingBlock");
+		var progressBarFull = document.querySelector("#progress_fill");
+		var progress_text = document.querySelector(".gameloader-progress-info");
+		let text_percent = "";
+		var script = document.createElement("script");
+		script.src = loaderUrl;
+		script.onload = () => {
+		createUnityInstance(canvas, config, (progress) => {
+			progressElement.style.width = 100 * progress + "%";
+			text_percent = "Downloading file: " + Math.round(progress*100) + "%";
+			progress_text.innerText = text_percent;
+			if (progress >= 99) {
+				progress_text.innerText = "Game Loading ...";
+			}
+		}).then((unityInstance) => {
+			window.unityInstance = unityInstance;
+			setTimeout(function() {
+				loadingBar.style.display = "none";
+				window.focus();
+			}, 2000);
+			container.style.display = "block";
+		}).catch((message) => {
+			alert(message);
+		});
+		};
+		document.body.appendChild(script);
+	</script>
+	<script nonce="MzQ1OTIwMjkzMCwyNTQ0NzYxMTI4">
+		function firebaseSetUserProperties(props) {
+		}
+		function firebaseLogEvent(event_name) {
+		}
+		function firebaseLogEventParameter(event_name, event_param) {
+		}
+		let time_counter_gm=0;
+		function gmRepeatEvery30Seconds() {
+		  setInterval(function() {
+			if(config.eventLog){
+				firebaseLogEvent("time_countergm_"+time_counter_gm++);
+			}
+		  }, 30000);
+		}
+		gmRepeatEvery30Seconds();
+		var lastSentDiem = 0,
+	    gameStartTime = 0,
+	    currentScore = 0;
+	    function sendScore (score, gameData = {}) {
+	        try {
+	            const message = {
+	                type: 'GAME_SCORE',
+	                data: {
+	                score: score,
+	                gameData: {
+	                    level: gameData.level || 1,
+	                    time: gameData.time || Math.floor((Date.now() - gameStartTime) / 1000),
+	                    lives: gameData.lives || 0,
+	                    ...gameData
+	                }
+	                }
+	            };
+	            if (window.parent && window.parent !== window) {
+	                window.parent.postMessage(message, '*');
+	                console.log('Score sent to parent:', score, message);
+	            } else {
+	                console.log('Score logged (no parent):', score);
+	            }
+	        } catch (error) {
+	        console.error('Error sending score:', error);
+	        }
+	    };
+	    function sendFinalDiem (score, gameData = {}) {
+	        try {
+	            if (!Number.isInteger(score) || score <= currentScore) {
+	                return;
+	            }
+	            currentScore = score;
+	            sendScore(score, {
+	                ...gameData,
+	                isFinalScore: true,
+	                gameTime: Math.floor((Date.now() - gameStartTime) / 1000)
+	            });
+	        } catch (error) {
+	        console.error('Error sending final score:', error);
+	        }
+	    };
+			(function () {
+	    const TARGET_URL =
+	        "https://leaderboards.services.api.unity.com/v1/projects/0b041d53-e49a-41e3-9746-011cbf864eb0/leaderboards/Top_Month/scores/players/";
+	    const originalFetch = window.fetch;
+	    window.fetch = function () {
+	        return originalFetch.apply(this, arguments).then(response => {
+	            try {
+	                const url = response.url || "";
+	                if (url.startsWith(TARGET_URL)) {
+	                    const clone = response.clone();
+	                    clone.json().then(data => {
+	                        if (data && typeof data.score !== "undefined") {
+								sendFinalDiem(data.score,{reason: 'game_stop'});
+	                        }
+	                    }).catch(() => {});
+	                }
+	            } catch (e) {}
+	            return response;
+	        });
+	    };
+	    console.log("✅ Unity leaderboard response hook ready");
+	})();
+	</script>
+	
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"3f107d1a3c4543b292bc29d1f0fdaf84","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>	
+</html>
