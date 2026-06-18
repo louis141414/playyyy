@@ -188,13 +188,8 @@ async function renderGame() {
     description.innerHTML = `
       <div class="game-meta">
         <div>
-          Playing <strong>${game.name}</strong><br>
-          Enjoy this classic browser game!<br>
+          Enjoy playing <strong>${game.name}</strong>!<br>
           <small>Full screen recommended (F11)</small><br>
-          <small>Drag this to your <a href="https://oliviagallucci.com/using-javascript-bookmarklets/#how-to-use-bookmarklets">BookmarkletsBar</a> to play these games everywhere!</small><br>
-          <small>
-            <a href="javascript:(function(){fetch('https://raw.githubusercontent.com/louishermanpaelinck/bookmarklet-apps/main/Iframer/no%20bookmark.js').then(r => r.text()).then(code => {const blob = new Blob([code], {type: 'application/javascript'});const blobUrl = URL.createObjectURL(blob);const s = document.createElement('script');s.src = blobUrl;s.onload = () => URL.revokeObjectURL(blobUrl);document.head.appendChild(s);}).catch(console.error);})();" id="bookmarklet-link">playyyy</a>
-          </small>
         </div>
         <button id="game-favorite-btn" class="favorite-btn favorite-btn-large ${isFavorite(game.name) ? 'active' : ''}" type="button">
           ${isFavorite(game.name) ? '★ Favorite' : '☆ Add to favorites'}
