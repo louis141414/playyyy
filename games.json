@@ -1,4 +1,5 @@
 [
+    { "name": "Astray", "url": "./games/astray/index.html", "tag": "New!!" },
     { "name": "Hextris", "url": "./games/hextris/index.html", "tag": "New!!" },
     { "name": "We Become What We Behold", "url": "./games/wbwwb/index.html", "tag": "New!!" },
     { "name": "escape road", "url": "./games/escaperoad/game-assets/17587083693312/index.html", "tag": "New!!" },
