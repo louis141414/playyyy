@@ -1,4 +1,6 @@
 [
+    { "name": "Roper", "url": "./games/roper/index.html", "tag": "New!!" },
+    { "name": "Monster Tracks", "url": "./games/monstertracks/index.html", "tag": "New!!" },
     { "name": "Astray", "url": "./games/astray/index.html", "tag": "New!!" },
     { "name": "Hextris", "url": "./games/hextris/index.html", "tag": "New!!" },
     { "name": "We Become What We Behold", "url": "./games/wbwwb/index.html", "tag": "New!!" },
