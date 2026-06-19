@@ -573,12 +573,7 @@ function tryStartGame() {
     gameReadyToStart = true;
     PokiSDK.gameLoadingFinished();
     console.log("Starting game");
-    PokiSDK.commercialBreak().then(() => {
-        startGame();
-    }).catch(() => {
-        startGame();
-        console.log("Failed to show ad");
-    });
+    startGame();
 }
 
 function simpleLogC(str) {
@@ -939,4 +934,11 @@ function firebaseDeinit() {}
 
 function currentTimeSecondsRound() {
     return Math.round(Date.now() / 1000);
+}
+
+if (gameStarted) {
+    console.log('already started');
+} else {
+    startGame();
+    console.log('game started');
 }
