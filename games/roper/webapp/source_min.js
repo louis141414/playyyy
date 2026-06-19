@@ -552,6 +552,15 @@ function pokiEnsureStart() {
 }
 var startGameAttempts = 0;
 var tryStartGameTimeout = null;
+function trygame() {
+    if (gameStarted) {
+        console.log('already started');
+    } else {
+       startGame();
+      console.log('game started');
+    }
+}
+
 
 function tryStartGame() {
     console.log("tryStartGame()", gameReadyToStart, true, theDomLoaded, postRunDone);
@@ -573,7 +582,7 @@ function tryStartGame() {
     gameReadyToStart = true;
     PokiSDK.gameLoadingFinished();
     console.log("Starting game");
-    startGame();
+    trygame();
 }
 
 function simpleLogC(str) {
@@ -934,11 +943,4 @@ function firebaseDeinit() {}
 
 function currentTimeSecondsRound() {
     return Math.round(Date.now() / 1000);
-}
-
-if (gameStarted) {
-    console.log('already started');
-} else {
-    startGame();
-    console.log('game started');
 }
