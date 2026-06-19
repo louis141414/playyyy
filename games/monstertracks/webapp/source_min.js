@@ -550,7 +550,7 @@ var startGameAttempts = 0;
 var tryStartGameTimeout = null;
 
 function tryStartGame() {
-    console.log("tryStartGame()", gameReadyToStart, pokiInited, theDomLoaded, postRunDone);
+    console.log("tryStartGame()", gameReadyToStart, true, heDomLoaded, postRunDone);
     if (gameReadyToStart) {
         return;
     }
