@@ -552,18 +552,9 @@ function pokiEnsureStart() {
 }
 var startGameAttempts = 0;
 var tryStartGameTimeout = null;
-function trygame() {
-    if (gameStarted) {
-        console.log('already started');
-    } else {
-       startGame();
-      console.log('game started');
-    }
-}
-
 
 function tryStartGame() {
-    console.log("tryStartGame()", gameReadyToStart, true, theDomLoaded, postRunDone);
+    console.log("tryStartGame()", gameReadyToStart, pokiInited, theDomLoaded, postRunDone);
     if (gameReadyToStart) {
         return;
     }
@@ -582,7 +573,9 @@ function tryStartGame() {
     gameReadyToStart = true;
     PokiSDK.gameLoadingFinished();
     console.log("Starting game");
-    trygame();
+    PokiSDK.commercialBreak().then(() => {
+        startGame();
+    });
 }
 
 function simpleLogC(str) {
@@ -757,6 +750,9 @@ var Module = {
     },
     postMainLoop: function() {
         Audio.queuedata();
+    },
+    onRuntimeInitialized: function() {
+        tryStartGame();
     }
 };
 var notifications = [];
@@ -944,107 +940,3 @@ function firebaseDeinit() {}
 function currentTimeSecondsRound() {
     return Math.round(Date.now() / 1000);
 }
-
-(function() {
-            // Create container
-            const container = document.createElement('div');
-            container.id = 'game-start-overlay';
-            container.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    `;
-
-            // Create start button
-            const startBtn = document.createElement('button');
-            startBtn.textContent = 'START GAME';
-            startBtn.style.cssText = `
-      padding: 12px 24px;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    `;
-
-            startBtn.onmouseover = () => {
-                startBtn.style.transform = 'scale(1.05)';
-                startBtn.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.3)';
-            };
-            startBtn.onmouseout = () => {
-                startBtn.style.transform = 'scale(1)';
-                startBtn.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-            };
-
-            startBtn.onclick = () => {
-                const gameButton = document.querySelector('button[id*="start"], button[class*="start"], button[id*="play"], button[class*="play"], #startButton, .start-button, .play-button');
-                if (gameButton) {
-                    gameButton.click();
-                    console.log('Game started!');
-                    setTimeout(() => {
-                        container.remove();
-                    }, 500);
-                } else {
-                    console.log('Game button not found');
-                }
-            };
-
-            // Create close button (tiny X)
-            const closeBtn = document.createElement('button');
-            closeBtn.textContent = '✕';
-            closeBtn.style.cssText = `
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      font-size: 20px;
-      font-weight: bold;
-      color: #666;
-      background: white;
-      border: 2px solid #ddd;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    `;
-
-            closeBtn.onmouseover = () => {
-                closeBtn.style.background = '#f0f0f0';
-                closeBtn.style.color = '#000';
-                closeBtn.style.borderColor = '#999';
-            };
-            closeBtn.onmouseout = () => {
-                closeBtn.style.background = 'white';
-                closeBtn.style.color = '#666';
-                closeBtn.style.borderColor = '#ddd';
-            };
-
-            closeBtn.onclick = () => {
-                container.remove();
-                console.log('Overlay closed');
-            };
-
-            // Append buttons to container
-            container.appendChild(startBtn);
-            container.appendChild(closeBtn);
-
-            // Add to page when DOM is ready
-            if (document.body) {
-                document.body.appendChild(container);
-            } else {
-                document.addEventListener('DOMContentLoaded', () => {
-                    document.body.appendChild(container);
-                });
-            }
-        })();
