@@ -368,3 +368,69 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGame();
   }
 });
+
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
+}
+
+function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+}
+
+const intro = document.getElementById("intro");
+const fill = document.getElementById("fill");
+const status = document.getElementById("status");
+
+const hasSeen = getCookie("playyyy_intro") === "1";
+
+function finishIntro() {
+    intro.classList.add("fadeout");
+
+    setTimeout(() => {
+        intro.style.display = "none";
+        setCookie("playyyy_intro", "1", 30);
+    }, 800);
+}
+
+// ------------------------
+// FIRST VISIT (FULL LOADING ~5s)
+// ------------------------
+if (!hasSeen) {
+    let progress = 0;
+    const duration = 5000; // 5 sec
+    const start = performance.now();
+
+    function animate() {
+        const t = Math.min(1, (performance.now() - start) / duration);
+        progress = Math.floor(t * 100);
+
+        fill.style.width = progress + "%";
+
+        if (progress < 30) status.textContent = "Preparing assets...";
+        else if (progress < 60) status.textContent = "Loading games...";
+        else if (progress < 90) status.textContent = "Finalizing...";
+        else status.textContent = "Ready";
+
+        if (t < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            finishIntro();
+        }
+    }
+
+    requestAnimationFrame(animate);
+
+// ------------------------
+// RETURN VISIT (SIMPLE QUICK INTRO)
+// ------------------------
+} else {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("status").style.display = "none";
+
+    setTimeout(() => {
+        finishIntro();
+    }, 1000);
+}
