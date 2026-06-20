@@ -3,6 +3,7 @@ function LoadStatcounter () {
   var sc_invisible=0; 
   var sc_security="d0abe929"; 
   var scJsHost = "https://";
+  var sc_text=5;
   document.write("<sc"+"ript type='text/javascript' src='" +
                  scJsHost+
                  "statcounter.com/counter/counter.js'></"+"script>");
