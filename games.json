@@ -1,4 +1,5 @@
 [
+    { "name": "Gobble", "url": "./games/gobble/index.html", "tag": "New!!" },
     { "name": "Roper", "url": "./games/roper/index.html", "tag": "New!!" },
     { "name": "Monster Tracks", "url": "./games/monstertracks/index.html", "tag": "New!!" },
     { "name": "Astray", "url": "./games/astray/index.html", "tag": "New!!" },

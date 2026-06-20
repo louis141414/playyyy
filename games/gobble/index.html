@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Gobble - Playtropolis</title>
+    <link rel="canonical" href="https://playtropolis.com/Gobble">
+    <meta name="description" content="">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="webapp/fancade.css">
+    <link rel="icon" href="webapp/favicon.ico">
+    <script type="text/javascript" src="sdk.js"></script>
+  </head>
+  <body id="body">
+    <div id="modal_parent">
+      <div id="modal_content">
+        <span id="modal_close_button">&times;</span>
+        <div id="store_link_modal_content" class="modal_inner"></div>
+        <div id="share_file_modal_content" class="modal_inner"></div>
+      </div>
+    </div>
+    <div id="canvas_border" class="emscripten_border">
+      <div id="play_content" class="middle center">
+        <div class="edge">
+          <div class="box">
+            <div class="black">
+              <img src="webapp/cover.jpg" class="cover">
+              <p class="title">Gobble</p>
+              <p class="author"></p>
+            </div>
+          </div>
+        </div>
+        <div id="progress_or_play">
+          <progress id="progress" class="loading" value="0" max="100"></progress>
+        </div>
+        <p class="description"></p>
+      </div>
+      <canvas class="emscripten" id="canvas" tabindex="-1"></canvas>
+      <div id="gradient"></div>
+      <div id="webview_content"></div>
+    </div>
+    <script type="text/javascript" src="webapp/source_min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="webapp/index.js" crossorigin="anonymous"></script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f32b117169f04cb0b6df465d556ac0f6","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

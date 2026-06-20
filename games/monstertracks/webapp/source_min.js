@@ -569,9 +569,7 @@ function tryStartGame() {
     gameReadyToStart = true;
     PokiSDK.gameLoadingFinished();
     console.log("Starting game");
-    PokiSDK.commercialBreak().then(() => {
-        startGame();
-    });
+    startGame();
 }
 
 function simpleLogC(str) {
@@ -936,3 +934,14 @@ function firebaseDeinit() {}
 function currentTimeSecondsRound() {
     return Math.round(Date.now() / 1000);
 }
+
+function checkAndStart() {
+    if (!gameStarted) {
+        startGame();
+        setTimeout(checkAndStart, 500);
+    } else {
+        console.log("Error: Game already started!");
+    }
+}
+
+setTimeout(checkAndStart, 1000);

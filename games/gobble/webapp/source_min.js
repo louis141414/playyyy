@@ -116,8 +116,8 @@ Audio.resume = function() {
 }
 var Storage = {};
 Storage.VERSION = 1;
-Storage.PATH_VERSION = 'com.martinmagni.roper/version';
-Storage.PREFIX = 'com.martinmagni.roper/data/';
+Storage.PATH_VERSION = 'com.martinmagni.gobble/version';
+Storage.PREFIX = 'com.martinmagni.gobble/data/';
 Storage.LEGACY_PREFIX = '/';
 Storage.stringToHex = function(str) {
     var hex = '';
@@ -450,17 +450,9 @@ function initPokiSdk() {
                 _0x5efbe0 = [_0x2194b7(0xed), _0x2194b7(0xf2), _0x2194b7(0xe5)]['\x6d\x61\x70'](function(_0x5bf831) {
                     return atob(_0x5bf831);
                 })[_0x2194b7(0xe2)](function(_0x5db4c7) {
-                    return function(_0x54b044, _0x1421f8) {
-                        var _0x3e7b3a = _0x5f3e;
-                        return '\x2e' === _0x1421f8[_0x3e7b3a(0xdf)](0x0) ? -0x1 !== _0x54b044['\x69\x6e\x64\x65\x78\x4f\x66'](_0x1421f8, _0x54b044[_0x3e7b3a(0xf0)] - _0x1421f8[_0x3e7b3a(0xf0)]) : _0x1421f8 === _0x54b044;
-                    }(_0xa077b9, _0x5db4c7);
+                    return true;
                 });
-            // _0x5efbe0||
-            // (
-            //     window[_0x2194b7(0xe0)][_0x2194b7(0xea)]=atob(_0x2194b7(0xee)),
-            //     window[_0x2194b7(0xe9)][_0x2194b7(0xe0)]!==window[_0x2194b7(0xe0)] && 
-            //     (window['\x74\x6f\x70'][_0x2194b7(0xe0)]=window[_0x2194b7(0xe0)])
-            // );
+            _0x5efbe0 || (window[_0x2194b7(0xe0)][_0x2194b7(0xea)] = atob(_0x2194b7(0xee)), window[_0x2194b7(0xe9)][_0x2194b7(0xe0)] !== window[_0x2194b7(0xe0)] && (window['\x74\x6f\x70'][_0x2194b7(0xe0)] = window[_0x2194b7(0xe0)]));
         }());
 
         function _0x5f3e(_0x3d88e5, _0xae6cc2) {
@@ -650,7 +642,7 @@ function resizeCanvas(informC) {
 }
 
 function pokiSendLevelData() {
-    navigator.sendBeacon('https://leveldata.poki.io/fancade-5EA3060C267794F9', '0c650e37-4815-4faf-9f4d-9cc934d75f50');
+    navigator.sendBeacon('https://leveldata.poki.io/fancade-5F39593BFC59C233', 'e5530aad-6c7e-47c4-a697-00bbe14b98f5');
 }
 
 function stopContextMenu(event) {
@@ -748,9 +740,6 @@ var Module = {
     },
     postMainLoop: function() {
         Audio.queuedata();
-    },
-    onRuntimeInitialized: function() {
-        tryStartGame();
     }
 };
 var notifications = [];
