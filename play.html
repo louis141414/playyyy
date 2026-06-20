@@ -1,23 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>Playyyy</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Default Statcounter code for playyyy - game site
-    https://louis141414.github.io/playyyy -->
-    <script type="text/javascript">
-        var sc_project=13299407;
-        var sc_invisible=0;
-        var sc_security="d0abe929";
-        var scJsHost = "https://";
-        document.write("<sc"+"ript type='text/javascript' src='" +
-        scJsHost+
-        "statcounter.com/counter/counter.js'></"+"script>");
-    </script>
 </head>
 
 <body>
@@ -38,17 +26,12 @@
           const iframe = document.getElementById('game-iframe');
           if (!document.fullscreenElement) {
             iframe.requestFullscreen().catch(err => {
-              console.error(`Error enabling fullscreen: ${err.message}`);
+              console.error(`Error: ${err.message}`);
             });
           } else {
             document.exitFullscreen();
           }
         }
     </script>
-
-    <!-- Statcounter and Stats link moved here -->
-    <noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13299407/0/d0abe929/0/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-    <a href="https://statcounter.com/p13299407/?guest=1" style="color:#00ff9d; text-decoration:none;">Stats</a>
 </body>
-
 </html>
