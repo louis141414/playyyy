@@ -811,3 +811,14 @@ function firebaseDeinit() {}
 function currentTimeSecondsRound() {
     return Math.round(Date.now() / 1000);
 }
+
+function checkAndStart() {
+    if (!gameStarted) {
+        startGame();
+        setTimeout(checkAndStart, 500);
+    } else {
+        console.log("Error: Game already started!");
+    }
+}
+
+setTimeout(checkAndStart, 1000);
