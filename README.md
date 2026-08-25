@@ -14,6 +14,7 @@ try it on [here!](https://t.ly/lTF-_)
 [![GitHub Issues](https://img.shields.io/github/issues/louis141414/playyyy)](https://github.com/louishermanpaelinck/playyyy/issues)
 [![License](https://img.shields.io/github/license/louis141414/playyyy)](#license)
 
+**➡ ➡ ➡ Windows version is now live! [Download](https://github.com/louis141414/Playyyy-pc-app/) ⬅ ⬅ ⬅**
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 
