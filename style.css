@@ -123,7 +123,7 @@ body {
 .captcha-gate {
   position: fixed;
   inset: 0;
-  z-index: var(--z-modal);
+  z-index: calc(var(--z-loading) + 1);
   display: grid;
   place-items: center;
   padding: var(--spacing-md);
