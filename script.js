@@ -9,6 +9,102 @@ function LoadStatcounter () {
                  "statcounter.com/counter/counter.js'></"+"script>");
 }
 
+const HCAPTCHA_SITE_KEY = '4f74f4a2-9160-4aa2-a89c-be7e00deaefe';
+const HCAPTCHA_SCRIPT_URL = 'https://js.hcaptcha.com/1/api.js?render=explicit';
+const HCAPTCHA_VERIFIED_AT_KEY = 'playyyy-hcaptcha-verified-at';
+const HCAPTCHA_VERIFICATION_WINDOW = 2 * 60 * 60 * 1000;
+
+function isCaptchaStillValid() {
+  const verifiedAt = Number(localStorage.getItem(HCAPTCHA_VERIFIED_AT_KEY));
+  return Number.isFinite(verifiedAt) && Date.now() - verifiedAt < HCAPTCHA_VERIFICATION_WINDOW;
+}
+
+function loadHCaptchaScript() {
+  if (window.hcaptcha) return Promise.resolve();
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = HCAPTCHA_SCRIPT_URL;
+    script.async = true;
+    script.defer = true;
+    script.onload = resolve;
+    script.onerror = () => reject(new Error('hCaptcha could not be loaded.'));
+    document.head.appendChild(script);
+  });
+}
+
+function createCaptchaGate() {
+  const gate = document.createElement('div');
+  gate.className = 'captcha-gate';
+  gate.setAttribute('role', 'dialog');
+  gate.setAttribute('aria-modal', 'true');
+  gate.innerHTML = `
+    <div class="captcha-gate-panel">
+      <p class="captcha-gate-eyebrow">Quick check</p>
+      <h2>Verify to continue</h2>
+      <p class="captcha-gate-message">Please complete the security check before playing.</p>
+      <div class="h-captcha" data-sitekey="${HCAPTCHA_SITE_KEY}"></div>
+      <button class="captcha-retry" type="button" hidden>Try again</button>
+    </div>
+  `;
+  document.body.appendChild(gate);
+  return gate;
+}
+
+async function requireCaptchaAccess() {
+  if (isCaptchaStillValid()) return true;
+
+  const gate = createCaptchaGate();
+  const message = gate.querySelector('.captcha-gate-message');
+  const retryButton = gate.querySelector('.captcha-retry');
+
+  const verify = () => new Promise((resolve, reject) => {
+    let widgetId;
+    const onVerified = (token) => {
+      if (!token) {
+        resolve(false);
+        return;
+      }
+      localStorage.setItem(HCAPTCHA_VERIFIED_AT_KEY, String(Date.now()));
+      gate.remove();
+      resolve(true);
+    };
+
+    try {
+      widgetId = window.hcaptcha.render(gate.querySelector('.h-captcha'), {
+        sitekey: HCAPTCHA_SITE_KEY,
+        callback: onVerified,
+        'expired-callback': () => message.textContent = 'The check expired. Please complete it again.',
+        'error-callback': () => {
+          message.textContent = 'The security check failed. Please try again.';
+          retryButton.hidden = false;
+        }
+      });
+    } catch (error) {
+      message.textContent = 'The security check is unavailable right now.';
+      retryButton.hidden = false;
+      reject(error);
+    }
+
+    retryButton.onclick = () => {
+      retryButton.hidden = true;
+      message.textContent = 'Please complete the security check before playing.';
+      if (widgetId !== undefined) window.hcaptcha.reset(widgetId);
+    };
+  });
+
+  try {
+    await loadHCaptchaScript();
+    await verify();
+    return true;
+  } catch (error) {
+    message.textContent = 'The security check is unavailable right now.';
+    retryButton.hidden = false;
+  }
+
+  return false;
+}
+
 // =======================
 // SUPER SIMPLE VERSION
 // =======================
@@ -322,6 +418,9 @@ function finishIntro() {
 // INIT
 // =======================
 document.addEventListener('DOMContentLoaded', async () => {
+  const captchaPassed = await requireCaptchaAccess();
+  if (!captchaPassed) return;
+
   const hasSeenIntro = getCookie('playyyy_intro') === '1';
 
   // Intro animatie
