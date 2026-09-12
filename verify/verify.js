@@ -12,12 +12,12 @@
   const verifiedAt = Number(getCookie(COOKIE)) || 0;
   const valid = verifiedAt && Date.now() - verifiedAt < MAX_AGE * 1000;
 
-  if (!valid && location.pathname !== "/verify") {
+  if (!valid && location.pathname !== "/playyyy/verify") {
     const returnTo =
       location.pathname + location.search + location.hash;
 
     location.replace(
-      "/verify?return=" + encodeURIComponent(returnTo)
+      "/playyyy/verify?return=" + encodeURIComponent(returnTo)
     );
 
     return;
@@ -26,6 +26,6 @@
   // Returning before 30 minutes resets the timer.
   if (valid) {
     document.cookie =
-      `${COOKIE}=${Date.now()}; Max-Age=${MAX_AGE}; Path=/; SameSite=Lax`;
+      `${COOKIE}=${Date.now()}; Max-Age=${MAX_AGE}; Path=/playyyy/; SameSite=Lax`;
   }
 })();

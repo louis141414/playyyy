@@ -67,16 +67,16 @@
 
     function safeReturnPath(path) {
       // Prevent external redirects.
-      return path.startsWith("/") && !path.startsWith("//")
+      return path.startsWith("/playyyy/") && !path.startsWith("//")
         ? path
-        : "/";
+        : "/playyyy/";
     }
 
     function captchaSolved(token) {
       // Verify this token on your server before trusting it.
       document.cookie =
         "captchaVerified=" + Date.now() +
-        "; Max-Age=1800; Path=/; SameSite=Lax";
+        "; Max-Age=1800; Path=/playyyy/; SameSite=Lax";
 
       location.replace(safeReturnPath(returnTo));
     }
