@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verification</title>
+
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #090909;
+      color: #fff;
+    }
+
+    .card {
+      width: min(92%, 380px);
+      padding: 32px;
+      text-align: center;
+      background: #151515;
+      border: 1px solid #333;
+      border-radius: 14px;
+      box-shadow: 0 15px 50px #000;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    p {
+      color: #bbb;
+      margin-bottom: 24px;
+    }
+
+    #captcha {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <h1>Verify you are human</h1>
+    <p>Complete the CAPTCHA to continue.</p>
+
+    <div id="captcha"></div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const returnTo = params.get("return") || "/";
+
+    function safeReturnPath(path) {
+      // Prevent external redirects.
+      return path.startsWith("/") && !path.startsWith("//")
+        ? path
+        : "/";
+    }
+
+    function captchaSolved(token) {
+      // Verify this token on your server before trusting it.
+      document.cookie =
+        "captchaVerified=" + Date.now() +
+        "; Max-Age=1800; Path=/; SameSite=Lax";
+
+      location.replace(safeReturnPath(returnTo));
+    }
+
+    function renderCaptcha() {
+      hcaptcha.render("captcha", {
+        sitekey: "2d8008b2-6a20-4bd6-9646-4a12bb4aa54c",
+        callback: captchaSolved,
+        "error-callback": () => alert("Verification failed."),
+        "expired-callback": () => alert("Verification expired.")
+      });
+    }
+
+    const waitForHcaptcha = setInterval(() => {
+      if (window.hcaptcha) {
+        clearInterval(waitForHcaptcha);
+        renderCaptcha();
+      }
+    }, 100);
+  </script>
+</body>
+</html>
