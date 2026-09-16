@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>Geometry Dash Lite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="margin:0;overflow:hidden;background:#000">
+
+<style>
+    #gameContainer {
+        width: 100vw;
+        height: 100vh;
+    }
+    canvas {
+        width:100%;
+        height:100%;
+        display:block;
+    }
+    #loader {
+        position:absolute;
+        left:0; top:0;
+        width:100%; height:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        background:linear-gradient(#000, #06f);
+    }
+    .logo {
+        max-width:70vw;
+        max-height:50vh;
+        margin-bottom:20px;
+    }
+    .spinner {
+        width:60px;
+        height:60px;
+        border-radius:50%;
+        border:8px solid rgba(255,255,255,.2);
+        border-left-color:#fff;
+        animation:spin 1s linear infinite;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+</style>
+
+<div id="gameContainer"></div>
+
+<div id="loader">
+    <img class="logo" src="image/loading.png">
+    <div class="spinner"></div>
+</div>
+
+<script src="Build/UnityLoader.js"></script>
+<script>
+    var gameInstance = UnityLoader.instantiate("gameContainer", "Build/GeometryDashLite.json", {
+        onProgress: UnityProgress
+    });
+
+    function UnityProgress(gameInstance, progress) {
+        const loader = document.querySelector("#loader");
+        if (progress === 1) {
+            setTimeout(() => loader.style.display = "none", 500);
+        }
+    }
+</script>
+
+</body>
+</html>
+
