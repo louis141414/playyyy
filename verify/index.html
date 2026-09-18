@@ -1,101 +1,185 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Verification</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verification</title>
 
-  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 
-  <style>
-    :root {
-      color-scheme: dark;
-      font-family: Arial, sans-serif;
-    }
+    <style>
+        :root {
+            color-scheme: dark;
+            font-family: Arial, sans-serif;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #090909;
-      color: #fff;
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: #090909;
+            color: #fff;
+        }
 
-    .card {
-      width: min(92%, 380px);
-      padding: 32px;
-      text-align: center;
-      background: #151515;
-      border: 1px solid #333;
-      border-radius: 14px;
-      box-shadow: 0 15px 50px #000;
-    }
+        .card {
+            width: min(92%, 380px);
+            padding: 32px;
+            text-align: center;
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 14px;
+            box-shadow: 0 15px 50px #000;
+        }
 
-    h1 {
-      margin-top: 0;
-      font-size: 24px;
-    }
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
 
-    p {
-      color: #bbb;
-      margin-bottom: 24px;
-    }
+        p {
+            color: #bbb;
+            margin-bottom: 24px;
+        }
 
-    #captcha {
-      display: flex;
-      justify-content: center;
-    }
-  </style>
+        #captcha {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Nieuwe stijlen voor het formulier */
+        .password-form {
+            margin-bottom: 24px;
+        }
+
+        .password-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #252525;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .password-form button {
+            width: 100%;
+            padding: 10px;
+            background: #0078d7;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .password-form button:hover {
+            background: #005a9e;
+        }
+
+        .error {
+            color: #ff5555;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
-  <main class="card">
-    <h1>Verify you are human</h1>
-    <p>Complete the CAPTCHA to continue.</p>
+    <main class="card">
+        <h1>Verify you are human</h1>
+        <p>Enter the password to continue.</p>
 
-    <div id="captcha"></div>
-  </main>
+        <!-- Nieuw: Wachtwoordformulier -->
+        <div class="password-form">
+            <input type="password" id="passwordInput" placeholder="Enter password" />
+            <button onclick="checkPassword()">Submit</button>
+            <p id="errorMessage" class="error"></p>
+        </div>
 
-  <script>
-    const params = new URLSearchParams(location.search);
-    const returnTo = params.get("return") || "/";
+        <div id="captcha"></div>
+    </main>
 
-    function safeReturnPath(path) {
-      // Prevent external redirects.
-      return path.startsWith("/playyyy/") && !path.startsWith("//")
-        ? path
-        : "/playyyy/";
-    }
+    <script>
+        // Hash van "LouisRepacks" (SHA-256)
+        const correctPasswordHash = "a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e";
 
-    function captchaSolved(token) {
-      // Verify this token on your server before trusting it.
-      document.cookie =
-        "captchaVerified=" + Date.now() +
-        "; Max-Age=1800; Path=/playyyy/; SameSite=Lax";
+        // Functie om een string te hashen met SHA-256
+        async function hashString(str) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(str);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+            return hashHex;
+        }
 
-      location.replace(safeReturnPath(returnTo));
-    }
+        // Functie om het wachtwoord te controleren
+        async function checkPassword() {
+            const passwordInput = document.getElementById("passwordInput").value;
+            const errorMessage = document.getElementById("errorMessage");
 
-    function renderCaptcha() {
-      hcaptcha.render("captcha", {
-        sitekey: "2d8008b2-6a20-4bd6-9646-4a12bb4aa54c",
-        callback: captchaSolved,
-        "error-callback": () => alert("Verification failed."),
-        "expired-callback": () => alert("Verification expired.")
-      });
-    }
+            if (!passwordInput) {
+                errorMessage.textContent = "Please enter a password.";
+                return;
+            }
 
-    const waitForHcaptcha = setInterval(() => {
-      if (window.hcaptcha) {
-        clearInterval(waitForHcaptcha);
-        renderCaptcha();
-      }
-    }, 100);
-  </script>
+            const inputHash = await hashString(passwordInput);
+
+            if (inputHash === correctPasswordHash) {
+                // Wachtwoord is correct, ga door naar CAPTCHA
+                document.getElementById("passwordInput").style.display = "none";
+                document.querySelector(".password-form button").style.display = "none";
+                errorMessage.textContent = "";
+                renderCaptcha();
+            } else {
+                errorMessage.textContent = "Incorrect password. Try again.";
+            }
+        }
+
+        // Originele CAPTCHA-logica
+        const params = new URLSearchParams(location.search);
+        const returnTo = params.get("return") || "/playyyy/";
+
+        function safeReturnPath(path) {
+            return path.startsWith("/playyyy/") && !path.startsWith("//") ? path : "/playyyy/";
+        }
+
+        function captchaSolved(token) {
+            document.cookie =
+                "captchaVerified=" + Date.now() +
+                "; Max-Age=1800; Path=/playyyy/; SameSite=Lax";
+            location.replace(safeReturnPath(returnTo));
+        }
+
+        function renderCaptcha() {
+            hcaptcha.render("captcha", {
+                sitekey: "2d8008b2-6a20-4bd6-9646-4a12bb4aa54c",
+                callback: captchaSolved,
+                "error-callback": () => alert("Verification failed."),
+                "expired-callback": () => alert("Verification expired.")
+            });
+        }
+    </script>
+
+    <!-- Statcounter code -->
+    <script type="text/javascript">
+    var sc_project=13354730;
+    var sc_invisible=1;
+    var sc_security="3faaef90";
+    </script>
+    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript>
+        <div class="statcounter">
+            <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
+                <img class="statcounter" src="https://c.statcounter.com/13354730/0/3faaef90/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade">
+            </a>
+        </div>
+    </noscript>
 </body>
 </html>
