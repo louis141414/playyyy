@@ -1,185 +1,267 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Verification</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Gate – Legal Acceptance</title>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --error: #e74c3c;
+      --success: #2ecc71;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+    }
 
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-    <style>
-        :root {
-            color-scheme: dark;
-            font-family: Arial, sans-serif;
-        }
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            background: #090909;
-            color: #fff;
-        }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+      font-size: 24px;
+    }
 
-        .card {
-            width: min(92%, 380px);
-            padding: 32px;
-            text-align: center;
-            background: #151515;
-            border: 1px solid #333;
-            border-radius: 14px;
-            box-shadow: 0 15px 50px #000;
-        }
+    .disclaimer {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-left: 4px solid var(--secondary);
+      border-radius: 8px;
+    }
 
-        h1 {
-            margin-top: 0;
-            font-size: 24px;
-        }
+    .disclaimer h2 {
+      margin-bottom: 12px;
+      color: var(--error);
+      font-size: 18px;
+    }
 
-        p {
-            color: #bbb;
-            margin-bottom: 24px;
-        }
+    .disclaimer ul {
+      padding-left: 20px;
+    }
 
-        #captcha {
-            display: flex;
-            justify-content: center;
-        }
+    .disclaimer li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
 
-        /* Nieuwe stijlen voor het formulier */
-        .password-form {
-            margin-bottom: 24px;
-        }
+    .disclaimer p {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
 
-        .password-form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: #252525;
-            border: 1px solid #444;
-            border-radius: 6px;
-            color: #fff;
-            font-size: 16px;
-        }
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-        .password-form button {
-            width: 100%;
-            padding: 10px;
-            background: #0078d7;
-            border: none;
-            border-radius: 6px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 15px;
+    }
 
-        .password-form button:hover {
-            background: #005a9e;
-        }
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
 
-        .error {
-            color: #ff5555;
-            margin-top: 10px;
-        }
-    </style>
+    .checkbox-group input[type="checkbox"] {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+    }
+
+    #continue-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    #continue-btn:hover:not(:disabled) {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    #continue-btn:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .download-btn {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      background: white;
+      color: var(--secondary);
+      text-align: center;
+      text-decoration: none;
+      border: 2px solid var(--secondary);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+
+    .download-btn:hover {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .captcha-container {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .full-terms-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: var(--secondary);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .full-terms-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <main class="card">
-        <h1>Verify you are human</h1>
-        <p>Enter the password to continue.</p>
+  <div class="container">
+    <h1>⚠️ Accept Terms to Continue</h1>
 
-        <!-- Nieuw: Wachtwoordformulier -->
-        <div class="password-form">
-            <input type="password" id="passwordInput" placeholder="Enter password" />
-            <button onclick="checkPassword()">Submit</button>
-            <p id="errorMessage" class="error"></p>
+    <div class="disclaimer">
+      <h2>Legal Notice – Read This First</h2>
+      <p>By using this site, you agree to:</p>
+      <ul>
+        <li><strong>1. You’re responsible</strong> – If you get caught, it’s <strong>your problem</strong>, not mine.</li>
+        <li><strong>2. No illegal stuff</strong> – No hacking, bypassing firewalls, or breaking laws.</li>
+        <li><strong>3. No copying/stealing</strong> – Don’t redistribute or reverse-engineer the site.</li>
+        <li><strong>4. Teachers can block it</strong> – But they <strong>can’t force me</strong> to take it down.</li>
+        <li><strong>5. No guarantees</strong> – The site is <strong>"AS IS"</strong>. Use at your own risk.</li>
+      </ul>
+      <p><a href="#" class="full-terms-link" id="show-full-terms">Need details? Read the full terms →</a></p>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <div class="checkbox-group">
+          <input type="checkbox" id="accept-terms">
+          <span>I’ve read and accept the <strong>Legal Notice</strong> above.</span>
         </div>
+      </label>
+    </div>
 
-        <div id="captcha"></div>
-    </main>
+    <div class="captcha-container">
+      <div class="h-captcha" data-sitekey="4f74f4a2-9160-4aa2-a89c-be7e00deaefe"></div>
+    </div>
 
-    <script>
-        // Hash van "LouisRepacks" (SHA-256)
-        const correctPasswordHash = "a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e";
+    <button id="continue-btn" disabled>Continue to Site</button>
+    <a href="YOUR_PDF_URL" class="download-btn" target="_blank" rel="noopener noreferrer">📄 Open Full Terms (PDF)</a>
+  </div>
 
-        // Functie om een string te hashen met SHA-256
-        async function hashString(str) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(str);
-            const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-            return hashHex;
-        }
+  <script>
+    // --- Redirect Logic ---
+    // Extract the 'return' query parameter (e.g., /playyyy/verify?return=/about)
+    const urlParams = new URLSearchParams(window.location.search);
+    const basePath = window.PLAYYYY_BASE_PATH || '/playyyy/';
+    const requestedReturn = urlParams.get('return') || basePath;
 
-        // Functie om het wachtwoord te controleren
-        async function checkPassword() {
-            const passwordInput = document.getElementById("passwordInput").value;
-            const errorMessage = document.getElementById("errorMessage");
+    function getSafeReturnUrl() {
+      try {
+        const destination = new URL(requestedReturn, window.location.origin);
+        const base = new URL(basePath, window.location.origin);
+        const isInSite = destination.origin === base.origin &&
+          (destination.pathname === base.pathname.slice(0, -1) ||
+            destination.pathname.startsWith(base.pathname));
 
-            if (!passwordInput) {
-                errorMessage.textContent = "Please enter a password.";
-                return;
-            }
+        return isInSite ? destination.href : base.href;
+      } catch {
+        return new URL(basePath, window.location.origin).href;
+      }
+    }
 
-            const inputHash = await hashString(passwordInput);
+    // Check if hCaptcha is solved
+    function isCaptchaSolved() {
+      return document.querySelector('textarea[name="h-captcha-response"]')?.value.length > 0;
+    }
 
-            if (inputHash === correctPasswordHash) {
-                // Wachtwoord is correct, ga door naar CAPTCHA
-                document.getElementById("passwordInput").style.display = "none";
-                document.querySelector(".password-form button").style.display = "none";
-                errorMessage.textContent = "";
-                renderCaptcha();
-            } else {
-                errorMessage.textContent = "Incorrect password. Try again.";
-            }
-        }
+    // Update button state
+    function updateButton() {
+      const checkbox = document.getElementById('accept-terms');
+      const captchaSolved = isCaptchaSolved();
+      document.getElementById('continue-btn').disabled = !(checkbox.checked && captchaSolved);
+    }
 
-        // Originele CAPTCHA-logica
-        const params = new URLSearchParams(location.search);
-        const returnTo = params.get("return") || "/playyyy/";
+    // Event listeners
+    document.getElementById('accept-terms').addEventListener('change', updateButton);
 
-        function safeReturnPath(path) {
-            return path.startsWith("/playyyy/") && !path.startsWith("//") ? path : "/playyyy/";
-        }
+    // Poll for CAPTCHA changes (hCaptcha doesn't fire events)
+    setInterval(updateButton, 500);
 
-        function captchaSolved(token) {
-            document.cookie =
-                "captchaVerified=" + Date.now() +
-                "; Max-Age=1800; Path=/playyyy/; SameSite=Lax";
-            location.replace(safeReturnPath(returnTo));
-        }
+    // Continue button action
+    document.getElementById('continue-btn').addEventListener('click', () => {
+      if (!isCaptchaSolved()) {
+        alert("❌ Please complete the CAPTCHA.");
+        return;
+      }
+      if (!document.getElementById('accept-terms').checked) {
+        alert("❌ You must accept the terms.");
+        return;
+      }
 
-        function renderCaptcha() {
-            hcaptcha.render("captcha", {
-                sitekey: "4f74f4a2-9160-4aa2-a89c-be7e00deaefe",
-                callback: captchaSolved,
-                "error-callback": () => alert("Verification failed."),
-                "expired-callback": () => alert("Verification expired.")
-            });
-        }
-    </script>
-
-    <!-- Statcounter code -->
-    <script type="text/javascript">
-    var sc_project=13354730;
-    var sc_invisible=1;
-    var sc_security="3faaef90";
-    </script>
-    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
-    <noscript>
-        <div class="statcounter">
-            <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
-                <img class="statcounter" src="https://c.statcounter.com/13354730/0/3faaef90/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade">
-            </a>
-        </div>
-    </noscript>
+      document.cookie = `captchaVerified=${Date.now()}; Max-Age=1800; Path=${basePath}; SameSite=Lax`;
+      window.location.assign(getSafeReturnUrl());
+    });
+  </script>
 </body>
 </html>
