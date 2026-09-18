@@ -1,267 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Access Gate – Legal Acceptance</title>
-  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-  <style>
-    :root {
-      --primary: #2c3e50;
-      --secondary: #3498db;
-      --error: #e74c3c;
-      --success: #2ecc71;
-      --light: #ecf0f1;
-      --dark: #2c3e50;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Gate – Legal Acceptance</title>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #111827;
+            --surface-2: #1f2937;
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --primary: #60a5fa;
+            --primary-hover: #3b82f6;
+            --border: #273244;
+            --error: #f87171;
+            --success: #4ade80;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --radius: 14px;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
 
-    body {
-      background-color: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-      padding: 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background:
+                radial-gradient(circle at top, rgba(96, 165, 250, 0.12), transparent 35%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
 
-    .container {
-      max-width: 600px;
-      width: 100%;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 28px;
+            background: rgba(17, 24, 39, 0.92);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: var(--primary);
-      font-size: 24px;
-    }
+        h1 {
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text);
+        }
 
-    .disclaimer {
-      margin-bottom: 25px;
-      padding: 20px;
-      background: #f8f9fa;
-      border-left: 4px solid var(--secondary);
-      border-radius: 8px;
-    }
+        .disclaimer {
+            margin-bottom: 24px;
+            padding: 18px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+        }
 
-    .disclaimer h2 {
-      margin-bottom: 12px;
-      color: var(--error);
-      font-size: 18px;
-    }
+        .disclaimer h2 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--error);
+        }
 
-    .disclaimer ul {
-      padding-left: 20px;
-    }
+        .disclaimer p,
+        .disclaimer li {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
 
-    .disclaimer li {
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
+        .disclaimer ul {
+            padding-left: 20px;
+        }
 
-    .disclaimer p {
-      margin-bottom: 12px;
-      font-size: 15px;
-    }
+        .disclaimer li {
+            margin-bottom: 8px;
+        }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+        .form-group {
+            margin-bottom: 18px;
+        }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 15px;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
 
-    .checkbox-group {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
+        .checkbox-group {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
 
-    .checkbox-group input[type="checkbox"] {
-      margin-top: 4px;
-      width: 18px;
-      height: 18px;
-    }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 4px;
+            accent-color: var(--primary);
+        }
 
-    #continue-btn {
-      width: 100%;
-      padding: 14px;
-      background: var(--secondary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
+        #continue-btn {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: linear-gradient(180deg, var(--primary), var(--primary-hover));
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+        }
 
-    #continue-btn:hover:not(:disabled) {
-      background: #2980b9;
-      transform: translateY(-2px);
-    }
+        #continue-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+        }
 
-    #continue-btn:disabled {
-      background: #bdc3c7;
-      cursor: not-allowed;
-      transform: none;
-    }
+        #continue-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
 
-    .download-btn {
-      display: block;
-      width: 100%;
-      margin-top: 12px;
-      padding: 12px;
-      background: white;
-      color: var(--secondary);
-      text-align: center;
-      text-decoration: none;
-      border: 2px solid var(--secondary);
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 15px;
-      transition: all 0.3s;
-    }
+        .download-btn {
+            display: block;
+            width: 100%;
+            margin-top: 12px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            color: var(--text);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
 
-    .download-btn:hover {
-      background: var(--secondary);
-      color: white;
-    }
+        .download-btn:hover {
+            background: var(--surface-2);
+            border-color: var(--primary);
+        }
 
-    .captcha-container {
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-    }
+        .captcha-container {
+            margin: 18px 0;
+            display: flex;
+            justify-content: center;
+        }
 
-    .full-terms-link {
-      display: block;
-      text-align: center;
-      margin-top: 15px;
-      color: var(--secondary);
-      text-decoration: none;
-      font-size: 14px;
-    }
+        .full-terms-link {
+            display: block;
+            margin-top: 14px;
+            text-align: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
 
-    .full-terms-link:hover {
-      text-decoration: underline;
-    }
+        .full-terms-link:hover {
+            text-decoration: underline;
+        }
 
-    @media (max-width: 500px) {
-      .container {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 20px;
-      }
-    }
-  </style>
+        @media (max-width: 500px) {
+            body {
+                padding: 16px;
+            }
+
+            .container {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 1.35rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>⚠️ Accept Terms to Continue</h1>
+    <div class="container">
+        <h1>⚠️ Accept Terms to Continue</h1>
 
-    <div class="disclaimer">
-      <h2>Legal Notice – Read This First</h2>
-      <p>By using this site, you agree to:</p>
-      <ul>
-        <li><strong>1. You’re responsible</strong> – If you get caught, it’s <strong>your problem</strong>, not mine.</li>
-        <li><strong>2. No illegal stuff</strong> – No hacking, bypassing firewalls, or breaking laws.</li>
-        <li><strong>3. No copying/stealing</strong> – Don’t redistribute or reverse-engineer the site.</li>
-        <li><strong>4. Teachers can block it</strong> – But they <strong>can’t force me</strong> to take it down.</li>
-        <li><strong>5. No guarantees</strong> – The site is <strong>"AS IS"</strong>. Use at your own risk.</li>
-      </ul>
-      <p><a href="Terms.pdf" class="full-terms-link" id="show-full-terms" target="_blank" rel="noopener noreferrer">Need details? Read the full terms →</a></p>
-    </div>
-
-    <div class="form-group">
-      <label>
-        <div class="checkbox-group">
-          <input type="checkbox" id="accept-terms">
-          <span>I’ve read and accept the <strong>Legal Notice</strong> above.</span>
+        <div class="disclaimer">
+            <h2>Legal Notice – Read This First</h2>
+            <p>By using this site, you agree to:</p>
+            <ul>
+                <li><strong>1. You’re responsible</strong> – If you get caught, it’s <strong>your problem</strong>, not mine.</li>
+                <li><strong>2. No illegal stuff</strong> – No hacking, bypassing firewalls, or breaking laws.</li>
+                <li><strong>3. No copying/stealing</strong> – Don’t redistribute or reverse-engineer the site.</li>
+                <li><strong>4. Teachers can block it</strong> – But they <strong>can’t force me</strong> to take it down.</li>
+                <li><strong>5. No guarantees</strong> – The site is <strong>"AS IS"</strong>. Use at your own risk.</li>
+            </ul>
+            <p><a href="Terms.pdf" class="full-terms-link" id="show-full-terms" target="_blank" rel="noopener noreferrer">Need details? Read the full terms →</a></p>
         </div>
-      </label>
+
+        <div class="form-group">
+            <label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="accept-terms">
+                    <span>I’ve read and accept the <strong>Legal Notice</strong> above.</span>
+                </div>
+            </label>
+        </div>
+
+        <div class="captcha-container">
+            <div class="h-captcha" data-sitekey="4f74f4a2-9160-4aa2-a89c-be7e00deaefe"></div>
+        </div>
+
+        <button id="continue-btn" disabled>Continue to Site</button>
+        <a href="Terms.pdf" class="download-btn" target="_blank" rel="noopener noreferrer">📄 Open Full Terms (PDF)</a>
     </div>
 
-    <div class="captcha-container">
-      <div class="h-captcha" data-sitekey="4f74f4a2-9160-4aa2-a89c-be7e00deaefe"></div>
-    </div>
+    <script>
+        // --- Redirect Logic ---
+        // Extract the 'return' query parameter (e.g., /playyyy/verify?return=/about)
+        const urlParams = new URLSearchParams(window.location.search);
+        const basePath = window.PLAYYYY_BASE_PATH || '/playyyy/';
+        const requestedReturn = urlParams.get('return') || basePath;
 
-    <button id="continue-btn" disabled>Continue to Site</button>
-    <a href="Terms.pdf" class="download-btn" target="_blank" rel="noopener noreferrer">📄 Open Full Terms (PDF)</a>
-  </div>
+        function getSafeReturnUrl() {
+            try {
+                const destination = new URL(requestedReturn, window.location.origin);
+                const base = new URL(basePath, window.location.origin);
+                const isInSite = destination.origin === base.origin &&
+                    (destination.pathname === base.pathname.slice(0, -1) ||
+                        destination.pathname.startsWith(base.pathname));
 
-  <script>
-    // --- Redirect Logic ---
-    // Extract the 'return' query parameter (e.g., /playyyy/verify?return=/about)
-    const urlParams = new URLSearchParams(window.location.search);
-    const basePath = window.PLAYYYY_BASE_PATH || '/playyyy/';
-    const requestedReturn = urlParams.get('return') || basePath;
+                return isInSite ? destination.href : base.href;
+            } catch {
+                return new URL(basePath, window.location.origin).href;
+            }
+        }
 
-    function getSafeReturnUrl() {
-      try {
-        const destination = new URL(requestedReturn, window.location.origin);
-        const base = new URL(basePath, window.location.origin);
-        const isInSite = destination.origin === base.origin &&
-          (destination.pathname === base.pathname.slice(0, -1) ||
-            destination.pathname.startsWith(base.pathname));
+        // Check if hCaptcha is solved
+        function isCaptchaSolved() {
+            return document.querySelector('textarea[name="h-captcha-response"]')?.value.length > 0;
+        }
 
-        return isInSite ? destination.href : base.href;
-      } catch {
-        return new URL(basePath, window.location.origin).href;
-      }
-    }
+        // Update button state
+        function updateButton() {
+            const checkbox = document.getElementById('accept-terms');
+            const captchaSolved = isCaptchaSolved();
+            document.getElementById('continue-btn').disabled = !(checkbox.checked && captchaSolved);
+        }
 
-    // Check if hCaptcha is solved
-    function isCaptchaSolved() {
-      return document.querySelector('textarea[name="h-captcha-response"]')?.value.length > 0;
-    }
+        // Event listeners
+        document.getElementById('accept-terms').addEventListener('change', updateButton);
 
-    // Update button state
-    function updateButton() {
-      const checkbox = document.getElementById('accept-terms');
-      const captchaSolved = isCaptchaSolved();
-      document.getElementById('continue-btn').disabled = !(checkbox.checked && captchaSolved);
-    }
+        // Poll for CAPTCHA changes (hCaptcha doesn't fire events)
+        setInterval(updateButton, 500);
 
-    // Event listeners
-    document.getElementById('accept-terms').addEventListener('change', updateButton);
+        // Continue button action
+        document.getElementById('continue-btn').addEventListener('click', () => {
+            if (!isCaptchaSolved()) {
+                alert("❌ Please complete the CAPTCHA.");
+                return;
+            }
+            if (!document.getElementById('accept-terms').checked) {
+                alert("❌ You must accept the terms.");
+                return;
+            }
 
-    // Poll for CAPTCHA changes (hCaptcha doesn't fire events)
-    setInterval(updateButton, 500);
-
-    // Continue button action
-    document.getElementById('continue-btn').addEventListener('click', () => {
-      if (!isCaptchaSolved()) {
-        alert("❌ Please complete the CAPTCHA.");
-        return;
-      }
-      if (!document.getElementById('accept-terms').checked) {
-        alert("❌ You must accept the terms.");
-        return;
-      }
-
-      document.cookie = `captchaVerified=${Date.now()}; Max-Age=1800; Path=${basePath}; SameSite=Lax`;
-      window.location.assign(getSafeReturnUrl());
-    });
-  </script>
+            document.cookie = `captchaVerified=${Date.now()}; Max-Age=1800; Path=${basePath}; SameSite=Lax`;
+            window.location.assign(getSafeReturnUrl());
+        });
+    </script>
 </body>
+
 </html>
