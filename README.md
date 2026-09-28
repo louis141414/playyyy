@@ -10,11 +10,16 @@ Play 100+ popular games **directly in your browser**, with **no ads, lightning-f
 
 try it on [here!](https://louis141414.github.io/playyyy/)
 
+Download either installer from the [Playyyy download page](https://louis141414.github.io/playyyy/download.html):
+
+- [PC version (internet required)](https://github.com/louis141414/playyyy/raw/refs/heads/main/pc-version/Playyyy-setup.exe)
+- [Offline version](https://github.com/louis141414/playyyy/raw/refs/heads/main/pc-version/Playyyy%20-%20offline%20setup.exe)
+
 [![GitHub Stars](https://img.shields.io/github/stars/louis141414/playyyy)](https://github.com/louishermanpaelinck/playyyy/stargazers)
 [![GitHub Issues](https://img.shields.io/github/issues/louis141414/playyyy)](https://github.com/louishermanpaelinck/playyyy/issues)
 [![License](https://img.shields.io/github/license/louis141414/playyyy)](#license)
 
-### **➡ ➡ ➡ Windows version is now live! [Download](https://github.com/louis141414/Playyyy-pc-app/) ⬅ ⬅ ⬅**
+### **➡ ➡ ➡ Windows version is now live! [Download](https://louis141414.github.io/playyyy/download.html) ⬅ ⬅ ⬅**
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 

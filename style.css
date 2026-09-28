@@ -265,6 +265,102 @@ header p {
   color: var(--color-text-muted);
 }
 
+.home-download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: var(--spacing-md);
+  padding: 0 var(--spacing-lg);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 800;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.home-download-link:hover {
+  transform: translateY(-2px);
+  background: var(--color-primary-light);
+  color: var(--color-text-inverse);
+}
+
+.download-page {
+  width: min(100% - 2rem, 1080px);
+  margin: 0 auto;
+  padding-bottom: var(--spacing-3xl);
+}
+
+.download-intro {
+  max-width: 680px;
+  margin: 0 auto var(--spacing-2xl);
+  text-align: center;
+}
+
+.download-intro h2 {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-3xl);
+}
+
+.download-intro p {
+  margin-bottom: 0;
+}
+
+.download-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-md);
+}
+
+.download-option {
+  display: flex;
+  min-height: 260px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--spacing-xl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+}
+
+.download-option h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.download-option p {
+  flex: 1;
+}
+
+.download-action {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-md);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 800;
+  text-align: center;
+}
+
+.download-action:hover {
+  background: var(--color-primary-light);
+  color: var(--color-text-inverse);
+}
+
+@media (max-width: 600px) {
+  .download-option {
+    min-height: 0;
+  }
+
+  .download-options {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ============================================
    GLASS MORPHISM
    ============================================ */
