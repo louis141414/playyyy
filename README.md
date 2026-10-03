@@ -3,8 +3,8 @@
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-**Playyyy** is your ultimate hub for **unblocked browser games**—perfect for school, work, or anywhere else!
-Play 100+ popular games **directly in your browser**, with **no ads, lightning-fast load times, and a sleek modern design.**
+**Playyyy** is your ultimate hub for **fast browser games**—perfect for school, work, or anywhere else!
+Play 100+ popular games **directly in your browser**, with **no ads, lightning-fast load times.**
 
 <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="20" alt="Party Parrot"> *No downloads, no emulators, just pure gaming fun!* <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="20" alt="Party Parrot">
 
@@ -27,12 +27,10 @@ Download either installer from the [Playyyy download page](https://louis141414.g
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-- 🎮 **Unblocked Everywhere** – Play at school, work, or anywhere with restricted access.
+- 🎮 **Works Everywhere** – Play at school, work, or anywhere with restricted access.
 - ⚡ **Blazing Fast** – Optimized for speed, so you spend less time loading and more time playing.
 - 🖤 **No Ads, No Nonsense** – Just pure, uninterrupted gaming.
-- 🌌 **Modern Glassy Dark Theme** – A beautiful, futuristic design with blur effects for a premium feel.
 - 📱 **Fully Responsive** – Works perfectly on mobile, tablet, and desktop.
-- 🔧 **Easy to Extend** – Powered by a **JSON-based system**, making it a breeze to add new games.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
