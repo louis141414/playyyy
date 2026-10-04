@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#070707">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <link rel="manifest" href="manifest.json">
     <title>Playyyy - Games</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="utm.js" defer></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/utm.js" defer></script>
     <script src="verify/verify.js"></script>
 </head>
 
@@ -27,16 +27,18 @@
 
     <header>
         <h1 class="home-logo" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <img src="favicon.ico" alt="Playyyy" style="width: 55px; height: 60px; display: flex; align-items: center;">
+            <img src="assets/images/favicon.ico" alt="Playyyy" style="width: 55px; height: 60px; display: flex; align-items: center;">
             Playyyy
         </h1>
 
 
         <p>100+ Best Browser Games</p>
-        <a class="home-download-link" href="download.html">Download for PC</a>
-        <button class="install-app-btn" id="install-app-btn" type="button">Install app</button>
         <p class="install-status" id="install-status" aria-live="polite"></p>
-        <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
+        <div class="home-header-actions">
+            <a class="home-request-link" href="https://github.com/louis141414/playyyy/issues/new?template=game_request.yml">Request a game</a>
+            <a class="home-download-link" href="download.html">Download for PC</a>
+            <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
+        </div>
     </header>
 
     <div style="text-align:center;">
@@ -89,7 +91,7 @@ counter" href="https://statcounter.com/" target="_blank"><img class="statcounter
         <div class="grid" id="grid"></div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

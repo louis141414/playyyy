@@ -4,13 +4,15 @@ const APP_SHELL_FILES = [
   './',
   './index.html',
   './play.html',
-  './style.css',
-  './script.js',
+  './assets/css/style.css',
+  './assets/js/script.js',
+  './assets/js/utm.js',
   './games.json',
   './manifest.json',
-  './app-icon-192.png',
-  './app-icon-512.png',
-  './favicon.ico'
+  './assets/images/app-icon-192.png',
+  './assets/images/app-icon-512.png',
+  './assets/images/favicon.ico',
+  './assets/images/ico.ico'
 ];
 
 self.addEventListener('install', event => {

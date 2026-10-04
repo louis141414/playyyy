@@ -118,22 +118,22 @@ function getThumbnailCandidates(name) {
   if (name === 'Appel') {
     return [
       'games/appel/assets/5ca72b0c06b2764b850d4a40848e9fb1.png',
-      `images/thumbnails/${base}.jpg`,
-      `images/thumbnails/${base}.jpeg`,
-      `images/thumbnails/${base}.png`,
+      `assets/images/thumbnails/${base}.jpg`,
+      `assets/images/thumbnails/${base}.jpeg`,
+      `assets/images/thumbnails/${base}.png`,
     ];
   }
   return [
-    `images/thumbnails/${base}.jpg`,
-    `images/thumbnails/${base}.jpeg`,
-    `images/thumbnails/${base}.png`,
+    `assets/images/thumbnails/${base}.jpg`,
+    `assets/images/thumbnails/${base}.jpeg`,
+    `assets/images/thumbnails/${base}.png`,
   ];
 }
 
 function applyThumbnailFallback(img, candidates, index = 0) {
   if (!img) return;
   if (index >= candidates.length) {
-    img.src = 'images/thumbnails/placeholder.jpg';
+    img.src = 'assets/images/thumbnails/placeholder.jpg';
     return;
   }
   img.onerror = () => applyThumbnailFallback(img, candidates, index + 1);

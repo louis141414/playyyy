@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#070707">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="manifest" href="manifest.json">
     <title>Playyyy</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="utm.js" defer></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/utm.js" defer></script>
     <script src="verify/verify.js"></script>
 </head>
 
@@ -16,7 +16,6 @@
     <header>
         <h1 id="game-title">Loading...</h1>
         <a class="game-home-link" href="index.html">← Back to Home</a>
-        <button class="install-app-btn" id="install-app-btn" type="button">Install app</button>
         <span class="install-status" id="install-status" aria-live="polite"></span>
         <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
         <button id="fullscreen-btn" onclick="toggleFullscreen()" style="background: none; border: none; color: #00ff9d; font-size: 1.2em; cursor: pointer; margin-left: 10px;">⛶</button>
@@ -29,7 +28,7 @@
 Stats</a>
     </div>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
     <script>
         function toggleFullscreen() {
           const iframe = document.getElementById('game-iframe');

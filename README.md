@@ -64,9 +64,9 @@ No frameworks. No unnecessary dependencies.
 ## Repository layout
 
 - `index.html`, `play.html`, `404.html`, and `download.html` are the static-site entry pages and stay at the repository root so their public URLs remain stable.
-- `script.js`, `style.css`, `utm.js`, `manifest.json`, and `service-worker.js` contain the shared site behavior, styling, and PWA setup.
+- `assets/js/` contains shared JavaScript; `assets/css/` contains shared styles; and `assets/images/` contains thumbnails and app icons. The root `manifest.json` and `service-worker.js` stay at the site root for PWA scope.
 - `games.json` is the game catalog. Each game lives in its own `games/<game-name>/` folder, with its original internal asset layout preserved because game files rely on relative paths.
-- `images/thumbnails/` contains the catalog artwork; `pc-version/` contains desktop installers; and `verify/` contains verification assets.
+- `pc-version/` contains desktop installers; and `verify/` contains verification assets.
 
 The root `.gitignore` excludes operating-system metadata files such as `.DS_Store` and `Thumbs.db`.
 
@@ -100,7 +100,9 @@ Contributions are always welcome!
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-Feel free to open an issue if you have ideas for new games or improvements.
+Use the **Request a game** button on the home page to suggest a game. Include its name, playable link, and description; after opening the issue, attach a game ZIP if available and a banner sized exactly **480 × 100 px**. You can also [open a game request directly](https://github.com/louis141414/playyyy/issues/new?template=game_request.yml).
+
+For other ideas or improvements, feel free to open an issue.
 
 ---
 

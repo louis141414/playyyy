@@ -1,0 +1,90 @@
+name: Request a game
+description: Suggest a game for the Playyyy library.
+title: "[Game Request]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping grow Playyyy! Please share a game that can be played in a browser.
+
+        **Files to add:** After opening this issue, attach the game ZIP (if you have one) and a **480 × 100 px** banner in a comment. Drag the files into the comment box or use its attachment button. You can also provide links below.
+
+  - type: input
+    id: game_name
+    attributes:
+      label: Game name
+      description: What should the game be called on Playyyy?
+      placeholder: e.g. Example Adventure
+    validations:
+      required: true
+
+  - type: input
+    id: game_link
+    attributes:
+      label: Official game page or playable link
+      description: Link to the original game page or a browser-playable version.
+      placeholder: https://
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Game description
+      description: What is the game about, and why would it be a good fit?
+      placeholder: Describe the gameplay and what makes it fun.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Suggested category
+      description: Pick the closest fit.
+      options:
+        - Action
+        - Adventure
+        - Arcade
+        - Puzzle
+        - Racing
+        - Sports
+        - Strategy
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: game_files
+    attributes:
+      label: Game ZIP or files link
+      description: Optional. Paste a link if the game files are hosted online; otherwise, attach a ZIP in a comment after opening the issue.
+      placeholder: https://
+
+  - type: textarea
+    id: banner
+    attributes:
+      label: Banner image
+      description: Optional. Provide an image link or attach a banner in a comment after opening the issue. It must be exactly 480 × 100 px.
+      placeholder: https://
+
+  - type: textarea
+    id: controls
+    attributes:
+      label: Controls and notes
+      description: Optional. Include controls, browser/device compatibility, or anything else we should know.
+      placeholder: Controls, keyboard support, mobile support, etc.
+
+  - type: input
+    id: submitter
+    attributes:
+      label: Your name
+      description: Optional.
+      placeholder: Name or username
+
+  - type: checkboxes
+    id: permissions
+    attributes:
+      label: Sharing and permissions
+      options:
+        - label: I have permission to share any game files or artwork I am submitting, or I have only provided public links.
+          required: true
