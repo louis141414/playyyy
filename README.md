@@ -1,97 +1,113 @@
 <div align="center">
-<img src="https://i.ibb.co/Dfh3WWKG/Screenshot-2026-06-13-13-55-12-removebg-preview.png" alt="Playyyy Logo" height="640">
+  <img src="https://i.ibb.co/Dfh3WWKG/Screenshot-2026-06-13-13-55-12-removebg-preview.png" alt="Playyyy Logo" height="280">
+  <p><strong>Fast, ad-free browser games.</strong><br>
+  Play 100+ popular titles instantly, no downloads, no accounts, no ads.</p>
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+  <p>
+    <a href="https://louis141414.github.io/playyyy/"><strong>Play Now</strong></a> ·
+    <a href="https://louis141414.github.io/playyyy/download.html">Download for Windows</a>
+  </p>
 
-**Playyyy** is your ultimate hub for **fast browser games**—perfect for school, work, or anywhere else!
-Play 100+ popular games **directly in your browser**, with **no ads, lightning-fast load times.**
+  <p>
+    <img src="https://img.shields.io/github/stars/louis141414/playyyy?style=flat-square" alt="Stars">
+    <img src="https://img.shields.io/github/license/louis141414/playyyy?style=flat-square" alt="License">
+    <img src="https://img.shields.io/github/last-commit/louis141414/playyyy?style=flat-square" alt="Last commit">
+  </p>
+</div>
 
-<img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="20" alt="Party Parrot"> *No downloads, no emulators, just pure gaming fun!* <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="20" alt="Party Parrot">
+---
 
-try it on [here!](https://louis141414.github.io/playyyy/)
+## Why Playyyy?
 
-Download either installer from the [Playyyy download page](https://louis141414.github.io/playyyy/download.html):
+- **No ads**: Just pure gaming
+- **Lightning fast**: Built with pure vanilla HTML, CSS & JavaScript
+- **Works everywhere**: Great for school, work, or anywhere else
+- **Favorites system**: Star the games you love (saved in your browser)
+- **Search**: Find any game in seconds
+- **Fully responsive**: Looks great on desktop, tablet and mobile
 
-- [PC version (internet required)](https://github.com/louis141414/playyyy/raw/refs/heads/main/pc-version/Playyyy-setup.exe)
+---
+
+## Features
+
+- 100+ high-quality browser games (Slope, Drive Mad, Retro Bowl, Geometry Dash, 2048, and many more)
+- Clean, modern interface with a dark theme
+- Full-screen support
+- Lightweight and optimized for speed
+- Open source and easy to customize
+
+---
+
+## Desktop Version (Windows)
+
+Prefer a desktop app?
+
+- [Online version](https://github.com/louis141414/playyyy/raw/refs/heads/main/pc-version/Playyyy-setup.exe) (requires internet)
 - [Offline version](https://github.com/louis141414/playyyy/raw/refs/heads/main/pc-version/Playyyy%20-%20offline%20setup.exe)
 
-[![GitHub Stars](https://img.shields.io/github/stars/louis141414/playyyy)](https://github.com/louishermanpaelinck/playyyy/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/louis141414/playyyy)](https://github.com/louishermanpaelinck/playyyy/issues)
-[![License](https://img.shields.io/github/license/louis141414/playyyy)](#license)
+Or visit the [download page](https://louis141414.github.io/playyyy/download.html).
 
-### **➡ ➡ ➡ Windows version is now live! [Download](https://louis141414.github.io/playyyy/download.html) ⬅ ⬅ ⬅**
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+---
 
+## Tech Stack
 
-## ✨ **Why Playyyy?**
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- JSON
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+No frameworks. No unnecessary dependencies.
 
-- 🎮 **Works Everywhere** – Play at school, work, or anywhere with restricted access.
-- ⚡ **Blazing Fast** – Optimized for speed, so you spend less time loading and more time playing.
-- 🖤 **No Ads, No Nonsense** – Just pure, uninterrupted gaming.
-- 📱 **Fully Responsive** – Works perfectly on mobile, tablet, and desktop.
+---
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+## Getting Started
 
+```bash
+git clone https://github.com/louis141414/playyyy.git
+```
 
-## 🚀 **Features**
+Then just open `index.html` in your browser, or serve the folder with any static file server.
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+---
 
-- **100+ High-Quality Games** – From classics like *2048* and *Slope* to modern hits like *Drift Hunters* and *Territorial.io*.
-- **Full-Screen Mode** – Immerse yourself in every game.
-- **Pure Vanilla Code** – No heavy frameworks, just fast, lightweight, and efficient code.
-- **Open Source** – Contribute, suggest, or request new features via [GitHub Issues](https://github.com/louis141414/playyyy/issues)!
+## Contributing
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
-
-
-## 🛠 **Built With**
-
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
-
-- **HTML5**
-- **CSS3**
-- **JavaScript (Vanilla)**
-- **JSON**
-
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
-
-
-## 🤝 **Contributing**
-
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
-
-Got an idea for a new feature or game? **Open an Issue** and let’s make Playyyy even better!
+Contributions are always welcome!
 
 1. Fork the project
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a **Pull Request**
+5. Open a Pull Request
 
-*Every contribution is greatly appreciated!* <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="20" alt="Party Parrot">
+Feel free to open an issue if you have ideas for new games or improvements.
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+---
 
+## License
 
-## 📜 **License**
+This project is licensed under the **MIT License**.  
+See the [LICENSE](LICENSE) file for details.
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+---
 
-This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
+## Author
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+**Louis Paelinck**  
+[@louis141414](https://github.com/louis141414)
 
+---
 
-## 📩 **Contact**
+## Notice
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+All games on this site belong to their original creators and owners.  
+Playyyy simply provides a convenient way to play them in the browser.
 
-Louis Paelinck – [@louis141414](https://github.com/louis141414)
+The creator of this project is **not responsible** if a teacher (or anyone else) catches you playing games when you’re not supposed to.  
+Play at your own risk.
 
-Project Link: [https://github.com/louis141414/playyyy](https://github.com/Louis141414/playyyy)
+---
 
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+<div align="center">
+  <sub>Made with ❤️ for people who just want to play games</sub>
 </div>
