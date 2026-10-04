@@ -11,6 +11,8 @@
   --color-bg: #070707;
   --color-bg-elevated: #101010;
   --color-bg-glass: rgba(255, 255, 255, 0.06);
+  --color-control-bg: #111;
+  --color-input-bg: rgba(0, 0, 0, 0.35);
 
   --color-text: #e8e8e8;
   --color-text-muted: rgba(232, 232, 232, 0.72);
@@ -70,6 +72,29 @@
   --z-loading: 9999;
 }
 
+:root[data-theme="light"] {
+  --color-primary: #08724d;
+  --color-primary-dark: #075b40;
+  --color-primary-light: #d3f5e5;
+  --color-primary-bg: rgba(8, 114, 77, 0.1);
+  --color-bg: #edf3ef;
+  --color-bg-elevated: #fff;
+  --color-bg-glass: rgba(255, 255, 255, 0.82);
+  --color-control-bg: #fff;
+  --color-input-bg: #fff;
+  --color-text: #18241e;
+  --color-text-muted: rgba(24, 36, 30, 0.72);
+  --color-text-inverse: #fff;
+  --color-border: rgba(24, 36, 30, 0.14);
+  --color-border-hover: rgba(8, 114, 77, 0.38);
+  --color-border-glass: rgba(24, 36, 30, 0.18);
+  --shadow-sm: 0 4px 12px rgba(12, 31, 21, 0.08);
+  --shadow-md: 0 12px 30px rgba(12, 31, 21, 0.12);
+  --shadow-lg: 0 24px 50px rgba(12, 31, 21, 0.16);
+  --shadow-glow: 0 0 25px rgba(8, 114, 77, 0.08);
+  --shadow-glow-strong: 0 0 40px rgba(8, 114, 77, 0.14);
+}
+
 /* ============================================
    CSS RESET & BASE STYLES
    ============================================ */
@@ -110,7 +135,7 @@ body {
     ),
     linear-gradient(
       180deg,
-      #0d0d0d,
+      var(--color-bg-elevated),
       var(--color-bg)
     );
   color: var(--color-text);
@@ -223,9 +248,17 @@ h1 {
   background-clip: text;
 }
 
+.home-logo {
+  display: inline-block;
+  padding: 0.12em 0.42em;
+  color: #d6ffed;
+  -webkit-text-fill-color: #d6ffed;
+  text-shadow: 0 0 22px rgba(0, 255, 157, 0.28);
+}
+
 h2 {
   font-size: var(--font-size-2xl);
-  color: #f2f2f2;
+  color: var(--color-text);
 }
 
 h3 {
@@ -284,6 +317,92 @@ header p {
   transform: translateY(-2px);
   background: var(--color-primary-light);
   color: var(--color-text-inverse);
+}
+
+.install-app-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.install-app-btn:hover {
+  background: var(--color-primary-light);
+}
+
+.install-app-btn[hidden] {
+  display: none;
+}
+
+.install-status {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-glass);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-primary);
+}
+
+.game-home-link,
+#fullscreen-btn {
+  color: var(--color-primary) !important;
+}
+
+.game-home-link {
+  text-decoration: none;
+}
+
+.home-logo + p {
+  margin-top: var(--spacing-md);
+}
+
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(circle at top, rgba(8, 114, 77, 0.1), transparent 30%),
+    linear-gradient(180deg, #fff, var(--color-bg));
+}
+
+:root[data-theme="light"] header {
+  background: linear-gradient(180deg, rgba(8, 114, 77, 0.06), transparent);
+}
+
+:root[data-theme="light"] .card {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+:root[data-theme="light"] .card-tag {
+  border-color: rgba(8, 114, 77, 0.2);
+  background: rgba(8, 114, 77, 0.1);
+  color: #075b40;
+}
+
+:root[data-theme="light"] .favorite-btn {
+  background: rgba(8, 114, 77, 0.06);
+  color: var(--color-text);
 }
 
 .download-page {
@@ -377,20 +496,75 @@ header p {
    ============================================ */
 .controls,
 .favorites-section,
-.all-games-section {
+.all-games-section,
+.recent-section {
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 var(--spacing-xl) var(--spacing-lg);
 }
 
 .controls {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-md);
   padding-top: 0;
 }
 
 .search-wrap {
   display: grid;
   gap: var(--spacing-sm);
+  flex: 1;
   padding: var(--spacing-md);
+}
+
+.category-wrap {
+  display: grid;
+  min-width: 190px;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+}
+
+.category-wrap span {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.category-wrap select,
+.random-game-btn {
+  min-height: 44px;
+  padding: 0 var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-control-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.category-wrap select {
+  width: 100%;
+}
+
+.random-game-btn {
+  margin: 0 var(--spacing-md) var(--spacing-md) 0;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.random-game-btn:hover {
+  background: var(--color-primary-light);
+}
+
+.site-update-badge {
+  display: inline-block;
+  margin: var(--spacing-sm);
+  padding: 2px var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
 }
 
 .search-wrap span {
@@ -403,7 +577,7 @@ header p {
   padding: calc(var(--spacing-md) - 2px) var(--spacing-md);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--color-input-bg);
   color: var(--color-text);
   font-size: var(--font-size-base);
   outline: none;
@@ -492,6 +666,7 @@ header p {
   object-fit: cover;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
+  filter: saturate(1.08) contrast(1.04);
   transition:
     transform var(--transition-base),
     border-color var(--transition-base);
@@ -539,6 +714,22 @@ header p {
 
 .card-title-link:hover {
   color: var(--color-primary);
+}
+
+.report-link {
+  flex: 0 0 auto;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.report-link:hover {
+  color: var(--color-primary-light);
+}
+
+.report-link-large {
+  font-size: var(--font-size-sm);
 }
 
 /* ============================================
@@ -614,6 +805,16 @@ header p {
   color: var(--color-text-muted);
   padding: var(--spacing-md) var(--spacing-sm);
   text-align: center;
+}
+
+.empty-state span {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+}
+
+[hidden] {
+  display: none !important;
 }
 
 /* ============================================
@@ -839,6 +1040,7 @@ iframe {
   .controls,
   .favorites-section,
   .all-games-section,
+  .recent-section,
   .bookmarklet-banner {
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
@@ -863,6 +1065,20 @@ iframe {
 
   .section-title p {
     font-size: var(--font-size-xs);
+  }
+
+  .controls {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .category-wrap {
+    min-width: 0;
+  }
+
+  .random-game-btn {
+    margin: 0 var(--spacing-md) var(--spacing-md);
   }
 
   .card-footer {

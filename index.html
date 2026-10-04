@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070707">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
     <title>Playyyy - Games</title>
     <link rel="stylesheet" href="style.css">
     <script src="utm.js" defer></script>
@@ -24,19 +26,29 @@
     </div>
 
     <header>
-        <h1>🎮 Playyyy</h1>
+        <h1 class="home-logo" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <img src="favicon.ico" alt="Playyyy" style="width: 55px; height: 60px; display: flex; align-items: center;">
+            Playyyy
+        </h1>
+
+
         <p>100+ Best Browser Games</p>
         <a class="home-download-link" href="download.html">Download for PC</a>
+        <button class="install-app-btn" id="install-app-btn" type="button">Install app</button>
+        <p class="install-status" id="install-status" aria-live="polite"></p>
+        <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
     </header>
 
     <div style="text-align:center;">
         <div style="font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial;padding:20px;font-size:18px;">
             this site has
             <a title="free hit
-counter" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13299407/0/d0abe929/0/" alt="free hit counter" referrerPolicy="no-referrer-when-downgrade"></a>
+counter" href="https://statcounter.com/" target="_blank"><img class="statcounter"
+                    src="https://c.statcounter.com/13299407/0/d0abe929/0/" alt="free hit counter"
+                    referrerPolicy="no-referrer-when-downgrade"></a>
             visitors
         </div>
-        <img src="https://img.shields.io/github/last-commit/louis141414/playyyy?label=Last%20update" alt="Last update">
+        <span class="site-update-badge">Last updated: <time datetime="2026-10-04">Oct 4, 2026</time></span>
     </div>
 
     <section class="controls glass">
@@ -44,6 +56,21 @@ counter" href="https://statcounter.com/" target="_blank"><img class="statcounter
             <span>Search games</span>
             <input id="search-input" type="search" placeholder="Type a game name..." autocomplete="off">
         </label>
+        <label class="category-wrap" for="category-filter">
+            <span>Category</span>
+            <select id="category-filter">
+                <option value="all">All categories</option>
+            </select>
+        </label>
+        <button class="random-game-btn" id="random-game-btn" type="button">Surprise me</button>
+    </section>
+
+    <section class="recent-section" id="recent-section" hidden>
+        <div class="section-title">
+            <h2>Recently Played</h2>
+            <p>Your last games</p>
+        </div>
+        <div class="grid" id="recent-grid"></div>
     </section>
 
     <section class="favorites-section">

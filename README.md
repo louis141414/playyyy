@@ -25,6 +25,7 @@
 - **Favorites system**: Star the games you love (saved in your browser)
 - **Search**: Find any game in seconds
 - **Fully responsive**: Looks great on desktop, tablet and mobile
+- **Installable PWA**: Install Playyyy on supported phones and computers; the app shell is cached for offline access
 
 ---
 
@@ -57,6 +58,25 @@ Or visit the [download page](https://louis141414.github.io/playyyy/download.html
 - JSON
 
 No frameworks. No unnecessary dependencies.
+
+---
+
+## Repository layout
+
+- `index.html`, `play.html`, `404.html`, and `download.html` are the static-site entry pages and stay at the repository root so their public URLs remain stable.
+- `script.js`, `style.css`, `utm.js`, `manifest.json`, and `service-worker.js` contain the shared site behavior, styling, and PWA setup.
+- `games.json` is the game catalog. Each game lives in its own `games/<game-name>/` folder, with its original internal asset layout preserved because game files rely on relative paths.
+- `images/thumbnails/` contains the catalog artwork; `pc-version/` contains desktop installers; and `verify/` contains verification assets.
+
+The root `.gitignore` excludes operating-system metadata files such as `.DS_Store` and `Thumbs.db`.
+
+---
+
+## Install and offline use
+
+On a supported browser, choose **Install app** on the site to add Playyyy to your home screen or apps. The home page, game list, and shared interface files are cached for offline access; individual game files are not pre-cached, so a game may still need an internet connection.
+
+Game page views are sent to StatCounter with the game name in both the page title and the `game` URL parameter, so its page-view reports can show which games are opened most often.
 
 ---
 
