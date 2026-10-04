@@ -23,7 +23,8 @@
 - **Lightning fast**: Built with pure vanilla HTML, CSS & JavaScript
 - **Works everywhere**: Great for school, work, or anywhere else
 - **Favorites system**: Star the games you love (saved in your browser)
-- **Search**: Find any game in seconds
+- **Search and filters**: Search, filter by category, and keep your current browse view in the URL
+- **Recently added and random picks**: Browse new additions or spin the filtered game wheel
 - **Fully responsive**: Looks great on desktop, tablet and mobile
 - **Installable PWA**: Install Playyyy on supported phones and computers; the app shell is cached for offline access
 
@@ -32,7 +33,8 @@
 ## Features
 
 - 100+ high-quality browser games (Slope, Drive Mad, Retro Bowl, Geometry Dash, 2048, and many more)
-- Clean, modern interface with a dark theme
+- Clean, modern interface with dark and light themes
+- Daily featured game and A–Z, recently added, and favorites-first sorting
 - Full-screen support
 - Lightweight and optimized for speed
 - Open source and easy to customize
@@ -74,7 +76,7 @@ The root `.gitignore` excludes operating-system metadata files such as `.DS_Stor
 
 ## Install and offline use
 
-On a supported browser, choose **Install app** on the site to add Playyyy to your home screen or apps. The home page, game list, and shared interface files are cached for offline access; individual game files are not pre-cached, so a game may still need an internet connection.
+On a supported browser, use the browser menu to install Playyyy or add it to your home screen. The service worker caches the home page, game page, game list, manifest, and shared interface files for offline access; individual game files are not cached, so a game may still need an internet connection. The featured game changes daily, **Most favorited** sorts your locally saved favorites first, and opening a game preserves your search, category, sort, and browse position when you return.
 
 Game page views are sent to StatCounter with the game name in both the page title and the `game` URL parameter, so its page-view reports can show which games are opened most often.
 

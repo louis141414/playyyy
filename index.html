@@ -25,69 +25,100 @@
         </div>
     </div>
 
-    <header>
-        <h1 class="home-logo" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <img src="assets/images/favicon.ico" alt="Playyyy" style="width: 55px; height: 60px; display: flex; align-items: center;">
-            Playyyy
-        </h1>
-
-
-        <p>100+ Best Browser Games</p>
-        <p class="install-status" id="install-status" aria-live="polite"></p>
+    <header class="site-header">
+        <a class="home-brand" href="./" aria-label="Playyyy home">
+            <img src="assets/images/favicon.ico" alt="">
+            <span>Playyyy</span>
+        </a>
         <div class="home-header-actions">
+            <a class="home-donate-link" href="https://ko-fi.com/nietnormalemeneer" target="_blank" rel="noopener noreferrer">
+                Donate
+            </a>
             <a class="home-request-link" href="https://github.com/louis141414/playyyy/issues/new?template=game_request.yml">Request a game</a>
             <a class="home-download-link" href="download.html">Download for PC</a>
             <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
         </div>
     </header>
 
-    <div style="text-align:center;">
-        <div style="font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial;padding:20px;font-size:18px;">
-            this site has
-            <a title="free hit
-counter" href="https://statcounter.com/" target="_blank"><img class="statcounter"
-                    src="https://c.statcounter.com/13299407/0/d0abe929/0/" alt="free hit counter"
-                    referrerPolicy="no-referrer-when-downgrade"></a>
-            visitors
-        </div>
-        <span class="site-update-badge">Last updated: <time datetime="2026-10-04">Oct 4, 2026</time></span>
-    </div>
+    <div class="home-highlights">
+        <section class="featured-section" id="featured-section">
+            <div class="section-title">
+                <h2>Game of the Day</h2>
+                <p>A fresh pick every day</p>
+            </div>
+            <div class="featured-grid" id="featured-grid"></div>
+        </section>
 
-    <section class="controls glass">
-        <label class="search-wrap" for="search-input">
-            <span>Search games</span>
-            <input id="search-input" type="search" placeholder="Type a game name..." autocomplete="off">
-        </label>
-        <label class="category-wrap" for="category-filter">
-            <span>Category</span>
-            <select id="category-filter">
-                <option value="all">All categories</option>
-            </select>
-        </label>
-        <button class="random-game-btn" id="random-game-btn" type="button">Surprise me</button>
-    </section>
+        <section class="favorites-section" id="favorites-section">
+            <div class="section-title">
+                <h2>Favorites</h2>
+                <p>Swipe to see your saved games</p>
+            </div>
+            <div class="grid quick-games-grid favorites-grid" id="favorites-grid" tabindex="0" aria-label="Favorite games"></div>
+        </section>
+
+        <dialog class="wheel-dialog" id="wheel-dialog" aria-labelledby="wheel-title">
+            <div class="wheel-dialog-header">
+                <div>
+                    <p class="wheel-eyebrow">Can't decide?</p>
+                    <h2 id="wheel-title">Let fate choose</h2>
+                </div>
+                <button class="wheel-close" id="wheel-close" type="button" aria-label="Close game picker">×</button>
+            </div>
+            <div class="game-wheel" id="game-wheel" aria-hidden="true">
+                <div class="wheel-pointer"></div>
+                <div class="wheel-track" id="game-wheel-track"></div>
+            </div>
+            <p class="wheel-result" id="wheel-result" aria-live="polite">Spin to pick from your current results.</p>
+            <div class="wheel-actions">
+                <button class="theme-toggle" id="wheel-spin" type="button">Spin the wheel</button>
+                <a class="home-download-link wheel-play" id="wheel-play" href="#all-games" hidden>Play this game</a>
+            </div>
+        </dialog>
+        <div class="offline-indicator" id="offline-indicator" role="status" hidden>You are offline. The app shell is available; games may need an internet connection.</div>
+        <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" title="Back to top" aria-hidden="true" disabled hidden>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+                <path d="M12 19V5m-7 7 7-7 7 7" />
+            </svg>
+        </button>
+
+    </div>
 
     <section class="recent-section" id="recent-section" hidden>
         <div class="section-title">
             <h2>Recently Played</h2>
-            <p>Your last games</p>
+            <p>Swipe to revisit a game</p>
         </div>
-        <div class="grid" id="recent-grid"></div>
+        <div class="grid quick-games-grid" id="recent-grid" tabindex="0" aria-label="Recently played games"></div>
     </section>
 
-    <section class="favorites-section">
+    <section class="all-games-section" id="all-games">
         <div class="section-title">
-            <h2>Favorites</h2>
-            <p>Your saved games</p>
+            <h2>Browse all games</h2>
+            <p id="all-games-description">Explore the collection or filter by name and category</p>
         </div>
-        <div class="grid favorites-grid" id="favorites-grid"></div>
-    </section>
-
-    <section class="all-games-section">
-        <div class="section-title">
-            <h2>All Games</h2>
-            <p>Tap the star to save a game</p>
+        <div class="controls glass" role="group" aria-label="Find and sort games">
+            <label class="search-wrap" for="search-input">
+                <span>Search games</span>
+                <input id="search-input" type="search" placeholder="Search 111 games..." autocomplete="off">
+            </label>
+            <label class="category-wrap" for="category-filter">
+                <span>Category</span>
+                <select id="category-filter">
+                    <option value="all">All categories</option>
+                </select>
+            </label>
+            <label class="sort-wrap" for="sort-filter">
+                <span>Sort by</span>
+                <select id="sort-filter">
+                    <option value="recent">Recently added</option>
+                    <option value="az">A–Z</option>
+                    <option value="favorites">Most favorited (yours first)</option>
+                </select>
+            </label>
+            <button class="random-game-btn" id="random-game-btn" type="button">Spin the wheel</button>
         </div>
+        <div class="active-filters" id="active-filters" aria-live="polite"></div>
         <div class="grid" id="grid"></div>
     </section>
 

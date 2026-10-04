@@ -1,4 +1,4 @@
-const CACHE_NAME = 'playyyy-shell-v1';
+const CACHE_NAME = 'playyyy-shell-v9';
 const APP_SHELL_URL = new URL('./index.html', self.registration.scope).href;
 const APP_SHELL_FILES = [
   './',
@@ -7,12 +7,14 @@ const APP_SHELL_FILES = [
   './assets/css/style.css',
   './assets/js/script.js',
   './assets/js/utm.js',
+  './verify/verify.js',
   './games.json',
   './manifest.json',
   './assets/images/app-icon-192.png',
   './assets/images/app-icon-512.png',
   './assets/images/favicon.ico',
-  './assets/images/ico.ico'
+  './assets/images/ico.ico',
+  './assets/images/thumbnails/placeholder.jpg'
 ];
 
 self.addEventListener('install', event => {
@@ -37,7 +39,11 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const request = event.request;
-  if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
+  const requestUrl = new URL(request.url);
+  if (request.method !== 'GET' || requestUrl.origin !== self.location.origin) return;
+
+  const gamesPath = new URL('./games/', self.registration.scope).pathname;
+  if (requestUrl.pathname.startsWith(gamesPath)) return;
 
   if (request.mode === 'navigate') {
     event.respondWith(

@@ -15,8 +15,7 @@
 <body>
     <header>
         <h1 id="game-title">Loading...</h1>
-        <a class="game-home-link" href="index.html">← Back to Home</a>
-        <span class="install-status" id="install-status" aria-live="polite"></span>
+        <a class="game-home-link" id="game-home-link" href="index.html">← Back to Games</a>
         <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
         <button id="fullscreen-btn" onclick="toggleFullscreen()" style="background: none; border: none; color: #00ff9d; font-size: 1.2em; cursor: pointer; margin-left: 10px;">⛶</button>
     </header>
@@ -27,6 +26,7 @@
         <a href="https://statcounter.com/p13299407/?guest=1">->
 Stats</a>
     </div>
+    <div class="offline-indicator" id="offline-indicator" role="status" hidden>You are offline. The app shell is available; games may need an internet connection.</div>
 
     <script src="assets/js/script.js"></script>
     <script>
