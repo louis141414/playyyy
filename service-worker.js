@@ -1,4 +1,4 @@
-const CACHE_NAME = 'playyyy-shell-v9';
+const CACHE_NAME = 'playyyy-shell-v10';
 const APP_SHELL_URL = new URL('./index.html', self.registration.scope).href;
 const APP_SHELL_FILES = [
   './',

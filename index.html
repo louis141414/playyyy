@@ -30,14 +30,19 @@
             <img src="assets/images/favicon.ico" alt="">
             <span>Playyyy</span>
         </a>
-        <div class="home-header-actions">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-controls="home-navigation" aria-expanded="false">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+        <nav class="home-header-actions" id="home-navigation" aria-label="Main navigation">
             <a class="home-donate-link" href="https://ko-fi.com/nietnormalemeneer" target="_blank" rel="noopener noreferrer">
                 Donate
             </a>
             <a class="home-request-link" href="https://github.com/louis141414/playyyy/issues/new?template=game_request.yml">Request a game</a>
             <a class="home-download-link" href="download.html">Download for PC</a>
             <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
-        </div>
+        </nav>
     </header>
 
     <div class="home-highlights">

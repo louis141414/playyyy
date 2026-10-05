@@ -795,6 +795,35 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  const menuToggle = document.getElementById('menu-toggle');
+  const homeNavigation = document.getElementById('home-navigation');
+  if (menuToggle && homeNavigation) {
+    const setMenuOpen = isOpen => {
+      homeNavigation.classList.toggle('is-open', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    };
+
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    homeNavigation.addEventListener('click', event => {
+      if (event.target instanceof Element && event.target.closest('a, button')) setMenuOpen(false);
+    });
+    document.addEventListener('click', event => {
+      if (menuToggle.getAttribute('aria-expanded') !== 'true') return;
+      if (event.target instanceof Node && !homeNavigation.contains(event.target) && !menuToggle.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false);
+        menuToggle.focus();
+      }
+    });
+  }
+
   // ✅ LAAD GAMES EN RENDER DIRECT
   await loadGames();
   
