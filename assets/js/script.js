@@ -242,7 +242,7 @@ function getThumbnailCandidates(name) {
   const base = normalizeName(name);
   if (name === 'Appel') {
     return [
-      'games/appel/assets/5ca72b0c06b2764b850d4a40848e9fb1.png',
+      'assets/images/thumbnails/appel.svg',
       `assets/images/thumbnails/${base}.jpg`,
       `assets/images/thumbnails/${base}.jpeg`,
       `assets/images/thumbnails/${base}.png`,

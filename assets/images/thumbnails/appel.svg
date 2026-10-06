@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="100" viewBox="0 0 480 100">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#b9eff4"/>
+      <stop offset="1" stop-color="#e1f8f5"/>
+    </linearGradient>
+    <pattern id="blocks" width="52" height="42" patternUnits="userSpaceOnUse">
+      <rect x="4" y="4" width="38" height="30" rx="8" fill="#fff" opacity=".22"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="100" fill="url(#sky)"/>
+  <rect width="480" height="100" fill="url(#blocks)"/>
+  <path d="M0 71h53V59h16V71h41V54h17V71h86V61h18V71h71V54h18V71h59V59h16V71h85v29H0z" fill="#42c34d"/>
+  <path d="M0 71h480v5H0z" fill="#279d3e"/>
+  <g fill="#35b447" opacity=".75">
+    <rect x="18" y="83" width="23" height="17"/><rect x="61" y="81" width="32" height="19"/>
+    <rect x="130" y="84" width="20" height="16"/><rect x="169" y="80" width="35" height="20"/>
+    <rect x="280" y="82" width="27" height="18"/><rect x="338" y="81" width="36" height="19"/>
+    <rect x="416" y="84" width="24" height="16"/><rect x="455" y="80" width="25" height="20"/>
+  </g>
+  <text x="28" y="68" font-family="Arial, Helvetica, sans-serif" font-size="57" font-weight="900" font-style="italic" letter-spacing="-3" fill="#197b43" stroke="#111" stroke-width="7" stroke-linejoin="round" paint-order="stroke">APPEL</text>
+  <text x="28" y="64" font-family="Arial, Helvetica, sans-serif" font-size="57" font-weight="900" font-style="italic" letter-spacing="-3" fill="#ffe928" stroke="#111" stroke-width="5" stroke-linejoin="round" paint-order="stroke">APPEL</text>
+  <g transform="translate(383 32)">
+    <path d="M18 4c0-7 4-11 10-11" fill="none" stroke="#49351d" stroke-width="4" stroke-linecap="round"/>
+    <path d="M23-6c8-8 18-7 21-2-7 5-14 7-21 2" fill="#32c94e" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M5 8c0-6 6-10 13-7 7-3 13 1 13 7 0 11-7 20-13 20S5 19 5 8z" fill="#f4212b" stroke="#111" stroke-width="3"/>
+    <ellipse cx="11" cy="8" rx="3" ry="5" fill="#ff8790"/>
+    <path d="M17 35v8m-14 0h30v8H3z" fill="#218f3c" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M38 28h32v32H38z" fill="#ffe928" stroke="#111" stroke-width="3"/>
+    <path d="M42 22h24v8H42z" fill="#19e44b" stroke="#111" stroke-width="3"/>
+    <path d="M46 38h5v6h-5zm12 0h5v6h-5z" fill="#111"/>
+    <path d="M48 52h13" stroke="#111" stroke-width="3"/>
+  </g>
+</svg>
