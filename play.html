@@ -21,7 +21,17 @@
     </header>
 
     <div id="game-container" class="glass">
-        <iframe id="game-iframe" allowfullscreen></iframe>
+        <div class="game-frame-wrap">
+            <iframe id="game-iframe" allowfullscreen></iframe>
+            <section class="minecraft-loading" id="minecraft-loading" aria-live="polite" hidden>
+                <div class="minecraft-loading-card">
+                    <h2 id="minecraft-loading-title">Downloading Minecraft</h2>
+                    <progress id="minecraft-download-progress" aria-label="Minecraft download progress"></progress>
+                    <p id="minecraft-loading-status">Preparing download...</p>
+                    <button class="theme-toggle" id="minecraft-download-retry" type="button" hidden>Try again</button>
+                </div>
+            </section>
+        </div>
         <div class="description" id="description"></div>
         <a href="https://statcounter.com/p13299407/?guest=1">->
 Stats</a>

@@ -467,6 +467,92 @@ function applyTheme(theme) {
 // =======================
 // RENDER GAME PAGE
 // =======================
+function formatDownloadSize(bytes) {
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function loadMinecraftIndex(game, iframe) {
+  const loading = document.getElementById('minecraft-loading');
+  const progress = document.getElementById('minecraft-download-progress');
+  const status = document.getElementById('minecraft-loading-status');
+  const retry = document.getElementById('minecraft-download-retry');
+
+  if (!loading || !progress || !status || !retry) {
+    iframe.src = game.url;
+    return;
+  }
+
+  const title = document.getElementById('minecraft-loading-title');
+  let revealTimer = window.setTimeout(() => {
+    loading.hidden = false;
+  }, 150);
+
+  if (title) title.textContent = 'Downloading Minecraft';
+  retry.hidden = true;
+  progress.hidden = false;
+  progress.removeAttribute('value');
+  status.textContent = 'Connecting to download the game index...';
+
+  const startGame = () => {
+    window.clearTimeout(revealTimer);
+    if (title) title.textContent = 'Starting Minecraft';
+    progress.hidden = true;
+    status.textContent = 'Download complete. Starting the game...';
+    iframe.addEventListener('load', () => {
+      loading.hidden = true;
+    }, { once: true });
+    iframe.src = game.url;
+  };
+
+  const downloadIndex = async () => {
+    const response = await fetch(new URL(game.url, window.location.href));
+    if (!response.ok) {
+      throw new Error(`Download returned HTTP ${response.status}`);
+    }
+
+    const total = Number(response.headers.get('content-length'));
+    const hasTotal = Number.isSafeInteger(total) && total > 0;
+    if (hasTotal) progress.max = total;
+
+    if (!response.body) {
+      startGame();
+      return;
+    }
+
+    const reader = response.body.getReader();
+    let downloaded = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      downloaded += value.byteLength;
+      if (hasTotal && downloaded <= total) {
+        progress.value = downloaded;
+        status.textContent = `Downloaded ${formatDownloadSize(downloaded)} of ${formatDownloadSize(total)}`;
+      } else {
+        progress.removeAttribute('value');
+        status.textContent = `Downloaded ${formatDownloadSize(downloaded)}`;
+      }
+    }
+
+    startGame();
+  };
+
+  downloadIndex().catch(error => {
+    window.clearTimeout(revealTimer);
+    console.error(`Could not download the ${game.name} index:`, error);
+    loading.hidden = false;
+    if (title) title.textContent = 'Minecraft download failed';
+    progress.hidden = true;
+    status.textContent = 'Check your connection, then try downloading the game again.';
+    retry.hidden = false;
+  });
+
+  retry.onclick = () => {
+    void loadMinecraftIndex(game, iframe);
+  };
+}
+
 async function renderGame() {
   const params = new URLSearchParams(window.location.search);
   const gameName = params.get('game');
@@ -509,7 +595,11 @@ async function renderGame() {
 
   const iframe = document.getElementById('game-iframe');
   if (iframe) {
-    iframe.src = game.url;
+    if (game.name.toLowerCase().includes('minecraft')) {
+      loadMinecraftIndex(game, iframe);
+    } else {
+      iframe.src = game.url;
+    }
   }
 
   const description = document.getElementById('description');
