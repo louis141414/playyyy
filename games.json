@@ -88,7 +88,7 @@
     { "name": "Bad Ice Cream", "url": "./games/badicecream/index.html", "category": "Puzzle" },
     { "name": "Baldi's Basics", "url": "./games/baldisbasics/index.html", "category": "Adventure" },
     { "name": "Battle Beavers", "url": "./games/battlebeavers/index.html", "category": "Action" },
-    { "name": "Bloons TD", "url": "./games/btd/index.html", "category": "Strategy" },
+    { "name": "Bloons TD", "url": "./games/btd/btd/index.html", "category": "Strategy" },
     { "name": "Cactus McCoy", "url": "./games/cactusmccoy/index.html", "category": "Platformer" },
     { "name": "Champion Island", "url": "./games/championisland/index.html", "category": "Sports" },
     { "name": "Choose Your Weapon", "url": "./games/chooseyourweapon/index.html", "category": "Action" },

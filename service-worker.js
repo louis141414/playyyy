@@ -1,5 +1,12 @@
-const CACHE_NAME = 'playyyy-shell-v17';
+const CACHE_NAME = 'playyyy-shell-v18';
+const GAME_CACHE_NAME = 'playyyy-games-v1';
 const APP_SHELL_URL = new URL('./index.html', self.registration.scope).href;
+const GAME_PAGE_URL = new URL('./game/index.html', self.registration.scope).href;
+const GAME_PAGE_PATHS = new Set([
+  new URL('./game/', self.registration.scope).pathname,
+  new URL('./game', self.registration.scope).pathname,
+  new URL('./game/index.html', self.registration.scope).pathname
+]);
 const OFFLINE_GAME_FILES = [
   './games/pacmanflash/index.html',
   './games/pacmanflash/pac-man.swf',
@@ -14,6 +21,10 @@ const OFFLINE_GAME_FILES = [
 const OFFLINE_GAME_PATHS = new Set(
   OFFLINE_GAME_FILES.map(path => new URL(path, self.registration.scope).pathname)
 );
+const PRELOAD_GAME_PATHS = new Set([
+  './games/minecraft 12.2/index.html',
+  './games/minecraft 26.2/index.html'
+].map(path => new URL(path, self.registration.scope).pathname));
 const APP_SHELL_FILES = [
   './',
   './index.html',
@@ -62,6 +73,15 @@ self.addEventListener('fetch', event => {
 
   const gamesPath = new URL('./games/', self.registration.scope).pathname;
   if (requestUrl.pathname.startsWith(gamesPath)) {
+    if (PRELOAD_GAME_PATHS.has(requestUrl.pathname)) {
+      event.respondWith(
+        caches.open(GAME_CACHE_NAME)
+          .then(cache => cache.match(request))
+          .then(cachedResponse => cachedResponse || fetch(request))
+      );
+      return;
+    }
+
     if (OFFLINE_GAME_PATHS.has(requestUrl.pathname)) {
       event.respondWith(
         caches.open(CACHE_NAME)
@@ -103,7 +123,13 @@ self.addEventListener('fetch', event => {
           });
       }).catch(async () => {
         const cache = await caches.open(CACHE_NAME);
-        return await cache.match(request, { ignoreSearch: true }) || cache.match(APP_SHELL_URL);
+        const cachedPage = await cache.match(request, { ignoreSearch: true });
+        if (cachedPage) return cachedPage;
+        if (GAME_PAGE_PATHS.has(requestUrl.pathname)) {
+          const gamePage = await cache.match(GAME_PAGE_URL);
+          if (gamePage) return gamePage;
+        }
+        return cache.match(APP_SHELL_URL);
       })
     );
     return;

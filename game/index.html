@@ -26,7 +26,6 @@
     <script src="verify/verify.js"></script>
 </head>
 <body>
-    <a class="skip-link" href="#game-iframe">Skip to game</a>
     <header>
         <h1 id="game-title">Loading...</h1>
         <a class="game-home-link" id="game-home-link" href="./">← Back to Games</a>
@@ -37,7 +36,7 @@
     <main id="game-container" class="glass">
         <div class="game-frame-wrap">
             <iframe id="game-iframe" title="Game" tabindex="0" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads"></iframe>
-            <section class="game-loading" id="game-loading" aria-live="polite">
+            <section class="game-loading" id="game-loading" aria-live="polite" hidden>
                 <div class="game-loading-card">
                     <img class="game-loading-logo" src="assets/images/app-icon-192.png" alt="Playyyy logo">
                     <p class="game-loading-brand">PLAYYYY</p>
