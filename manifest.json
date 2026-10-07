@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Playyyy - Browser Games",
   "short_name": "Playyyy",
-  "description": "Discover and play free browser games.",
+  "description": "Play free browser games instantly. Discover action, puzzle, racing, and arcade games with no downloads or account.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

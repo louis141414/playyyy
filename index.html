@@ -5,9 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#070707">
+    <meta name="description" id="page-description" content="Play free browser games instantly on Playyyy. Discover action, puzzle, racing, and arcade games—no downloads or account required.">
+    <meta property="og:site_name" content="Playyyy">
+    <meta property="og:type" content="website">
+    <meta property="og:title" id="og-title" content="Play free browser games instantly | Playyyy">
+    <meta property="og:description" id="og-description" content="Discover and play free browser games instantly. No downloads or account required.">
+    <meta property="og:url" id="og-url" content="https://louis141414.github.io/playyyy/">
+    <meta property="og:image" content="https://louis141414.github.io/playyyy/assets/images/app-icon-512.png">
+    <meta property="og:image:alt" content="Playyyy browser games">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Play free browser games instantly | Playyyy">
+    <meta name="twitter:description" content="Discover and play free browser games instantly. No downloads or account required.">
+    <meta name="twitter:image" content="https://louis141414.github.io/playyyy/assets/images/app-icon-512.png">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <link rel="manifest" href="manifest.json">
-    <title>Playyyy - Games</title>
+    <title>Play free browser games instantly | Playyyy</title>
+    <script src="assets/js/theme.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/utm.js" defer></script>
     <script src="verify/verify.js"></script>
@@ -41,11 +54,20 @@
             </a>
             <a class="home-request-link" href="https://github.com/louis141414/playyyy/issues/new?template=game_request.yml">Request a game</a>
             <a class="home-download-link" href="download.html">Download for PC</a>
-            <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
+            <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light mode">Light mode</button>
         </nav>
     </header>
 
+    <main id="main-content">
     <div class="home-highlights">
+        <section class="recent-section" id="recent-section" hidden>
+            <div class="section-title">
+                <h2>Recently Played</h2>
+                <p>Swipe to revisit a game</p>
+            </div>
+            <div class="grid quick-games-grid" id="recent-grid" tabindex="0" aria-label="Recently played games"></div>
+        </section>
+
         <section class="featured-section" id="featured-section">
             <div class="section-title">
                 <h2>Game of the Day</h2>
@@ -89,15 +111,7 @@
 
     </div>
 
-    <section class="recent-section" id="recent-section" hidden>
-        <div class="section-title">
-            <h2>Recently Played</h2>
-            <p>Swipe to revisit a game</p>
-        </div>
-        <div class="grid quick-games-grid" id="recent-grid" tabindex="0" aria-label="Recently played games"></div>
-    </section>
-
-    <section class="all-games-section" id="all-games">
+    <section class="all-games-section" id="all-games" tabindex="-1">
         <div class="section-title">
             <h2>Browse all games</h2>
             <p id="all-games-description">Explore the collection or filter by name and category</p>
@@ -105,7 +119,7 @@
         <div class="controls glass" role="group" aria-label="Find and sort games">
             <label class="search-wrap" for="search-input">
                 <span>Search games</span>
-                <input id="search-input" type="search" placeholder="Search 111 games..." autocomplete="off">
+                <input id="search-input" type="search" placeholder="Search games..." autocomplete="off">
             </label>
             <label class="category-wrap" for="category-filter">
                 <span>Category</span>
@@ -126,6 +140,21 @@
         <div class="active-filters" id="active-filters" aria-live="polite"></div>
         <div class="grid" id="grid"></div>
     </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-about">
+            <h2>About Playyyy</h2>
+            <p>Free browser games, ready to play without downloads or an account.</p>
+        </div>
+        <p class="footer-privacy">Favorites and theme preferences stay in your browser. Game-page visits may be measured with StatCounter.</p>
+        <p class="footer-credits">Games belong to their respective creators. Playyyy is an independent game directory.</p>
+        <nav class="footer-links" aria-label="Footer">
+            <span>Playyyy Web v1.0.0</span>
+            <a href="https://github.com/louis141414/playyyy" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="verify/Terms.pdf">Disclaimer</a>
+        </nav>
+    </footer>
 
     <script src="assets/js/script.js"></script>
 </body>

@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Download the Playyyy PC installer or offline installer.">
-    <title>Download Playyyy</title>
+    <meta name="description" content="Download the Playyyy PC installer or offline version for offline play.">
+    <meta name="theme-color" content="#070707">
+    <meta property="og:site_name" content="Playyyy">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Download Playyyy for PC">
+    <meta property="og:description" content="Get the Playyyy PC installer or offline version for offline play.">
+    <meta property="og:url" content="https://louis141414.github.io/playyyy/download.html">
+    <meta property="og:image" content="https://louis141414.github.io/playyyy/assets/images/app-icon-512.png">
+    <meta property="og:image:alt" content="Playyyy browser games">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Download Playyyy for PC">
+    <meta name="twitter:description" content="Get the Playyyy PC installer or offline version for offline play.">
+    <meta name="twitter:image" content="https://louis141414.github.io/playyyy/assets/images/app-icon-512.png">
+    <title>Download Playyyy for PC | Playyyy</title>
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <script src="assets/js/theme.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/utm.js" defer></script>
 </head>
 <body>
-    <header>
+    <a class="skip-link" href="#download-options">Skip to downloads</a>
+    <header class="download-page-header">
         <h1>Playyyy</h1>
         <p>Choose your installer.</p>
+        <button class="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light mode">Light mode</button>
     </header>
 
     <main class="download-page">
@@ -26,7 +41,7 @@
             </a>
         </section>
 
-        <section class="download-options" aria-label="Playyyy installers">
+        <section class="download-options" id="download-options" tabindex="-1" aria-label="Playyyy installers">
             <article class="download-option">
                 <h3>PC version</h3>
                 <p>For playing with an internet connection.</p>
@@ -40,5 +55,18 @@
             </article>
         </section>
     </main>
+    <footer class="site-footer">
+        <div class="footer-about">
+            <h2>About Playyyy</h2>
+            <p>Free browser games, ready to play without downloads or an account.</p>
+        </div>
+        <p class="footer-privacy">Favorites and theme preferences stay in your browser. Game-page visits may be measured with StatCounter.</p>
+        <p class="footer-credits">Games belong to their respective creators. Playyyy is an independent game directory.</p>
+        <nav class="footer-links" aria-label="Footer">
+            <span>Playyyy Web v1.0.0</span>
+            <a href="https://github.com/louis141414/playyyy" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="verify/Terms.pdf">Disclaimer</a>
+        </nav>
+    </footer>
 </body>
 </html>

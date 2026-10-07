@@ -9,14 +9,90 @@ body,
 }
 
 #ruffle-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#status {
-  color: #fff;
-  font: 16px/1.5 sans-serif;
-  padding: 24px;
+#ruffle-container ruffle-player {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-screen {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #070707;
+  color: #e8e8e8;
+  font: 14px/1.5 "Segoe UI", system-ui, sans-serif;
   text-align: center;
+}
+
+.loading-screen[hidden] {
+  display: none;
+}
+
+.loading-logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.loading-brand {
+  margin: 0;
+  color: #00ff9d;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+.loading-spinner {
+  position: relative;
+  width: min(180px, 55vw);
+  height: 3px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 12%);
+}
+
+.loading-spinner::after {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  border-radius: inherit;
+  background: #00ff9d;
+  content: "";
+  animation: ruffle-loading-progress 1.4s ease-in-out infinite;
+}
+
+#status {
+  max-width: min(90%, 480px);
+  margin: 0;
+  color: rgb(232 232 232 / 72%);
+}
+
+@keyframes ruffle-loading-progress {
+  from {
+    transform: translateX(-110%);
+  }
+
+  to {
+    transform: translateX(260%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner::after {
+    animation-duration: 4s;
+  }
 }

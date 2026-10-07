@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070707">
+    <meta name="description" id="page-description" content="Play free browser games instantly on Playyyy.">
+    <meta property="og:site_name" content="Playyyy">
+    <meta property="og:type" content="website">
+    <meta property="og:title" id="og-title" content="Play free browser games instantly | Playyyy">
+    <meta property="og:description" id="og-description" content="Play free browser games instantly on Playyyy.">
+    <meta property="og:url" id="og-url" content="https://louis141414.github.io/playyyy/game/">
+    <meta property="og:image" content="https://louis141414.github.io/playyyy/assets/images/app-icon-512.png">
+    <meta property="og:image:alt" content="Playyyy browser games">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitter-title" content="Play free browser games instantly | Playyyy">
+    <meta name="twitter:description" id="twitter-description" content="Play free browser games instantly on Playyyy.">
+    <meta name="twitter:image" content="https://louis141414.github.io/playyyy/assets/images/app-icon-512.png">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <title>Play free browser games instantly | Playyyy</title>
+    <script src="assets/js/theme.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/utm.js" defer></script>
+    <script src="verify/verify.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#game-iframe">Skip to game</a>
+    <header>
+        <h1 id="game-title">Loading...</h1>
+        <a class="game-home-link" id="game-home-link" href="./">← Back to Games</a>
+        <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light mode">Light mode</button>
+        <button class="fullscreen-btn" id="fullscreen-btn" type="button" aria-label="Enter fullscreen" title="Enter fullscreen">⛶</button>
+    </header>
+
+    <main id="game-container" class="glass">
+        <div class="game-frame-wrap">
+            <iframe id="game-iframe" title="Game" tabindex="0" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads"></iframe>
+            <section class="game-loading" id="game-loading" aria-live="polite">
+                <div class="game-loading-card">
+                    <img class="game-loading-logo" src="assets/images/app-icon-192.png" alt="Playyyy logo">
+                    <p class="game-loading-brand">PLAYYYY</p>
+                    <h2 id="game-loading-title">Loading game</h2>
+                    <progress id="game-download-progress" aria-label="Download progress" hidden></progress>
+                    <div class="game-loading-indeterminate" id="game-loading-indeterminate" role="progressbar" aria-label="Loading game"></div>
+                    <p id="game-loading-status">Preparing game...</p>
+                    <button class="theme-toggle" id="game-download-retry" type="button" hidden>Try again</button>
+                </div>
+            </section>
+        </div>
+        <p class="game-start-hint">Click inside the game to start when prompted. Press Tab to focus it.</p>
+        <div class="description" id="description"></div>
+        <a class="game-stats-link" href="https://statcounter.com/p13299407/?guest=1" target="_blank" rel="noopener noreferrer">Site statistics</a>
+    </main>
+    <section class="game-not-found" id="game-not-found" role="main" hidden>
+        <p class="error-code">404</p>
+        <h2>Game not found</h2>
+        <p>That game link may be misspelled, outdated, or no longer available.</p>
+        <a class="home-download-link" href="./">Browse all games</a>
+    </section>
+    <div class="offline-indicator" id="offline-indicator" role="status" hidden>You are offline. The app shell is available; games may need an internet connection.</div>
+
+    <footer class="site-footer">
+        <div class="footer-about">
+            <h2>About Playyyy</h2>
+            <p>Free browser games, ready to play without downloads or an account.</p>
+        </div>
+        <p class="footer-privacy">Favorites and theme preferences stay in your browser. Game-page visits may be measured with StatCounter.</p>
+        <p class="footer-credits">Games belong to their respective creators. Playyyy is an independent game directory.</p>
+        <nav class="footer-links" aria-label="Footer">
+            <span>Playyyy Web v1.0.0</span>
+            <a href="https://github.com/louis141414/playyyy" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="verify/Terms.pdf">Disclaimer</a>
+        </nav>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

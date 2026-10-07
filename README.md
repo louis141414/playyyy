@@ -24,9 +24,11 @@
 - **Works everywhere**: Great for school, work, or anywhere else
 - **Favorites system**: Star the games you love (saved in your browser)
 - **Search and filters**: Search, filter by category, and keep your current browse view in the URL
+- **Clean game links**: Every game has a simple `/game/?id=<game name>` URL, such as `/game/?id=Pac-Man`
 - **Recently added and random picks**: Browse new additions or spin the filtered game wheel
 - **Fully responsive**: Looks great on desktop, tablet and mobile
 - **Installable PWA**: Install Playyyy on supported phones and computers; the app shell is cached for offline access
+- **Accessible browsing**: Keyboard-friendly filters, clear focus styles, labeled controls, and progressive game-card loading
 
 ---
 
@@ -65,7 +67,7 @@ No frameworks. No unnecessary dependencies.
 
 ## Repository layout
 
-- `index.html`, `play.html`, `404.html`, and `download.html` are the static-site entry pages and stay at the repository root so their public URLs remain stable.
+- `index.html`, `404.html`, and `download.html` are the static-site entry pages. `game/index.html` serves game pages at `/game/?id=<game name>`.
 - `assets/js/` contains shared JavaScript; `assets/css/` contains shared styles; and `assets/images/` contains thumbnails and app icons. The root `manifest.json` and `service-worker.js` stay at the site root for PWA scope.
 - `games.json` is the game catalog. Each game lives in its own `games/<game-name>/` folder, with its original internal asset layout preserved because game files rely on relative paths.
 - `pc-version/` contains desktop installers; and `verify/` contains verification assets.
@@ -76,9 +78,9 @@ The root `.gitignore` excludes operating-system metadata files such as `.DS_Stor
 
 ## Install and offline use
 
-On a supported browser, use the browser menu to install Playyyy or add it to your home screen. The service worker caches the home page, game page, game list, manifest, and shared interface files for offline access; individual game files are not cached, so a game may still need an internet connection. The featured game changes daily, **Most favorited** sorts your locally saved favorites first, and opening a game preserves your search, category, sort, and browse position when you return.
+On a supported browser, use the browser menu to install Playyyy or add it to your home screen. The service worker caches the home page, game page, game list, manifest, and shared interface files for offline access. Pac-Man (Flash) and the newest Flash games use the locally hosted Ruffle player; its runtime adds about 29 MB to the initial install, and each Flash game is cached the first time it is played online so it can be replayed offline. Every game opens behind the Playyyy loading screen; common embedded loading indicators, including Unity progress screens, are hidden while their games load. Minecraft also reports its download progress. Game frames block top-level navigation and outside links so games remain within Playyyy. Other game files are not cached and may still need an internet connection. Theme preference and favorites stay in local browser storage; game-page visits may be measured with StatCounter. The featured game changes daily, **Most favorited** sorts your locally saved favorites first, and opening a game preserves your search, category, sort, and browse position when you return.
 
-Game page views are sent to StatCounter with the game name in both the page title and the `game` URL parameter, so its page-view reports can show which games are opened most often.
+Game pages use `/game/?id=<game name>` URLs. Game page views are sent to StatCounter with the game name in the page title.
 
 ---
 

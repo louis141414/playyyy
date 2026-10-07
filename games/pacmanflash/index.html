@@ -3,11 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pac-Man (Flash) | Playyyy</title>
+  <meta name="theme-color" content="#070910">
+  <meta name="description" content="Play Pac-Man in the Playyyy offline arcade.">
+  <title>Pac-Man | Playyyy Arcade</title>
   <link rel="stylesheet" href="../ruffle/player.css">
 </head>
 <body>
-  <main id="ruffle-container" aria-label="Pac-Man (Flash)"><p id="status">Loading game...</p></main>
+  <main id="ruffle-container" aria-label="Pac-Man">
+    <section class="loading-screen" id="loading-screen" aria-live="polite">
+      <img class="loading-logo" src="../../assets/images/app-icon-512.png" alt="Playyyy logo">
+      <p class="loading-brand">PLAYYYY</p>
+      <span class="loading-spinner" aria-hidden="true"></span>
+      <p id="status" role="status">Loading Pac-Man...</p>
+    </section>
+  </main>
   <script src="../ruffle/player.js" data-title="Pac-Man (Flash)" data-file="pac-man.swf"></script>
 </body>
 </html>
