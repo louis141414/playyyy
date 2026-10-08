@@ -23,7 +23,7 @@ const createLoadingScreen = () => {
 
   const logo = document.createElement('img');
   logo.className = 'loading-logo';
-  logo.src = new URL('../../assets/images/app-icon-512.png', loader.src).href;
+  logo.src = new URL('../../new-logo.svg', loader.src).href;
   logo.alt = 'Playyyy logo';
 
   const brand = document.createElement('p');

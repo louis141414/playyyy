@@ -38,10 +38,7 @@ const APP_SHELL_FILES = [
   './verify/verify.js',
   './games.json',
   './manifest.json',
-  './assets/images/app-icon-192.png',
-  './assets/images/app-icon-512.png',
-  './assets/images/favicon.ico',
-  './assets/images/ico.ico',
+  './new-logo.svg',
   './assets/images/thumbnails/placeholder.jpg',
   ...OFFLINE_GAME_FILES
 ];
