@@ -1,20 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270">
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="100" viewBox="0 0 480 100">
   <defs>
     <linearGradient id="bg" x2="0" y2="1">
-      <stop stop-color="#321a19"/>
+      <stop stop-color="#4a211b"/>
+      <stop offset=".52" stop-color="#211313"/>
       <stop offset="1" stop-color="#080909"/>
     </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#bc4828" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#bc4828" stop-opacity="0"/>
+    </radialGradient>
     <linearGradient id="title" x2="0" y2="1">
       <stop stop-color="#fff0c3"/>
       <stop offset=".5" stop-color="#d75836"/>
       <stop offset="1" stop-color="#781b18"/>
     </linearGradient>
   </defs>
-  <rect width="480" height="270" fill="url(#bg)"/>
-  <path d="M0 206 66 154l46 30 75-64 59 47 71-81 65 67 42-33 56 54v96H0Z" fill="#171818"/>
-  <path d="m0 219 72-26 78 27 74-38 93 39 80-31 83 28v52H0Z" fill="#0b0d0d"/>
-  <text x="240" y="139" fill="#370e0d" font-family="Impact, sans-serif" font-size="90" font-weight="900" text-anchor="middle" letter-spacing="3">DOOM</text>
-  <text x="240" y="130" fill="url(#title)" font-family="Impact, sans-serif" font-size="90" font-weight="900" text-anchor="middle" letter-spacing="3">DOOM</text>
-  <path d="M129 144h222" stroke="#e56a3b" stroke-width="3" opacity=".8"/>
-  <text x="240" y="247" fill="#d1c8b1" font-family="Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="5">FREEDOOM · PLAY IN YOUR BROWSER</text>
+  <rect width="480" height="100" fill="url(#bg)"/>
+  <ellipse cx="240" cy="43" rx="220" ry="88" fill="url(#glow)"/>
+  <path d="m0 66 34-16 26 9 26-25 20 17 28-15 30 20 30-21 30 22 25-17 23 15 28-27 26 23 34-14 31 22 29-17v58H0Z" fill="#171818"/>
+  <path d="m0 78 47-15 42 14 44-17 46 16 47-14 45 17 48-16 44 15 44-13 33 11v24H0Z" fill="#0b0d0d"/>
+  <text x="240" y="67" fill="#370e0d" font-family="Impact, 'Arial Black', sans-serif" font-size="62" font-weight="900" text-anchor="middle" letter-spacing="4">DOOM</text>
+  <text x="240" y="62" fill="url(#title)" font-family="Impact, 'Arial Black', sans-serif" font-size="62" font-weight="900" text-anchor="middle" letter-spacing="4">DOOM</text>
+  <path d="M142 72h196" stroke="#e56a3b" stroke-width="2" opacity=".85"/>
+  <text x="240" y="91" fill="#d1c8b1" font-family="Arial, sans-serif" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="3">FREEDOOM · PLAY IN YOUR BROWSER</text>
+  <path d="M1 1h478v98H1z" fill="none" stroke="#d75836" stroke-opacity=".45"/>
 </svg>
