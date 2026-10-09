@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270">
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1">
+      <stop stop-color="#321a19"/>
+      <stop offset="1" stop-color="#080909"/>
+    </linearGradient>
+    <linearGradient id="title" x2="0" y2="1">
+      <stop stop-color="#fff0c3"/>
+      <stop offset=".5" stop-color="#d75836"/>
+      <stop offset="1" stop-color="#781b18"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="270" fill="url(#bg)"/>
+  <path d="M0 206 66 154l46 30 75-64 59 47 71-81 65 67 42-33 56 54v96H0Z" fill="#171818"/>
+  <path d="m0 219 72-26 78 27 74-38 93 39 80-31 83 28v52H0Z" fill="#0b0d0d"/>
+  <text x="240" y="139" fill="#370e0d" font-family="Impact, sans-serif" font-size="90" font-weight="900" text-anchor="middle" letter-spacing="3">DOOM</text>
+  <text x="240" y="130" fill="url(#title)" font-family="Impact, sans-serif" font-size="90" font-weight="900" text-anchor="middle" letter-spacing="3">DOOM</text>
+  <path d="M129 144h222" stroke="#e56a3b" stroke-width="3" opacity=".8"/>
+  <text x="240" y="247" fill="#d1c8b1" font-family="Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="5">FREEDOOM · PLAY IN YOUR BROWSER</text>
+</svg>

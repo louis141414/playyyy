@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <title>Doom</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #090909; }
+    body { display: grid; place-items: center; color: #eee; font: 14px/1.5 system-ui, sans-serif; }
+    #stage { position: relative; display: grid; width: 100vw; height: 100vh; place-items: center; background: #090909; }
+    #game { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; outline: none; }
+    #game:focus-visible { outline: 2px solid #d75836; outline-offset: -2px; }
+    #status {
+      position: absolute;
+      inset: auto 0 0;
+      padding: .55rem 1rem;
+      color: #f2e8d4;
+      background: rgb(0 0 0 / 70%);
+      text-align: center;
+      pointer-events: none;
+    }
+    #loading {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      gap: .75rem;
+      padding: 2rem;
+      background: #090909;
+      text-align: center;
+    }
+    #loading[hidden] { display: none; }
+    #loading p { max-width: 32rem; margin: 0; }
+    #retry {
+      justify-self: center;
+      padding: .5rem 1rem;
+      border: 1px solid #a94934;
+      border-radius: .4rem;
+      color: #fff;
+      background: #712a20;
+      font: inherit;
+      cursor: pointer;
+    }
+    #retry[hidden] { display: none; }
+  </style>
+</head>
+<body>
+  <main id="stage">
+    <canvas id="game" tabindex="0" aria-label="Doom game screen"></canvas>
+    <p id="status">Loading the Doom port and Freedoom data...</p>
+    <section id="loading" role="status" aria-live="polite">
+      <p id="loading-message">Loading Doom and its free game data (about 32 MB)...</p>
+      <button id="retry" type="button" hidden>Try again</button>
+    </section>
+  </main>
+  <script>
+    const canvas = document.getElementById('game');
+    const status = document.getElementById('status');
+    const loading = document.getElementById('loading');
+    const loadingMessage = document.getElementById('loading-message');
+    const retry = document.getElementById('retry');
+    let loop = null;
+    let memory;
+    let frameImage;
+    let frameContext;
+
+    async function loadDoom() {
+      if (loop !== null) clearInterval(loop);
+      retry.hidden = true;
+      loading.hidden = false;
+      loadingMessage.textContent = 'Loading Doom and its free game data (about 32 MB)...';
+
+      try {
+        const [wasmResponse, wadResponse] = await Promise.all([
+          fetch('doom.wasm'),
+          fetch('freedoom1.wad')
+        ]);
+        if (!wasmResponse.ok) throw new Error(`Doom engine download failed (HTTP ${wasmResponse.status}).`);
+        if (!wadResponse.ok) throw new Error(`Freedoom data download failed (HTTP ${wadResponse.status}).`);
+        const wad = new Uint8Array(await wadResponse.arrayBuffer());
+        if (wad.length < 4 || String.fromCharCode(...wad.subarray(0, 4)) !== 'IWAD') {
+          throw new Error('The Freedoom data file is invalid.');
+        }
+
+        const imports = {
+          loading: {
+            onGameInit(width, height) {
+              canvas.width = width;
+              canvas.height = height;
+              frameContext = canvas.getContext('2d');
+              frameImage = frameContext.createImageData(width, height);
+            },
+            wadSizes(numberOfWadsPointer, totalBytesPointer) {
+              const view = new DataView(memory.buffer);
+              view.setInt32(numberOfWadsPointer, 1, true);
+              view.setUint32(totalBytesPointer, wad.length, true);
+            },
+            readWads(wadDataPointer, wadLengthsPointer) {
+              const view = new DataView(memory.buffer);
+              new Uint8Array(memory.buffer).set(wad, wadDataPointer);
+              view.setInt32(wadLengthsPointer, wad.length, true);
+            }
+          },
+          ui: {
+            drawFrame(framePointer) {
+              const source = new Uint8Array(memory.buffer, framePointer, canvas.width * canvas.height * 4);
+              for (let pixel = 0; pixel < source.length; pixel += 4) {
+                frameImage.data[pixel] = source[pixel + 2];
+                frameImage.data[pixel + 1] = source[pixel + 1];
+                frameImage.data[pixel + 2] = source[pixel];
+                frameImage.data[pixel + 3] = 255;
+              }
+              frameContext.putImageData(frameImage, 0, 0);
+            }
+          },
+          runtimeControl: {
+            timeInMilliseconds: () => BigInt(Math.trunc(performance.now()))
+          },
+          console: {
+            onInfoMessage(pointer, length) {
+              console.info('[Doom]', new TextDecoder().decode(new Uint8Array(memory.buffer, pointer, length)));
+            },
+            onErrorMessage(pointer, length) {
+              console.error('[Doom]', new TextDecoder().decode(new Uint8Array(memory.buffer, pointer, length)));
+            }
+          },
+          gameSaving: {
+            sizeOfSaveGame: () => 0,
+            readSaveGame: () => 0,
+            writeSaveGame: () => 0
+          }
+        };
+
+        const { instance } = await WebAssembly.instantiate(await wasmResponse.arrayBuffer(), imports);
+        const doom = instance.exports;
+        memory = doom.memory;
+        const specialKeys = new Map([
+          ['ArrowLeft', doom.KEY_LEFTARROW.value],
+          ['ArrowRight', doom.KEY_RIGHTARROW.value],
+          ['ArrowUp', doom.KEY_UPARROW.value],
+          ['ArrowDown', doom.KEY_DOWNARROW.value],
+          [',', doom.KEY_STRAFE_L.value],
+          ['.', doom.KEY_STRAFE_R.value],
+          ['Control', doom.KEY_FIRE.value],
+          [' ', doom.KEY_USE.value],
+          ['Shift', doom.KEY_SHIFT.value],
+          ['Tab', doom.KEY_TAB.value],
+          ['Escape', doom.KEY_ESCAPE.value],
+          ['Enter', doom.KEY_ENTER.value],
+          ['Backspace', doom.KEY_BACKSPACE.value],
+          ['Alt', doom.KEY_ALT.value]
+        ]);
+        const getDoomKey = event => specialKeys.get(event.key) ?? (event.key.length === 1 ? event.key.charCodeAt(0) : null);
+        const pressedKeys = new Set();
+        canvas.onkeydown = event => {
+          const key = getDoomKey(event);
+          if (key === null) return;
+          event.preventDefault();
+          pressedKeys.add(key);
+          doom.reportKeyDown(key);
+        };
+        canvas.onkeyup = event => {
+          const key = getDoomKey(event);
+          if (key === null) return;
+          event.preventDefault();
+          pressedKeys.delete(key);
+          doom.reportKeyUp(key);
+        };
+        canvas.onblur = () => {
+          for (const key of pressedKeys) doom.reportKeyUp(key);
+          pressedKeys.clear();
+        };
+        doom.initGame();
+        loading.hidden = true;
+        status.textContent = 'Click the game to focus it · Arrows move · Ctrl fire · Space use · Shift run · Esc menu';
+        loop = setInterval(doom.tickGame, 1000 / 35);
+      } catch (error) {
+        console.error('Could not start Doom:', error);
+        loadingMessage.textContent = error instanceof Error ? error.message : 'Could not start Doom.';
+        status.textContent = 'Doom could not be loaded.';
+        retry.hidden = false;
+      }
+    }
+
+    canvas.addEventListener('click', () => canvas.focus());
+    retry.addEventListener('click', loadDoom);
+    loadDoom();
+  </script>
+</body>
+</html>

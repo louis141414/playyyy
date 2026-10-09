@@ -121,10 +121,7 @@ function renderActiveFilters() {
     chip.type = 'button';
     chip.className = 'filter-chip';
     chip.append(filter.label);
-    const removeIcon = document.createElement('img');
-    removeIcon.className = 'filter-remove-logo';
-    removeIcon.src = 'favicon.svg';
-    removeIcon.alt = '';
+    const removeIcon = createUiIcon('m18 6-12 12M6 6l12 12', 'filter-remove-icon');
     chip.append(removeIcon);
     chip.setAttribute('aria-label', `Remove ${filter.label} filter`);
     chip.addEventListener('click', () => {
@@ -250,6 +247,14 @@ function normalizeName(name) {
 
 function getThumbnailCandidates(name) {
   const base = normalizeName(name);
+  if (name === 'Doom') {
+    return [
+      'assets/images/thumbnails/doom.svg',
+      `assets/images/thumbnails/${base}.jpg`,
+      `assets/images/thumbnails/${base}.jpeg`,
+      `assets/images/thumbnails/${base}.png`,
+    ];
+  }
   if (name === 'Appel') {
     return [
       'assets/images/thumbnails/appel.svg',
@@ -278,12 +283,22 @@ function applyThumbnailFallback(img, candidates, index = 0) {
 // =======================
 // CREATE GAME CARD
 // =======================
+function createUiIcon(path, className) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', `ui-icon ${className}`);
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+
+  const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  iconPath.setAttribute('d', path);
+  svg.appendChild(iconPath);
+  return svg;
+}
+
 function renderFavoriteButton(button, active, showLabel = false) {
-  const logo = document.createElement('img');
-  logo.className = 'favorite-logo-icon';
-  logo.src = 'favicon.svg';
-  logo.alt = '';
-  button.replaceChildren(logo);
+  const star = createUiIcon('m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z', 'favorite-icon');
+  button.replaceChildren(star);
   if (showLabel) button.append(active ? 'Favorite' : 'Add to favorites');
 }
 
@@ -904,7 +919,9 @@ async function renderGame() {
           <small>Full screen recommended (F11)</small>
         </div>
         <button id="game-favorite-btn" class="favorite-btn favorite-btn-large ${isFavorite(game.name) ? 'active' : ''}" type="button" aria-label="${isFavorite(game.name) ? `Remove ${game.name} from favorites` : `Add ${game.name} to favorites`}" aria-pressed="${isFavorite(game.name)}">
-          <img class="favorite-logo-icon" src="favicon.svg" alt="">${isFavorite(game.name) ? 'Favorite' : 'Add to favorites'}
+          <svg class="ui-icon favorite-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z"></path>
+          </svg>${isFavorite(game.name) ? 'Favorite' : 'Add to favorites'}
         </button>
         <a class="report-link report-link-large" href="${reportIssueUrl(game.name)}" target="_blank" rel="noopener noreferrer">Report broken game</a>
       </div>
@@ -1350,6 +1367,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const isFullscreen = Boolean(document.fullscreenElement);
         fullscreenButton.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen');
         fullscreenButton.title = isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen';
+        fullscreenButton.dataset.fullscreen = String(isFullscreen);
       });
     }
   }

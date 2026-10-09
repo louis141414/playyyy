@@ -1,4 +1,5 @@
 [
+    { "name": "Doom", "url": "./games/doom/index.html", "tag": "new!", "category": "Action" },
     { "name": "Minecraft 12.2", "url": "./games/minecraft 12.2/index.html", "tag": "new!", "category": "Adventure" },
     { "name": "Minecraft 26.2", "url": "./games/minecraft 26.2/index.html", "tag": "new!", "category": "Adventure" },
     { "name": "Snail Bob", "url": "./games/snailbob/index.html", "tag": "new!", "category": "Adventure" },

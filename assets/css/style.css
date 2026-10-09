@@ -352,11 +352,19 @@ header p {
   border-color: var(--color-primary);
 }
 
-.menu-toggle img {
+.ui-icon {
   display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.menu-toggle .ui-icon,
+.wheel-close .ui-icon {
   width: 22px;
   height: 22px;
-  object-fit: contain;
 }
 
 .home-download-link {
@@ -450,12 +458,19 @@ header p {
   text-decoration: none;
 }
 
-.game-home-link img,
-.fullscreen-btn img {
+.game-home-link .ui-icon,
+.fullscreen-btn .ui-icon {
   width: 1.25rem;
   height: 1.25rem;
-  object-fit: contain;
-  vertical-align: middle;
+}
+
+.fullscreen-exit-icon,
+.fullscreen-btn[data-fullscreen="true"] .fullscreen-enter-icon {
+  display: none;
+}
+
+.fullscreen-btn[data-fullscreen="true"] .fullscreen-exit-icon {
+  display: block;
 }
 
 .home-logo + p {
@@ -796,11 +811,11 @@ header p {
   color: var(--color-primary);
 }
 
-.filter-remove-logo {
+.filter-remove-icon {
+  display: inline-block;
   width: 0.9rem;
   height: 0.9rem;
   margin-left: var(--spacing-xs);
-  object-fit: contain;
   vertical-align: middle;
 }
 
@@ -868,12 +883,6 @@ header p {
   background: var(--color-bg-glass);
   color: var(--color-text);
   cursor: pointer;
-}
-
-.wheel-close img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
 }
 
 .wheel-pointer {
@@ -1007,10 +1016,9 @@ header p {
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
 }
 
-.back-to-top img {
+.back-to-top .ui-icon {
   width: 24px;
   height: 24px;
-  object-fit: contain;
 }
 
 .back-to-top[hidden] {
@@ -1351,11 +1359,11 @@ header p {
     color var(--transition-fast);
 }
 
-.favorite-logo-icon {
+.favorite-icon {
+  display: inline-block;
   width: 1.15em;
   height: 1.15em;
   margin-right: var(--spacing-xs);
-  object-fit: contain;
   vertical-align: middle;
 }
 
