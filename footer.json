@@ -1,0 +1,24 @@
+{
+  "version": "0.4.1",
+  "about": {
+    "heading": "About Playyyy",
+    "description": "Free browser games, ready to play without downloads or an account."
+  },
+  "privacy": "Favorites and theme preferences stay in your browser. Game-page visits may be measured with StatCounter.",
+  "credits": "Games belong to their respective creators. Playyyy is an independent game directory.",
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/louis141414/playyyy"
+    },
+    {
+      "label": "Disclaimer",
+      "url": "verify/Terms.pdf"
+    }
+  ],
+  "pages": [
+    "/",
+    "/404.html",
+    "/game/"
+  ]
+}
