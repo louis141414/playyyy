@@ -352,14 +352,11 @@ header p {
   border-color: var(--color-primary);
 }
 
-.menu-toggle svg {
+.menu-toggle img {
   display: block;
   width: 22px;
   height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-width: 2;
+  object-fit: contain;
 }
 
 .home-download-link {
@@ -447,7 +444,18 @@ header p {
 }
 
 .game-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
   text-decoration: none;
+}
+
+.game-home-link img,
+.fullscreen-btn img {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .home-logo + p {
@@ -788,6 +796,14 @@ header p {
   color: var(--color-primary);
 }
 
+.filter-remove-logo {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-left: var(--spacing-xs);
+  object-fit: contain;
+  vertical-align: middle;
+}
+
 .clear-filters-btn {
   border-color: transparent;
   background: transparent;
@@ -851,8 +867,13 @@ header p {
   border-radius: var(--radius-full);
   background: var(--color-bg-glass);
   color: var(--color-text);
-  font-size: 1.5rem;
   cursor: pointer;
+}
+
+.wheel-close img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 .wheel-pointer {
@@ -986,14 +1007,10 @@ header p {
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
 }
 
-.back-to-top svg {
+.back-to-top img {
   width: 24px;
   height: 24px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2.5;
+  object-fit: contain;
 }
 
 .back-to-top[hidden] {
@@ -1332,6 +1349,14 @@ header p {
     border-color var(--transition-fast),
     background var(--transition-fast),
     color var(--transition-fast);
+}
+
+.favorite-logo-icon {
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: var(--spacing-xs);
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .favorite-btn:hover {

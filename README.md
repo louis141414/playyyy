@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.ibb.co/Dfh3WWKG/Screenshot-2026-06-13-13-55-12-removebg-preview.png" alt="Playyyy Logo" height="280">
+  <img src="./favicon.svg" alt="Playyyy Logo" height="128">
   <p><strong>Fast, ad-free browser games.</strong><br>
   Play 100+ popular titles instantly, no downloads, no accounts, no ads.</p>
 

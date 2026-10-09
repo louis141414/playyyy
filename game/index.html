@@ -11,13 +11,18 @@
     <meta property="og:title" id="og-title" content="Play free browser games instantly | Playyyy">
     <meta property="og:description" id="og-description" content="Play free browser games instantly on Playyyy.">
     <meta property="og:url" id="og-url" content="https://louis141414.github.io/playyyy/game/">
-    <meta property="og:image" content="https://louis141414.github.io/playyyy/new-logo.svg">
+    <meta property="og:image" content="https://louis141414.github.io/playyyy/assets/images/social-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="540">
     <meta property="og:image:alt" content="Playyyy logo">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" id="twitter-title" content="Play free browser games instantly | Playyyy">
     <meta name="twitter:description" id="twitter-description" content="Play free browser games instantly on Playyyy.">
-    <meta name="twitter:image" content="https://louis141414.github.io/playyyy/new-logo.svg">
-    <link rel="icon" href="../new-logo.svg" type="image/svg+xml">
+    <meta name="twitter:image" content="https://louis141414.github.io/playyyy/assets/images/social-image.png">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/app-icon-192.png">
+    <link rel="apple-touch-icon" href="assets/images/app-icon-192.png">
     <link rel="manifest" href="manifest.json">
     <title>Play free browser games instantly | Playyyy</title>
     <script src="assets/js/theme.js"></script>
@@ -28,9 +33,9 @@
 <body>
     <header>
         <h1 id="game-title">Loading...</h1>
-        <a class="game-home-link" id="game-home-link" href="./">← Back to Games</a>
+        <a class="game-home-link" id="game-home-link" href="./"><img src="favicon.svg" alt=""> Back to Games</a>
         <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light mode">Light mode</button>
-        <button class="fullscreen-btn" id="fullscreen-btn" type="button" aria-label="Enter fullscreen" title="Enter fullscreen">⛶</button>
+        <button class="fullscreen-btn" id="fullscreen-btn" type="button" aria-label="Enter fullscreen" title="Enter fullscreen"><img src="favicon.svg" alt=""></button>
     </header>
 
     <main id="game-container" class="glass">
@@ -38,7 +43,7 @@
             <iframe id="game-iframe" title="Game" tabindex="0" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads"></iframe>
             <section class="game-loading" id="game-loading" aria-live="polite" hidden>
                 <div class="game-loading-card">
-                    <img class="game-loading-logo" src="../new-logo.svg" alt="Playyyy logo">
+                    <img class="game-loading-logo" src="favicon.svg" alt="Playyyy logo">
                     <p class="game-loading-brand">PLAYYYY</p>
                     <h2 id="game-loading-title">Loading game</h2>
                     <progress id="game-download-progress" aria-label="Download progress" hidden></progress>

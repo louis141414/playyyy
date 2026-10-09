@@ -1,4 +1,4 @@
-const CACHE_NAME = 'playyyy-shell-v18';
+const CACHE_NAME = 'playyyy-shell-v20';
 const GAME_CACHE_NAME = 'playyyy-games-v1';
 const APP_SHELL_URL = new URL('./index.html', self.registration.scope).href;
 const GAME_PAGE_URL = new URL('./game/index.html', self.registration.scope).href;
@@ -30,7 +30,6 @@ const APP_SHELL_FILES = [
   './index.html',
   './game/index.html',
   './404.html',
-  './download.html',
   './assets/css/style.css',
   './assets/js/script.js',
   './assets/js/theme.js',
@@ -38,7 +37,10 @@ const APP_SHELL_FILES = [
   './verify/verify.js',
   './games.json',
   './manifest.json',
-  './new-logo.svg',
+  './favicon.svg',
+  './assets/images/app-icon-192.png',
+  './assets/images/app-icon-512.png',
+  './assets/images/social-image.png',
   './assets/images/thumbnails/placeholder.jpg',
   ...OFFLINE_GAME_FILES
 ];

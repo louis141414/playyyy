@@ -120,7 +120,12 @@ function renderActiveFilters() {
     const chip = document.createElement('button');
     chip.type = 'button';
     chip.className = 'filter-chip';
-    chip.textContent = `${filter.label} ×`;
+    chip.append(filter.label);
+    const removeIcon = document.createElement('img');
+    removeIcon.className = 'filter-remove-logo';
+    removeIcon.src = 'favicon.svg';
+    removeIcon.alt = '';
+    chip.append(removeIcon);
     chip.setAttribute('aria-label', `Remove ${filter.label} filter`);
     chip.addEventListener('click', () => {
       filter.clear();
@@ -273,6 +278,15 @@ function applyThumbnailFallback(img, candidates, index = 0) {
 // =======================
 // CREATE GAME CARD
 // =======================
+function renderFavoriteButton(button, active, showLabel = false) {
+  const logo = document.createElement('img');
+  logo.className = 'favorite-logo-icon';
+  logo.src = 'favicon.svg';
+  logo.alt = '';
+  button.replaceChildren(logo);
+  if (showLabel) button.append(active ? 'Favorite' : 'Add to favorites');
+}
+
 function createGameCard(game) {
   if (!game || !game.name) {
     return document.createElement('div');
@@ -327,7 +341,7 @@ function createGameCard(game) {
   const favoriteBtn = document.createElement('button');
   favoriteBtn.type = 'button';
   favoriteBtn.className = `favorite-btn ${isFavorite(game.name) ? 'active' : ''}`;
-  favoriteBtn.textContent = isFavorite(game.name) ? '★' : '☆';
+  renderFavoriteButton(favoriteBtn, isFavorite(game.name));
   favoriteBtn.setAttribute('aria-label', `${isFavorite(game.name) ? 'Remove' : 'Add'} ${game.name} ${isFavorite(game.name) ? 'from' : 'to'} favorites`);
   favoriteBtn.setAttribute('aria-pressed', String(isFavorite(game.name)));
   favoriteBtn.onclick = (e) => {
@@ -513,6 +527,10 @@ function setGameLoading(title, message, { indeterminate = true, retryVisible = f
   if (loading) loading.hidden = false;
 }
 
+function isMinecraftGame(game) {
+  return game.name.toLowerCase().includes('minecraft');
+}
+
 function formatDownloadSize(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
@@ -646,21 +664,10 @@ function isGameLoaderComplete(element, gameWindow) {
   return progress !== null && progress >= 0.995;
 }
 
-function usesEmulatorOrPlayer(gameDocument, gameWindow) {
-  const runtimePattern = /(?:ruffle|emulator|dosbox|retroarch|unity|flash(?:player|[-_]?emulator)|ejs[_-]?loader|(?:^|[/_.-])player(?:[/_.-]|$))/i;
-  const playerElements = 'ruffle-player, #ruffle-container, #unity-container, #unity-loading-bar, #emulator, #game-player';
-  const runtimeGlobals = [
-    'RufflePlayer',
-    'UnityLoader',
-    'createUnityInstance',
-    'EJS_emulator',
-    'EmulatorJS',
-    'Dos'
-  ];
-
-  return [...gameDocument.scripts].some(script => runtimePattern.test(script.src))
-    || Boolean(gameDocument.querySelector(playerElements))
-    || runtimeGlobals.some(globalName => globalName in gameWindow);
+function usesRufflePlayer(gameDocument, gameWindow) {
+  return [...gameDocument.scripts].some(script => /ruffle/i.test(script.src))
+    || Boolean(gameDocument.querySelector('ruffle-player, #ruffle-container, #ruffle'))
+    || 'RufflePlayer' in gameWindow;
 }
 
 function blockExternalNavigation(gameWindow, gameDocument, iframe, game, token) {
@@ -717,8 +724,6 @@ function waitForGameReady(gameDocument, gameWindow, game, iframe, token) {
   const loaderStyle = gameDocument.createElement('style');
   loaderStyle.textContent = '.playyyy-native-loader { opacity: 0 !important; pointer-events: none !important; }';
   gameDocument.head.appendChild(loaderStyle);
-  const hasUnityLoader = Boolean(gameWindow.UnityLoader || gameDocument.querySelector('#unity-container, #unity-canvas, #unity-loading-bar'))
-    || [...gameDocument.scripts].some(script => /unityloader|unityprogress|\.loader\.js/i.test(script.src));
 
   const syncLoaders = () => {
     const loaders = getGameLoadingElements(gameDocument, gameWindow);
@@ -727,13 +732,13 @@ function waitForGameReady(gameDocument, gameWindow, game, iframe, token) {
   };
 
   const loaders = syncLoaders();
-  if ((!loaders.length && !hasUnityLoader) || (loaders.length && loaders.every(element => isGameLoaderComplete(element, gameWindow)))) {
+  if (!loaders.length || loaders.every(element => isGameLoaderComplete(element, gameWindow))) {
     const loading = document.getElementById('game-loading');
     if (loading) loading.hidden = true;
     return;
   }
 
-  setGameLoading(game.name, hasUnityLoader ? 'Loading game and its files...' : 'Starting game...');
+  setGameLoading(game.name, 'Starting game and loading its files...');
   const loadingTimeout = window.setTimeout(() => {
     if (token !== iframe.gameLoadToken) return;
     const loading = document.getElementById('game-loading');
@@ -744,7 +749,6 @@ function waitForGameReady(gameDocument, gameWindow, game, iframe, token) {
     const retry = document.getElementById('game-download-retry');
     if (retry) retry.onclick = () => launchGameFrame(game, iframe);
   }, 60000);
-  let sawNativeLoader = loaders.length > 0;
   const observer = new gameWindow.MutationObserver(() => {
     if (token !== iframe.gameLoadToken) {
       observer.disconnect();
@@ -752,9 +756,7 @@ function waitForGameReady(gameDocument, gameWindow, game, iframe, token) {
     }
 
     const currentLoaders = syncLoaders();
-    if (currentLoaders.length) sawNativeLoader = true;
-    if ((!currentLoaders.length && (!hasUnityLoader || sawNativeLoader))
-      || (currentLoaders.length && currentLoaders.every(element => isGameLoaderComplete(element, gameWindow)))) {
+    if (!currentLoaders.length || currentLoaders.every(element => isGameLoaderComplete(element, gameWindow))) {
       window.clearTimeout(loadingTimeout);
       observer.disconnect();
       const loading = document.getElementById('game-loading');
@@ -786,7 +788,6 @@ function launchGameFrame(game, iframe) {
     iframe.sandboxGuard.observe(iframe, { attributes: true, attributeFilter: ['sandbox'] });
   }
   const loading = document.getElementById('game-loading');
-  setGameLoading(game.name, 'Starting game and loading its files...');
 
   if (iframe.gameLoadHandler) iframe.removeEventListener('load', iframe.gameLoadHandler);
   iframe.gameLoadHandler = () => {
@@ -815,7 +816,7 @@ function launchGameFrame(game, iframe) {
     }
 
     blockExternalNavigation(gameWindow, gameDocument, iframe, game, token);
-    if (usesEmulatorOrPlayer(gameDocument, gameWindow)) {
+    if (usesRufflePlayer(gameDocument, gameWindow)) {
       setGameLoading(game.name, 'Starting game and loading its files...');
       waitForGameReady(gameDocument, gameWindow, game, iframe, token);
     } else if (loading) {
@@ -823,6 +824,12 @@ function launchGameFrame(game, iframe) {
     }
   };
   iframe.addEventListener('load', iframe.gameLoadHandler);
+
+  if (isMinecraftGame(game)) {
+    setGameLoading(game.name, 'Starting game and loading its files...');
+  } else if (loading) {
+    loading.hidden = true;
+  }
 
   iframe.src = game.url;
 }
@@ -865,15 +872,6 @@ async function renderGame() {
   if (gameContainer) gameContainer.hidden = false;
   if (notFound) notFound.hidden = true;
 
-  const safeName = normalizeName(decodedName);
-  let link = document.querySelector('link[rel~="icon"]');
-  if (!link) {
-    link = document.createElement('link');
-    link.rel = 'icon';
-    document.head.appendChild(link);
-  }
-  link.href = `./games/${safeName}/favicon.png`;
-
   if (titleEl) titleEl.textContent = game.name;
   const pageTitle = `Play ${game.name} free online | Playyyy`;
   document.title = pageTitle;
@@ -890,7 +888,7 @@ async function renderGame() {
   const iframe = document.getElementById('game-iframe');
   if (iframe) {
     iframe.title = `${game.name}. Click inside the game to start if prompted.`;
-    if (game.name.toLowerCase().includes('minecraft')) {
+    if (isMinecraftGame(game)) {
       preloadMinecraftIndex(game, iframe);
     } else {
       launchGameFrame(game, iframe);
@@ -906,7 +904,7 @@ async function renderGame() {
           <small>Full screen recommended (F11)</small>
         </div>
         <button id="game-favorite-btn" class="favorite-btn favorite-btn-large ${isFavorite(game.name) ? 'active' : ''}" type="button" aria-label="${isFavorite(game.name) ? `Remove ${game.name} from favorites` : `Add ${game.name} to favorites`}" aria-pressed="${isFavorite(game.name)}">
-          ${isFavorite(game.name) ? '★ Favorite' : '☆ Add to favorites'}
+          <img class="favorite-logo-icon" src="favicon.svg" alt="">${isFavorite(game.name) ? 'Favorite' : 'Add to favorites'}
         </button>
         <a class="report-link report-link-large" href="${reportIssueUrl(game.name)}" target="_blank" rel="noopener noreferrer">Report broken game</a>
       </div>
@@ -916,7 +914,7 @@ async function renderGame() {
     if (favBtn) {
       favBtn.onclick = () => {
         toggleFavorite(game.name);
-        favBtn.textContent = isFavorite(game.name) ? '★ Favorite' : '☆ Add to favorites';
+        renderFavoriteButton(favBtn, isFavorite(game.name), true);
         favBtn.className = `favorite-btn favorite-btn-large ${isFavorite(game.name) ? 'active' : ''}`;
         favBtn.setAttribute('aria-label', `${isFavorite(game.name) ? 'Remove' : 'Add'} ${game.name} ${isFavorite(game.name) ? 'from' : 'to'} favorites`);
         favBtn.setAttribute('aria-pressed', String(isFavorite(game.name)));
@@ -934,7 +932,7 @@ function updateGameFavoriteButton() {
   if (!gameName) return;
 
   const decodedName = gameName;
-  gameBtn.textContent = isFavorite(decodedName) ? '★ Favorite' : '☆ Add to favorites';
+  renderFavoriteButton(gameBtn, isFavorite(decodedName), true);
   gameBtn.className = `favorite-btn favorite-btn-large ${isFavorite(decodedName) ? 'active' : ''}`;
   gameBtn.setAttribute('aria-label', `${isFavorite(decodedName) ? 'Remove' : 'Add'} ${decodedName} ${isFavorite(decodedName) ? 'from' : 'to'} favorites`);
   gameBtn.setAttribute('aria-pressed', String(isFavorite(decodedName)));
