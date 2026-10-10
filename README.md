@@ -4,8 +4,7 @@
   Play 100+ popular titles instantly, no downloads, no accounts, no ads.</p>
 
   <p>
-    <a href="https://louis141414.github.io/playyyy/"><strong>Play Now</strong></a> ·
-    <a href="https://louis141414.github.io/playyyy/download.html">Download for Windows</a>
+    <a href="https://louis141414.github.io/playyyy/"><strong>Play Now</strong></a>
   </p>
 
   <p>
@@ -43,17 +42,6 @@
 
 ---
 
-## Desktop Version (Windows)
-
-Prefer a desktop app?
-
-- [Online version](https://github.com/louis141414/playyyy/raw/refs/heads/main/pc-version/Playyyy-setup.exe) (requires internet)
-- [Offline version](https://github.com/louis141414/playyyy/raw/refs/heads/main/pc-version/Playyyy%20-%20offline%20setup.exe)
-
-Or visit the [download page](https://louis141414.github.io/playyyy/download.html).
-
----
-
 ## Tech Stack
 
 - HTML5
@@ -67,10 +55,10 @@ No frameworks. No unnecessary dependencies.
 
 ## Repository layout
 
-- `index.html`, `404.html`, and `download.html` are the static-site entry pages. `game/index.html` serves game pages at `/game/?id=<game name>`.
+- `index.html` and `404.html` are the static-site entry pages. `game/index.html` serves game pages at `/game/?id=<game name>`.
 - `assets/js/` contains shared JavaScript; `assets/css/` contains shared styles; and `assets/images/` contains thumbnails and app icons. The root `manifest.json` and `service-worker.js` stay at the site root for PWA scope.
 - `games.json` is the game catalog. Each game lives in its own `games/<game-name>/` folder, with its original internal asset layout preserved because game files rely on relative paths.
-- `pc-version/` contains desktop installers; and `verify/` contains verification assets.
+- `verify/` contains verification assets.
 
 The root `.gitignore` excludes operating-system metadata files such as `.DS_Store` and `Thumbs.db`.
 
