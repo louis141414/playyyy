@@ -1,4 +1,5 @@
 [
+    { "name": "Cluster Truck", "url": "./games/clustertruck/index.html", "tag": "new!", "category": "Platformer" },
     { "name": "ULTRAKILL", "url": "./games/ultrakill/index.html", "tag": "WIP", "category": "Action" },
     { "name": "Doom", "url": "./games/doom/index.html", "tag": "new!", "category": "Action" },
     { "name": "Minecraft 12.2", "url": "./games/minecraft 12.2/index.html", "tag": "new!", "category": "Adventure" },
