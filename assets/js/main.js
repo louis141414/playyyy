@@ -1,9 +1,43 @@
+function getStatcounterTagValue(value, fallback = '') {
+  const normalized = typeof value === 'string' ? value.trim() : String(value ?? '').trim();
+  return normalized ? normalized.slice(0, 30) : fallback;
+}
+
+function getStatcounterTags() {
+  const pathname = window.location.pathname || '/';
+  const isGamePage = /\/game\/?(?:index\.html)?$/.test(pathname) || pathname.includes('/game/');
+  const page = isGamePage ? 'game' : 'home';
+  const theme = document.documentElement.dataset.theme || 'system';
+  const tags = {
+    page: page,
+    theme: getStatcounterTagValue(theme, 'system'),
+  };
+
+  const gameTitle = document.getElementById('game-title')?.textContent?.trim();
+  if (gameTitle && gameTitle !== 'Loading...') {
+    tags.game = getStatcounterTagValue(gameTitle);
+  }
+
+  const gameId = new URLSearchParams(window.location.search).get('id');
+  if (isGamePage && gameId) {
+    tags.gameId = getStatcounterTagValue(gameId);
+  }
+
+  return tags;
+}
+
 function loadStatcounter() {
   if (window.sc_project || window.location.hostname !== 'louis141414.github.io') return;
 
   window.sc_project = 13299407;
   window.sc_invisible = 1;
   window.sc_security = 'd0abe929';
+
+  window._statcounter = window._statcounter || [];
+  if (!window.__playyyy_statcounter_tags_added) {
+    window._statcounter.push({ tags: getStatcounterTags() });
+    window.__playyyy_statcounter_tags_added = true;
+  }
 
   const script = document.createElement('script');
   script.src = 'https://www.statcounter.com/counter/counter.js';
