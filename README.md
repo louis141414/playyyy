@@ -58,7 +58,7 @@ No frameworks. No unnecessary dependencies.
 - `index.html` and `404.html` are the static-site entry pages. `game/index.html` serves game pages at `/game/?id=<game name>`.
 - `assets/js/` contains shared JavaScript; `assets/css/` contains shared styles; and `assets/images/` contains thumbnails and app icons. The root `manifest.json` and `service-worker.js` stay at the site root for PWA scope.
 - `games.json` is the game catalog. Each game lives in its own `games/<game-name>/` folder, with its original internal asset layout preserved because game files rely on relative paths.
-- `verify/` contains verification assets.
+- `verify/` contains the editable legal terms and their PDF.
 
 The root `.gitignore` excludes operating-system metadata files such as `.DS_Store` and `Thumbs.db`.
 

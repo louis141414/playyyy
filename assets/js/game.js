@@ -168,6 +168,14 @@ function usesRufflePlayer(gameDocument, gameWindow) {
     || 'RufflePlayer' in gameWindow;
 }
 
+function getGameStartupError(gameDocument) {
+  const text = gameDocument.body?.innerText || gameDocument.body?.textContent || '';
+  if (/webgl.{0,80}(?:not supported|does not support|unsupported|unavailable|disabled|failed|could not)|(?:not supported|does not support|unsupported|unavailable|disabled|failed|could not).{0,80}webgl/i.test(text)) {
+    return 'This game needs WebGL, but your browser could not start it. Try updating your browser or enabling hardware acceleration.';
+  }
+  return null;
+}
+
 function blockExternalNavigation(gameWindow, gameDocument, iframe, game, token) {
   const appOrigin = window.location.origin;
   const reportBlocked = () => {
@@ -288,6 +296,17 @@ function launchGameFrame(game, iframe) {
   const loading = document.getElementById('game-loading');
 
   if (iframe.gameLoadHandler) iframe.removeEventListener('load', iframe.gameLoadHandler);
+  if (iframe.gameErrorHandler) iframe.removeEventListener('error', iframe.gameErrorHandler);
+  iframe.gameErrorHandler = () => {
+    if (token !== iframe.gameLoadToken || iframe.gameNavigationBlocked) return;
+    setGameLoading(game.name, 'The game could not be loaded. Check your connection and try again.', {
+      indeterminate: false,
+      retryVisible: true
+    });
+    const retry = document.getElementById('game-download-retry');
+    if (retry) retry.onclick = () => launchGameFrame(game, iframe);
+  };
+  iframe.addEventListener('error', iframe.gameErrorHandler);
   iframe.gameLoadHandler = () => {
     if (token !== iframe.gameLoadToken) return;
     if (iframe.gameNavigationBlocked) return;
@@ -314,6 +333,16 @@ function launchGameFrame(game, iframe) {
     }
 
     blockExternalNavigation(gameWindow, gameDocument, iframe, game, token);
+    const startupError = getGameStartupError(gameDocument);
+    if (startupError) {
+      setGameLoading(game.name, startupError, {
+        indeterminate: false,
+        retryVisible: true
+      });
+      const retry = document.getElementById('game-download-retry');
+      if (retry) retry.onclick = () => launchGameFrame(game, iframe);
+      return;
+    }
     if (usesRufflePlayer(gameDocument, gameWindow)) {
       setGameLoading(game.name, 'Starting game and loading its files...');
       waitForGameReady(gameDocument, gameWindow, game, iframe, token);

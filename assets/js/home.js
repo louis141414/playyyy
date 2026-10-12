@@ -313,25 +313,26 @@ function renderGameGrid(container, games, emptyMessage, emptySuggestion, batchSi
   }
 
   let renderedCount = 0;
-  const loadMoreStatus = document.createElement('p');
-  loadMoreStatus.className = 'load-more-games';
-  loadMoreStatus.setAttribute('role', 'status');
+  const loadMoreStatus = document.createElement('button');
+  loadMoreStatus.className = 'theme-toggle load-more-games';
+  loadMoreStatus.type = 'button';
   const loadNextBatch = () => {
     if (renderedCount >= games.length) return;
     const nextCount = Math.min(renderedCount + batchSize, games.length);
     appendGames(renderedCount, nextCount, loadMoreStatus);
     renderedCount = nextCount;
     if (renderedCount < games.length) {
-      loadMoreStatus.textContent = 'Scroll to the bottom to load more games';
+      loadMoreStatus.textContent = `Load more games (${games.length - renderedCount} remaining)`;
     } else {
-      loadMoreStatus.textContent = 'All games loaded';
+      loadMoreStatus.remove();
       loadMoreCatalogGames = null;
     }
   };
   const firstCount = Math.min(batchSize, games.length);
   appendGames(0, firstCount);
   renderedCount = firstCount;
-  loadMoreStatus.textContent = 'Scroll to the bottom to load more games';
+  loadMoreStatus.textContent = `Load more games (${games.length - renderedCount} remaining)`;
+  loadMoreStatus.addEventListener('click', loadNextBatch);
   if (container.id === 'grid') loadMoreCatalogGames = loadNextBatch;
   container.appendChild(loadMoreStatus);
 }
@@ -611,10 +612,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     renderHome();
-    window.addEventListener('scroll', () => {
-      if (window.scrollY + window.innerHeight < document.documentElement.scrollHeight - 1) return;
-      loadMoreCatalogGames?.();
-    }, { passive: true });
     try {
       const savedPosition = JSON.parse(sessionStorage.getItem('playyyy-return-position') || 'null');
       if (savedPosition && savedPosition.location === `${window.location.pathname}${window.location.search}`) {

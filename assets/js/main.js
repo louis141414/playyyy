@@ -83,7 +83,8 @@ async function loadGames() {
 // =======================
 function getFavorites() {
   try {
-    return JSON.parse(localStorage.getItem('playyyy-favorites') || '[]');
+    const favorites = JSON.parse(localStorage.getItem('playyyy-favorites') || '[]');
+    return Array.isArray(favorites) ? favorites.filter(name => typeof name === 'string') : [];
   } catch {
     return [];
   }
@@ -106,7 +107,12 @@ function toggleFavorite(name) {
     favorites.push(name);
   }
   
-  localStorage.setItem('playyyy-favorites', JSON.stringify(favorites));
+  try {
+    localStorage.setItem('playyyy-favorites', JSON.stringify(favorites));
+  } catch (error) {
+    console.warn('Could not save favorites:', error);
+    return;
+  }
   
   // Update UI
   if (document.getElementById('grid')) renderHome();
@@ -168,6 +174,121 @@ function updateOfflineIndicator() {
   if (indicator) indicator.hidden = navigator.onLine;
 }
 
+function initLegalNotice() {
+  const storageKey = 'playyyy-legal-notice-dismissed';
+  try {
+    if (localStorage.getItem(storageKey) === '1') return;
+  } catch (error) {
+    console.warn('Could not read the legal notice preference:', error);
+  }
+
+  const notice = document.createElement('aside');
+  notice.className = 'legal-notice';
+  notice.setAttribute('aria-label', 'Site notice');
+
+  const message = document.createElement('p');
+  message.textContent = 'If you are caught playing where the rules prohibit it, that is your responsibility, not Playyyy\'s.';
+
+  const termsLink = document.createElement('a');
+  termsLink.href = `${getAppBasePath()}verify/Terms.pdf`;
+  termsLink.textContent = 'Read the terms';
+
+  const dismissButton = document.createElement('button');
+  dismissButton.type = 'button';
+  dismissButton.textContent = 'Got it';
+  dismissButton.addEventListener('click', () => {
+    try {
+      localStorage.setItem(storageKey, '1');
+    } catch (error) {
+      console.warn('Could not save the legal notice preference:', error);
+    }
+    notice.remove();
+  });
+
+  notice.append(message, termsLink, dismissButton);
+  document.body.prepend(notice);
+}
+
+function initStoragePersistencePrompt() {
+  const storageManager = navigator.storage;
+  if (typeof storageManager?.persist !== 'function' || typeof storageManager.persisted !== 'function') return;
+
+  const choiceKey = 'playyyy-storage-persistence-choice';
+  try {
+    if (localStorage.getItem(choiceKey) === 'dismissed') return;
+  } catch (error) {
+    console.warn('Could not read the storage preference:', error);
+  }
+
+  storageManager.persisted().then(isPersisted => {
+    if (isPersisted) return;
+
+    const footer = document.querySelector('.site-footer');
+    if (!footer) return;
+
+    const notice = document.createElement('aside');
+    notice.className = 'storage-persistence-notice';
+    notice.setAttribute('aria-label', 'Persistent storage');
+
+    const message = document.createElement('p');
+    message.className = 'storage-persistence-copy';
+    message.textContent = 'Playyyy saves favorites and preferences in this browser. Ask your browser to reduce automatic cleanup of this site\'s storage, including game saves that use browser storage. This is not a backup or encryption, and your browser can still clear data.';
+
+    const status = document.createElement('p');
+    status.className = 'storage-persistence-status';
+    status.setAttribute('role', 'status');
+    status.hidden = true;
+
+    const actions = document.createElement('div');
+    actions.className = 'storage-persistence-actions';
+
+    const allowButton = document.createElement('button');
+    allowButton.className = 'theme-toggle';
+    allowButton.type = 'button';
+    allowButton.textContent = 'Ask browser to keep data';
+    allowButton.addEventListener('click', async () => {
+      allowButton.disabled = true;
+      status.hidden = false;
+      status.textContent = 'Asking your browser...';
+      try {
+        const granted = await storageManager.persist();
+        status.textContent = granted
+          ? 'Persistent storage is enabled. This helps prevent automatic cleanup, but clearing site data can still remove saves.'
+          : 'Your browser did not grant persistent storage. Your data still saves normally, but may be cleared by browser settings.';
+        if (granted) {
+          allowButton.hidden = true;
+          dismissButton.textContent = 'Close';
+        } else {
+          allowButton.disabled = false;
+        }
+      } catch (error) {
+        console.warn('Could not request persistent storage:', error);
+        status.textContent = 'Your browser could not enable persistent storage. Your data still saves normally, but may be cleared by browser settings.';
+        allowButton.disabled = false;
+      }
+    });
+
+    const dismissButton = document.createElement('button');
+    dismissButton.className = 'theme-toggle';
+    dismissButton.type = 'button';
+    dismissButton.textContent = 'Not now';
+    dismissButton.addEventListener('click', () => {
+      try {
+        localStorage.setItem(choiceKey, 'dismissed');
+      } catch (error) {
+        console.warn('Could not save the storage preference:', error);
+      }
+      notice.remove();
+    });
+
+    actions.append(allowButton, dismissButton);
+    notice.append(message, actions, status);
+    footer.before(notice);
+  }).catch(error => {
+    console.warn('Could not check persistent storage status:', error);
+  });
+}
+
 // =======================
 // COOKIES (voor intro)
 // =======================
@@ -200,6 +321,9 @@ function finishIntro() {
 // =======================
 
 document.addEventListener('DOMContentLoaded', () => {
+  initLegalNotice();
+  initStoragePersistencePrompt();
+
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js')
       .catch(error => console.error('Could not register the offline app shell:', error));

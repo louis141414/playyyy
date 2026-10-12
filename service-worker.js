@@ -1,4 +1,4 @@
-const CACHE_NAME = 'playyyy-shell-v22';
+const CACHE_NAME = 'playyyy-shell-v24';
 const GAME_CACHE_NAME = 'playyyy-games-v1';
 const APP_SHELL_URL = new URL('./index.html', self.registration.scope).href;
 const GAME_PAGE_URL = new URL('./game/index.html', self.registration.scope).href;
@@ -36,7 +36,7 @@ const APP_SHELL_FILES = [
   './assets/js/game.js',
   './assets/js/theme.js',
   './assets/js/utm.js',
-  './verify/verify.js',
+  './verify/Terms.pdf',
   './games.json',
   './manifest.json',
   './favicon.svg',
