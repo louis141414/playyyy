@@ -38,7 +38,7 @@ These terms may be updated when the site changes. The current version and its ef
 
 ## 7. Contact
 
-Playyyy is maintained by Louis Paelinck in Belgium. For questions about the site or these terms, use the project's public contact page: https://github.com/louis141414/playyyy/issues.
+Playyyy is maintained by Louis in Belgium. For questions about the site or these terms, use the project's public contact page: https://github.com/louis141414/playyyy/issues.
 
 ## Appendix A: MIT License
 
