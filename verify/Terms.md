@@ -18,7 +18,7 @@ Games, names, artwork, and other game content belong to their respective creator
 
 ## 3. Browser storage and analytics
 
-Playyyy may store preferences such as favorites, recently played games, theme choice, and dismissal of the site notice in your browser's local storage. These settings remain on that browser unless you clear its site data.
+By continuing to use Playyyy, you accept its use of cookies and browser storage as described in this section. Playyyy uses a cookie to remember whether you have seen the introduction and may store preferences such as favorites, recently played games, theme choice, and dismissal of the site notice in your browser's local storage. These settings remain on that browser unless you clear its site data.
 
 Your browser may offer to mark Playyyy's storage as persistent to reduce automatic cleanup. The browser can decline, and this does not prevent you or the browser from clearing site data. It is not a backup or encryption. Individual games control whether and how they save progress; not every game supports saving, and Playyyy cannot guarantee that game progress will be retained or synchronized.
 

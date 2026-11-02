@@ -349,12 +349,10 @@ async function renderHome() {
 
   if (!grid && !favoritesGrid) return;
 
-  // ✅ ZORG DAT GAMES GELADEN ZIJN
   if (allGames.length === 0) {
     await loadGames();
   }
 
-  // ✅ Filter games
   const query = (searchQuery || '').toLowerCase().trim();
   const matchingGames = query
     ? allGames.filter(g => g && g.name && g.name.toLowerCase().includes(query))

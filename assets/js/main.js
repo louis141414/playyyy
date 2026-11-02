@@ -46,26 +46,18 @@ function loadStatcounter() {
   document.head.appendChild(script);
 }
 
-// =======================
-// SUPER SIMPLE VERSION
-// =======================
-
-let allGames = []; // ✅ Altijd array
+let allGames = [];
 const GAME_CACHE_NAME = 'playyyy-games-v1';
 
 function getAppBasePath() {
   return new URL('.', document.baseURI).pathname;
 }
 
-// =======================
-// LOAD GAMES (Altijd werkt!)
-// =======================
 async function loadGames() {
   try {
     const response = await fetch('games.json');
     allGames = await response.json();
     
-    // ✅ ZORG DAT HET EEN ARRAY IS!
     if (!Array.isArray(allGames)) {
       allGames = [];
     }
@@ -73,7 +65,7 @@ async function loadGames() {
     return allGames;
   } catch (error) {
     console.error('Error loading games:', error);
-    allGames = []; // ✅ Altijd array
+    allGames = [];
     return [];
   }
 }
@@ -187,7 +179,7 @@ function initLegalNotice() {
   notice.setAttribute('aria-label', 'Site notice');
 
   const message = document.createElement('p');
-  message.textContent = 'If you are caught playing where the rules prohibit it, that is your responsibility, not Playyyy\'s.';
+  message.textContent = 'By continuing to use Playyyy, you accept our use of cookies and browser storage. Game-page visits may be measured with StatCounter. If you are caught playing where the rules prohibit it, that is your responsibility, not Playyyy\'s.';
 
   const termsLink = document.createElement('a');
   termsLink.href = `${getAppBasePath()}verify/Terms.pdf`;
