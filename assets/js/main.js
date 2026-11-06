@@ -179,7 +179,7 @@ function initLegalNotice() {
   notice.setAttribute('aria-label', 'Site notice');
 
   const message = document.createElement('p');
-  message.textContent = 'By continuing to use Playyyy, you accept our use of cookies and browser storage. Game-page visits may be measured with StatCounter. If you are caught playing where the rules prohibit it, that is your responsibility, not Playyyy\'s.';
+  message.textContent = 'Using Playyyy means accepting cookies and browser storage. We track visits with StatCounter. You’re on your own if you play where it’s banned.';
 
   const termsLink = document.createElement('a');
   termsLink.href = `${getAppBasePath()}verify/Terms.pdf`;

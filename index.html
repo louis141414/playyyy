@@ -47,10 +47,6 @@
             <img src="favicon.svg" alt="Playyyy logo">
             <span>Playyyy</span>
         </a>
-        <label class="search-wrap header-search-wrap" for="search-input">
-            <span>Search games</span>
-            <input id="search-input" type="search" placeholder="Search games..." autocomplete="off">
-        </label>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-controls="home-navigation" aria-expanded="false">
             <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M4 6h16M4 12h16M4 18h16"></path>
@@ -63,6 +59,27 @@
             <a class="home-request-link" href="https://github.com/louis141414/playyyy/issues/new?template=game_request.yml">Request a game</a>
             <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light mode">Light mode</button>
         </nav>
+        <div class="controls glass" role="group" aria-label="Find and sort games">
+            <label class="search-wrap" for="search-input">
+                <span class="sr-only">Search games</span>
+                <input id="search-input" type="search" placeholder="Search games..." autocomplete="off">
+            </label>
+            <label class="category-wrap" for="category-filter">
+                <span class="sr-only">Category</span>
+                <select id="category-filter">
+                    <option value="all">All categories</option>
+                </select>
+            </label>
+            <label class="sort-wrap" for="sort-filter">
+                <span class="sr-only">Sort by</span>
+                <select id="sort-filter">
+                    <option value="recent">Recently added</option>
+                    <option value="az">A–Z</option>
+                    <option value="favorites">Most favorited (yours first)</option>
+                </select>
+            </label>
+            <button class="random-game-btn" id="random-game-btn" type="button">Spin the wheel</button>
+        </div>
     </header>
 
     <main id="main-content">
@@ -127,23 +144,6 @@
         <div class="section-title">
             <h2>Browse all games</h2>
             <p id="all-games-description">Explore the collection or filter by name and category</p>
-        </div>
-        <div class="controls glass" role="group" aria-label="Find and sort games">
-            <label class="category-wrap" for="category-filter">
-                <span>Category</span>
-                <select id="category-filter">
-                    <option value="all">All categories</option>
-                </select>
-            </label>
-            <label class="sort-wrap" for="sort-filter">
-                <span>Sort by</span>
-                <select id="sort-filter">
-                    <option value="recent">Recently added</option>
-                    <option value="az">A–Z</option>
-                    <option value="favorites">Most favorited (yours first)</option>
-                </select>
-            </label>
-            <button class="random-game-btn" id="random-game-btn" type="button">Spin the wheel</button>
         </div>
         <div class="active-filters" id="active-filters" aria-live="polite"></div>
         <div class="grid" id="grid"></div>
