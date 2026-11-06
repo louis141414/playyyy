@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./favicon.svg" alt="Playyyy Logo" height="128">
-  <p><strong>Fast, ad-free browser games.</strong><br>
-  Play 100+ popular titles instantly, no downloads, no accounts, no ads.</p>
+  <p><strong>Find your game. Hit Playyyy.</strong><br>
+  Play popular browser games instantly, no downloads, no accounts, no ads.</p>
 
   <p>
     <a href="https://louis141414.github.io/playyyy/"><strong>Play Now</strong></a>
@@ -16,29 +16,19 @@
 
 ---
 
-## Why Playyyy?
-
-- **No ads**: Just pure gaming
-- **Lightning fast**: Built with pure vanilla HTML, CSS & JavaScript
-- **Works everywhere**: Great for school, work, or anywhere else
-- **Favorites system**: Star the games you love (saved in your browser)
-- **Search and filters**: Search, filter by category, and keep your current browse view in the URL
-- **Clean game links**: Every game has a simple `/game/?id=<game name>` URL, such as `/game/?id=Pac-Man`
-- **Recently added and random picks**: Browse new additions or spin the filtered game wheel
-- **Fully responsive**: Looks great on desktop, tablet and mobile
-- **Installable PWA**: Install Playyyy on supported phones and computers; the app shell is cached for offline access
-- **Accessible browsing**: Keyboard-friendly filters, clear focus styles, labeled controls, and progressive game-card loading
-
----
-
 ## Features
 
-- 100+ high-quality browser games (Slope, Drive Mad, Retro Bowl, Geometry Dash, 2048, and many more)
-- Clean, modern interface with dark and light themes
-- Daily featured game and A–Z, recently added, and favorites-first sorting
-- Full-screen support
-- Lightweight and optimized for speed
-- Open source and easy to customize
+- Browse and search a catalog of browser games
+- Filter by category and sort A–Z, by recently added, or favorites first
+- Save favorites in your browser (stored locally on your device)
+- Random game picker and a daily featured game
+- Dark and light themes
+- Full-screen play
+- Responsive layout for desktop, tablet, and mobile
+- Installable as a Progressive Web App (PWA) with offline access to the site shell
+- Keyboard-friendly controls and labeled, accessible UI
+
+Every game has its own link in the format `/game/?id=<game name>`, so you can share a direct link to a game.
 
 ---
 
@@ -49,79 +39,80 @@
 - Vanilla JavaScript
 - JSON
 
-No frameworks. No unnecessary dependencies.
+No frameworks and no build step.
 
 ---
 
-## Repository layout
+## Repository Layout
 
-- `index.html` and `404.html` are the static-site entry pages. `game/index.html` serves game pages at `/game/?id=<game name>`.
-- `assets/js/` contains shared JavaScript; `assets/css/` contains shared styles; and `assets/images/` contains thumbnails and app icons. The root `manifest.json` and `service-worker.js` stay at the site root for PWA scope.
-- `games.json` is the game catalog. Each game lives in its own `games/<game-name>/` folder, with its original internal asset layout preserved because game files rely on relative paths.
-- `verify/` contains the editable legal terms and their PDF.
-
-The root `.gitignore` excludes operating-system metadata files such as `.DS_Store` and `Thumbs.db`.
-
----
-
-## Install and offline use
-
-On a supported browser, use the browser menu to install Playyyy or add it to your home screen. The service worker caches the home page, game page, game list, manifest, and shared interface files for offline access. Pac-Man (Flash) and the newest Flash games use the locally hosted Ruffle player; its runtime adds about 29 MB to the initial install, and each Flash game is cached the first time it is played online so it can be replayed offline. Every game opens behind the Playyyy loading screen; common embedded loading indicators, including Unity progress screens, are hidden while their games load. Minecraft also reports its download progress. Game frames block top-level navigation and outside links so games remain within Playyyy. Other game files are not cached and may still need an internet connection. Theme preference and favorites stay in local browser storage; game-page visits may be measured with StatCounter. The featured game changes daily, **Most favorited** sorts your locally saved favorites first, and opening a game preserves your search, category, sort, and browse position when you return.
-
-Game pages use `/game/?id=<game name>` URLs. Game page views are sent to StatCounter with the game name in the page title.
+- `index.html` and `404.html`: site entry pages
+- `game/index.html`: game page template
+- `assets/js/`: shared JavaScript
+- `assets/css/`: shared styles
+- `assets/images/`: thumbnails and app icons
+- `games.json`: the game catalog (titles, categories, and links)
+- `games/<game-name>/`: per-game folders, kept as-is because games rely on relative file paths
+- `manifest.json` and `service-worker.js`: PWA files, kept at the site root
+- `verify/`: legal documents (Terms, Privacy, and Takedown Policy)
 
 ---
 
-## Getting Started
+## Running Locally
 
 ```bash
 git clone https://github.com/louis141414/playyyy.git
+cd playyyy
 ```
 
-Then just open `index.html` in your browser, or serve the folder with any static file server.
+Open `index.html` in a browser, or serve the folder with any static file server, for example:
+
+```bash
+python3 -m http.server 8000
+```
+
+---
+
+## Installing and Offline Use
+
+On a supported browser, use the browser menu to install Playyyy or add it to your home screen. The service worker caches the site shell (home page, game page, game list, and shared interface files). Games themselves may still need an internet connection.
+
+---
+
+## Privacy
+
+Theme preference and favorites are stored in your browser's local storage and are not sent to a server. Game-page visits may be measured with StatCounter. See the Privacy Notice in `verify/` for details.
+
+---
+
+## Games and Third-Party Content
+
+Playyyy links to or hosts browser games that were created by third parties. Those games remain the property of their respective owners. Playyyy does not claim ownership of any third-party game, character, name, or artwork.
+
+If you own rights to a game listed here and want it removed or changed, see the Takedown Policy in `verify/`.
 
 ---
 
 ## Contributing
 
-Contributions are always welcome!
+Contributions are welcome.
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-change`)
+3. Commit your changes
+4. Push the branch and open a Pull Request
 
-Use the **Request a game** button on the home page to suggest a game. Include its name, playable link, and description; after opening the issue, attach a game ZIP if available and a banner sized exactly **480 × 100 px**. You can also [open a game request directly](https://github.com/louis141414/playyyy/issues/new?template=game_request.yml).
-
-For other ideas or improvements, feel free to open an issue.
+For bugs or ideas, open an issue. Game suggestions should include the game's name, a link to a version the creator has made available for browser play, and confirmation that the creator permits its use on this site.
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License**.  
-See the [LICENSE](LICENSE) file for details.
+The **code** in this repository (HTML, CSS, JavaScript, and documentation) is licensed under the **MIT License**. See [LICENSE](LICENSE).
+
+This license does **not** apply to third-party games, names, logos, or artwork, which remain the property of their owners.
 
 ---
 
 ## Author
 
-**Louis Paelinck**  
 [@louis141414](https://github.com/louis141414)
-
----
-
-## Notice
-
-All games on this site belong to their original creators and owners.  
-Playyyy simply provides a convenient way to play them in the browser.
-
-The creator of this project is **not responsible** if a teacher (or anyone else) catches you playing games when you’re not supposed to.  
-Play at your own risk.
-
----
-
-<div align="center">
-  <sub>Made with ❤️ for people who just want to play games</sub>
-</div>

@@ -5,7 +5,7 @@ let selectedSort = 'recent';
 let wheelSpinTimer = null;
 let wheelSpinAnimation = null;
 const GAME_CARD_BATCH_SIZE = 24;
-let loadMoreCatalogGames = null;
+let catalogLoadObserver = null;
 
 function getBrowseParams() {
   const params = new URLSearchParams();
@@ -282,7 +282,10 @@ function renderGameGrid(container, games, emptyMessage, emptySuggestion, batchSi
   if (!container) return;
 
   container.innerHTML = '';
-  if (container.id === 'grid') loadMoreCatalogGames = null;
+  if (container.id === 'grid') {
+    catalogLoadObserver?.disconnect();
+    catalogLoadObserver = null;
+  }
 
   if (!games || games.length === 0) {
     if (!emptyMessage) return;
@@ -311,30 +314,40 @@ function renderGameGrid(container, games, emptyMessage, emptySuggestion, batchSi
     appendGames(0, games.length);
     return;
   }
+  if (typeof IntersectionObserver !== 'function') {
+    appendGames(0, games.length);
+    return;
+  }
 
   let renderedCount = 0;
-  const loadMoreStatus = document.createElement('button');
-  loadMoreStatus.className = 'theme-toggle load-more-games';
-  loadMoreStatus.type = 'button';
+  const loadMoreStatus = document.createElement('div');
+  loadMoreStatus.className = 'load-more-games';
+  loadMoreStatus.setAttribute('role', 'status');
+  loadMoreStatus.setAttribute('aria-live', 'polite');
   const loadNextBatch = () => {
     if (renderedCount >= games.length) return;
     const nextCount = Math.min(renderedCount + batchSize, games.length);
     appendGames(renderedCount, nextCount, loadMoreStatus);
     renderedCount = nextCount;
     if (renderedCount < games.length) {
-      loadMoreStatus.textContent = `Load more games (${games.length - renderedCount} remaining)`;
+      loadMoreStatus.textContent = 'More games load as you scroll.';
     } else {
+      catalogLoadObserver?.disconnect();
+      catalogLoadObserver = null;
       loadMoreStatus.remove();
-      loadMoreCatalogGames = null;
     }
   };
   const firstCount = Math.min(batchSize, games.length);
   appendGames(0, firstCount);
   renderedCount = firstCount;
-  loadMoreStatus.textContent = `Load more games (${games.length - renderedCount} remaining)`;
-  loadMoreStatus.addEventListener('click', loadNextBatch);
-  if (container.id === 'grid') loadMoreCatalogGames = loadNextBatch;
+  loadMoreStatus.textContent = 'More games load as you scroll.';
   container.appendChild(loadMoreStatus);
+  catalogLoadObserver = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    loadMoreStatus.textContent = 'Loading more games...';
+    loadNextBatch();
+  }, { rootMargin: '500px 0px' });
+  catalogLoadObserver.observe(loadMoreStatus);
 }
 
 // =======================
@@ -384,8 +397,8 @@ async function renderHome() {
   const recentGames = getRecentlyPlayed()
     .map(name => allGames.find(game => game && game.name === name))
     .filter(Boolean);
-  if (recentSection) recentSection.hidden = recentGames.length === 0;
-  renderGameGrid(recentGrid, recentGames);
+  if (recentSection) recentSection.hidden = false;
+  renderGameGrid(recentGrid, recentGames, 'No games played yet.', 'Start any game and it will appear here.');
 }
 
 function getEligibleGames() {

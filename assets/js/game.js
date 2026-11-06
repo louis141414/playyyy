@@ -294,11 +294,13 @@ function launchGameFrame(game, iframe) {
     iframe.sandboxGuard.observe(iframe, { attributes: true, attributeFilter: ['sandbox'] });
   }
   const loading = document.getElementById('game-loading');
+  if (iframe.gameLoadingTimeout) window.clearTimeout(iframe.gameLoadingTimeout);
 
   if (iframe.gameLoadHandler) iframe.removeEventListener('load', iframe.gameLoadHandler);
   if (iframe.gameErrorHandler) iframe.removeEventListener('error', iframe.gameErrorHandler);
   iframe.gameErrorHandler = () => {
     if (token !== iframe.gameLoadToken || iframe.gameNavigationBlocked) return;
+    window.clearTimeout(iframe.gameLoadingTimeout);
     setGameLoading(game.name, 'The game could not be loaded. Check your connection and try again.', {
       indeterminate: false,
       retryVisible: true
@@ -310,6 +312,7 @@ function launchGameFrame(game, iframe) {
   iframe.gameLoadHandler = () => {
     if (token !== iframe.gameLoadToken) return;
     if (iframe.gameNavigationBlocked) return;
+    window.clearTimeout(iframe.gameLoadingTimeout);
 
     let gameWindow;
     let gameDocument;
@@ -359,6 +362,16 @@ function launchGameFrame(game, iframe) {
   }
 
   iframe.src = game.url;
+  if (loading && !isMinecraftGame(game)) {
+    iframe.gameLoadingTimeout = window.setTimeout(() => {
+      if (token !== iframe.gameLoadToken || iframe.gameNavigationBlocked) return;
+      setGameLoading(game.name, 'This game is taking longer than expected. You can keep waiting or try again.', {
+        retryVisible: true
+      });
+      const retry = document.getElementById('game-download-retry');
+      if (retry) retry.onclick = () => launchGameFrame(game, iframe);
+    }, 20000);
+  }
 }
 
 async function renderGame() {
