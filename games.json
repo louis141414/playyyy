@@ -131,5 +131,6 @@
     { "name": "Watermelon Game", "url": "./games/watermelongame/index.html", "category": "Puzzle" },
     { "name": "World's Hardest Game", "url": "./games/worldshardestgame/index.html", "category": "Puzzle" },
     { "name": "Yohoho.io", "url": "./games/yohoho/index.html", "category": ".io" },
-    { "name": "Zombocalypse", "url": "./games/zombocalypse/index.html", "category": "Action" }
+    { "name": "Zombocalypse", "url": "./games/zombocalypse/index.html", "category": "Action" },
+    { "name": "Bubble Game 3", "url": "./games/bubble-game-3/index.html", "category": "Puzzle" }
 ]

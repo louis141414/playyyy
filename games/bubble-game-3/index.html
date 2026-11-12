@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Bubble Game 3</title>
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
+    <style>
+        /* Hide any residual loader branding if present */
+        #loader { display: none !important; }
+    </style>
+    <script type="text/javascript">
+        var version = 'offline';
+    </script>
+</head>
+<body>
+    <div id="content"></div>
+    <div id="loader">Loading ...</div>
+    <script type="text/javascript">
+        var gameName = "bubble-game-3.min.js";
+
+        function addScript(src, buster, callback) {
+            var s = document.createElement('script');
+            s.setAttribute('src', src + (buster ? '?v=' + buster : ''));
+            if (typeof callback === 'function') {
+                s.onload = callback;
+            }
+            s.onerror = function() {
+                console.error('Failed to load: ' + src);
+            };
+            document.body.appendChild(s);
+        }
+
+        // Load local version.js then game
+        addScript('version.js', null, function() {
+            // Preload the local libs listed in version.js
+            var loaded = 0;
+            var total = libs.length;
+            if (total === 0) {
+                loadGame();
+                return;
+            }
+            libs.forEach(function(src) {
+                addScript(src, null, function() {
+                    loaded++;
+                    if (loaded >= total) loadGame();
+                });
+            });
+        });
+
+        function loadGame() {
+            addScript(gameName, version, function() {
+                try {
+                    var game = new BubbleGame3.Game();
+                } catch (e) {
+                    console.error(e);
+                    document.getElementById('content').innerHTML = '<p style="color:white;text-align:center;margin-top:100px;">Error starting game. See console.</p>';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

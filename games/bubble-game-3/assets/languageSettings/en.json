@@ -1,0 +1,18 @@
+{
+  "ok": "bold 25pt Fira Sans Compressed",
+  "cancel": "bold 20pt Fira Sans Compressed",
+  "restart": "bold 20pt Fira Sans Compressed",
+  "setup": "bold 20pt Fira Sans Compressed",
+  "more_games": "bold 18pt Fira Sans Compressed",
+  "novice": "bold 56px Tahoma",
+  "board_color": {},
+  "continue": "bold 18pt Fira Sans Compressed",
+  "sound": "bold 22pt Fira Sans Compressed",
+  "volume": "bold 30pt Fira Sans Compressed",
+  "play": "bold 25pt Fira Sans Compressed",
+  "top_10": "bold 20pt Fira Sans Compressed",
+  "paused": "bold 56px Tahoma",
+  "game_over": "bold 20pt Fira Sans Compressed",
+  "reward_title": "bold 55px Tahoma",
+  "rotate_message_1": "bold 30px Tahoma"
+}
