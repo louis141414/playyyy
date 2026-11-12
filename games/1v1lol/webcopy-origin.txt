@@ -10,14 +10,6 @@ Uri: https://1v1.lol/css/style.css
 File Name: C:\Downloaded Web Sites\1v1.lol\css\style.css
 Content Type: text/css
 
-Uri: https://www.googletagmanager.com/gtag/js?id=UA-118283086-6
-File Name: C:\Downloaded Web Sites\1v1.lol\gtag\js.js
-Content Type: application/javascript
-
-Uri: https://1v1.lol/js/googleAnalytics.js
-File Name: C:\Downloaded Web Sites\1v1.lol\js\googleAnalytics.js
-Content Type: text/javascript
-
 Uri: https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
 File Name: C:\Downloaded Web Sites\1v1.lol\ajax\libs\jquery\3.5.1\jquery.min.js
 Content Type: text/javascript
@@ -52,10 +44,6 @@ Content Type: application/x-javascript
 
 Uri: https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js
 File Name: C:\Downloaded Web Sites\1v1.lol\firebasejs\7.2.1\firebase-app.js
-Content Type: text/javascript
-
-Uri: https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js
-File Name: C:\Downloaded Web Sites\1v1.lol\firebasejs\7.2.1\firebase-analytics.js
 Content Type: text/javascript
 
 Uri: https://www.gstatic.com/firebasejs/7.2.1/firebase-auth.js
