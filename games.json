@@ -1,4 +1,5 @@
 [
+    { "name": "Bubble Game 3", "url": "./games/bubble-game-3/index.html", "category": "Puzzle", "tag":"new!!" },
     { "name": "Super Mario 64", "url": "./games/sm64-split/index.html", "category": "Platformer", "tag": "new!!" },
     { "name": "Madalin Cars", "url": "./games/madalincars/index.html", "category": "Racing", "tag": "new!!" },
     { "name": "Minesweeper", "url": "./games/minesweeper/index.html", "category": "Puzzle" },
@@ -131,6 +132,5 @@
     { "name": "Watermelon Game", "url": "./games/watermelongame/index.html", "category": "Puzzle" },
     { "name": "World's Hardest Game", "url": "./games/worldshardestgame/index.html", "category": "Puzzle" },
     { "name": "Yohoho.io", "url": "./games/yohoho/index.html", "category": ".io" },
-    { "name": "Zombocalypse", "url": "./games/zombocalypse/index.html", "category": "Action" },
-    { "name": "Bubble Game 3", "url": "./games/bubble-game-3/index.html", "category": "Puzzle" }
+    { "name": "Zombocalypse", "url": "./games/zombocalypse/index.html", "category": "Action" }
 ]
