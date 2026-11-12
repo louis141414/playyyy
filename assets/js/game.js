@@ -486,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const iframe = document.getElementById('game-iframe');
   const fullscreenButton = document.getElementById('fullscreen-btn');
   if (iframe && fullscreenButton) {
-    fullscreenButton.addEventListener('click', async () => {
+    const toggleFullscreen = async () => {
       try {
         if (document.fullscreenElement) {
           await document.exitFullscreen();
@@ -495,6 +495,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (error) {
         console.error('Could not change fullscreen mode:', error);
+      }
+    };
+    const handleFullscreenKeydown = event => {
+      if (event.key !== 'F11') return;
+      event.preventDefault();
+      toggleFullscreen();
+    };
+
+    fullscreenButton.addEventListener('click', toggleFullscreen);
+    document.addEventListener('keydown', handleFullscreenKeydown);
+    iframe.addEventListener('load', () => {
+      try {
+        iframe.contentDocument.addEventListener('keydown', handleFullscreenKeydown, true);
+      } catch (error) {
+        console.warn('Could not add the fullscreen shortcut to the game frame:', error);
       }
     });
     document.addEventListener('fullscreenchange', () => {
