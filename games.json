@@ -1,4 +1,6 @@
 [
+    { "name": "Super Mario Bros", "url": "./games/super-mario-bros/index.html", "category": "Platformer", "tag":"new!!" },
+    { "name": "Temple Run", "url": "./games/templerun/index.html", "category": "Platformer", "tag":"new!!" },
     { "name": "Bubble Game 3", "url": "./games/bubble-game-3/index.html", "category": "Puzzle", "tag":"new!!" },
     { "name": "Super Mario 64", "url": "./games/sm64-split/index.html", "category": "Platformer", "tag": "new!!" },
     { "name": "Madalin Cars", "url": "./games/madalincars/index.html", "category": "Racing", "tag": "new!!" },
