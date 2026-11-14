@@ -33,21 +33,9 @@
             document.body.appendChild(s);
         }
 
-        // Load local version.js then game
+        // The game preloader loads Phaser plugins after Phaser itself is available.
         addScript('version.js', null, function() {
-            // Preload the local libs listed in version.js
-            var loaded = 0;
-            var total = libs.length;
-            if (total === 0) {
-                loadGame();
-                return;
-            }
-            libs.forEach(function(src) {
-                addScript(src, null, function() {
-                    loaded++;
-                    if (loaded >= total) loadGame();
-                });
-            });
+            loadGame();
         });
 
         function loadGame() {
