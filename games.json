@@ -5,6 +5,7 @@
     { "name": "Bubble Game 3", "url": "./games/bubble-game-3/index.html", "category": "Puzzle", "tag":"new!!" },
     { "name": "Super Mario 64", "url": "./games/sm64-split/index.html", "category": "Platformer", "tag": "new!!" },
     { "name": "Madalin Cars", "url": "./games/madalincars/index.html", "category": "Racing", "tag": "new!!" },
+    { "name": "Wheelie Master", "url": "./games/wheelie-master/index.html", "category": "Racing", "tag": "new!!" },
     { "name": "Minesweeper", "url": "./games/minesweeper/index.html", "category": "Puzzle" },
     { "name": "Cluster Truck", "url": "./games/clustertruck/index.html", "category": "Platformer" },
     { "name": "ULTRAKILL", "url": "./games/ultrakill/index.html", "category": "Action" },
