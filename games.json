@@ -1,4 +1,5 @@
 [
+    { "name": "Wacky Flip", "url": "./games/wacky-flip/index.html", "category": "Platformer", "tag":"new!!" },
     { "name": "Super Mario Bros", "url": "./games/super-mario-bros/index.html", "category": "Platformer", "tag":"new!!" },
     { "name": "Temple Run", "url": "./games/templerun/index.html", "category": "Platformer", "tag":"new!!" },
     { "name": "Bubble Game 3", "url": "./games/bubble-game-3/index.html", "category": "Puzzle", "tag":"new!!" },
