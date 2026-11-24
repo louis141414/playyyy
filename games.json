@@ -1,4 +1,5 @@
 [
+    { "name": "Sonic", "url": "./games/Sonic/index.html", "category": "Platformer", "tag":"new!!" },
     { "name": "Wacky Flip", "url": "./games/wacky-flip/index.html", "category": "Platformer", "tag":"new!!" },
     { "name": "Super Mario Bros", "url": "./games/super-mario-bros/index.html", "category": "Platformer", "tag":"new!!" },
     { "name": "Temple Run", "url": "./games/templerun/index.html", "category": "Platformer", "tag":"new!!" },
