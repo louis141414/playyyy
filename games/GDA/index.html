@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grand De Auto</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%; background: #000; overflow: hidden; color: #ddd;
+      font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    canvas {
+      position: fixed; inset: 0; width: 100vw; height: 100vh;
+      display: block; outline: none; background: #000; z-index: 1;
+    }
+
+    /* INTRO - same window */
+    #intro {
+      position: fixed; inset: 0; z-index: 100; background: #000;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 1s ease;
+    }
+    #intro.fade-out { opacity: 0; pointer-events: none; }
+    #intro video {
+      width: 100%; height: 100%; object-fit: contain; background: #000;
+    }
+    #skip {
+      position: absolute; bottom: 28px; right: 28px;
+      padding: 10px 22px; background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.25); color: #fff;
+      font-size: 13px; letter-spacing: 0.08em; cursor: pointer;
+      border-radius: 3px; opacity: 0; transition: opacity 0.4s; z-index: 2;
+    }
+    #intro:hover #skip, #skip.visible { opacity: 1; }
+
+    /* LOADING - same window */
+    #loading {
+      position: fixed; inset: 0; z-index: 50;
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #050505; transition: opacity 0.8s ease;
+    }
+    #loading.show { display: flex; }
+    #loading.fade-out { opacity: 0; pointer-events: none; }
+    #loading h1 {
+      font-size: 36px; letter-spacing: 0.08em; color: #fff;
+      font-weight: 700; margin-bottom: 8px;
+      text-shadow: 0 0 40px rgba(200,120,255,0.4);
+    }
+    #loading .sub {
+      font-size: 12px; color: #b090e0; letter-spacing: 0.4em;
+      text-transform: uppercase; margin-bottom: 36px;
+    }
+    .bar-wrap {
+      width: 260px; height: 3px; background: #1a1a1a;
+      border-radius: 2px; overflow: hidden; margin-bottom: 12px;
+    }
+    .bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #c084fc, #e879f9, #f0abfc);
+      transition: width 0.3s ease;
+    }
+    #status { font-size: 12px; color: #666; min-height: 18px; }
+    .rockstar-foot {
+      position: absolute; bottom: 22px; left: 0; right: 0;
+      text-align: center; font-size: 11px; color: #333; letter-spacing: 0.15em;
+    }
+
+    /* Click fallback */
+    #ov {
+      position: fixed; inset: 0; z-index: 40;
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.93); cursor: pointer;
+    }
+    #ov.show { display: flex; }
+    #ov h1 {
+      font-size: 38px; color: #fff; letter-spacing: 0.06em; margin-bottom: 8px;
+      text-shadow: 0 0 40px rgba(255,80,180,0.35);
+    }
+    #ov .sub {
+      font-size: 13px; color: #c8a0ff; letter-spacing: 0.35em;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    #go {
+      padding: 14px 40px; font-size: 17px; font-weight: 600; color: #111;
+      background: linear-gradient(135deg, #f0e6ff, #d8b4fe);
+      border: none; border-radius: 4px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+
+  <div id="intro">
+    <video id="introVideo" playsinline preload="auto">
+      <source src="intro.mp4" type="video/mp4">
+    </video>
+    <button id="skip" type="button">SKIP INTRO</button>
+  </div>
+
+  <div id="loading">
+    <h1>Grand De Auto</h1>
+    <div class="sub">Leonida</div>
+    <div class="bar-wrap"><div class="bar" id="bar"></div></div>
+    <div id="status">Initializing...</div>
+    <div class="rockstar-foot">Playyyy - GAMES</div>
+  </div>
+
+  <div id="ov">
+    <h1>Grand De Auto</h1>
+    <div class="sub">Leonida</div>
+    <button id="go" type="button">Click to play</button>
+  </div>
+
+  <script>
+    (function () {
+      const intro = document.getElementById('intro');
+      const video = document.getElementById('introVideo');
+      const skipBtn = document.getElementById('skip');
+      const loading = document.getElementById('loading');
+      const bar = document.getElementById('bar');
+      const status = document.getElementById('status');
+      const ov = document.getElementById('ov');
+      let introDone = false;
+      let gameReady = false;
+      let started = false;
+      let gameScriptLoaded = false;
+
+      // ---- Intro ----
+      function finishIntro() {
+        if (introDone) return;
+        introDone = true;
+        try { video.pause(); } catch (e) {}
+        intro.classList.add('fade-out');
+        setTimeout(function () {
+          intro.style.display = 'none';
+          loading.classList.add('show');
+          startLoadingAnim();
+          loadGameScript();
+        }, 1000);
+      }
+
+      video.addEventListener('ended', finishIntro);
+      skipBtn.addEventListener('click', finishIntro);
+      setTimeout(function () { skipBtn.classList.add('visible'); }, 2000);
+
+      // Try autoplay
+      video.muted = false;
+      var p = video.play();
+      if (p !== undefined) {
+        p.catch(function () {
+          video.muted = true;
+          video.play().then(function () {
+            var unmute = function () {
+              video.muted = false;
+              document.removeEventListener('click', unmute);
+              document.removeEventListener('keydown', unmute);
+            };
+            document.addEventListener('click', unmute);
+            document.addEventListener('keydown', unmute);
+          }).catch(function () {
+            setTimeout(finishIntro, 600);
+          });
+        });
+      }
+
+      // ---- Loading bar ----
+      var steps = [
+        { pct: 10, msg: 'Mounting package...' },
+        { pct: 25, msg: 'Loading terrain...' },
+        { pct: 40, msg: 'Loading maps...' },
+        { pct: 55, msg: 'Loading peds & vehicles...' },
+        { pct: 70, msg: 'Compiling shaders...' },
+        { pct: 85, msg: 'Starting RAGE engine...' },
+        { pct: 95, msg: 'Almost ready...' }
+      ];
+      var step = 0;
+      function startLoadingAnim() {
+        function next() {
+          if (step < steps.length) {
+            var s = steps[step++];
+            bar.style.width = s.pct + '%';
+            status.textContent = s.msg;
+            setTimeout(next, 300 + Math.random() * 250);
+          }
+        }
+        next();
+      }
+
+      function onGameReady() {
+        gameReady = true;
+        bar.style.width = '100%';
+        status.textContent = 'Ready';
+        setTimeout(tryStart, 500);
+      }
+
+      function tryStart() {
+        if (started || !gameReady) return;
+        started = true;
+        loading.classList.add('fade-out');
+        setTimeout(function () {
+          loading.style.display = 'none';
+          if (window.oopAudioResume) window.oopAudioResume();
+          var c = document.getElementById('canvas');
+          c.focus();
+          // Simulate a click to unlock pointer lock / audio if needed
+          try {
+            c.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+          } catch (e) {}
+        }, 850);
+      }
+
+      ov.addEventListener('click', function () {
+        ov.classList.remove('show');
+        if (window.oopAudioResume) window.oopAudioResume();
+        document.getElementById('canvas').focus();
+      });
+
+      // ---- Module + load game ----
+      window.Module = {
+        canvas: document.getElementById('canvas'),
+        print: function () {},
+        printErr: function (t) { console.warn(t); },
+        locateFile: function (path) { return path; },
+        onRuntimeInitialized: function () { onGameReady(); }
+      };
+
+      function loadGameScript() {
+        if (gameScriptLoaded) return;
+        gameScriptLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'outonparole.js';
+        s.onerror = function () {
+          status.textContent = 'Failed to load game files';
+          status.style.color = '#f66';
+        };
+        document.body.appendChild(s);
+      }
+
+      // Safety fallback
+      setTimeout(function () {
+        if (!started && introDone) {
+          loading.classList.add('fade-out');
+          setTimeout(function () {
+            loading.style.display = 'none';
+            if (gameReady) {
+              tryStart();
+            } else {
+              ov.classList.add('show');
+            }
+          }, 700);
+        }
+      }, 20000);
+    })();
+  </script>
+</body>
+</html>
