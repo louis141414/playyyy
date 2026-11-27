@@ -5,6 +5,15 @@ Dit bestand wordt wekelijks bijgewerkt door een Grok-automatisering.
 
 ## Log (nieuwste bovenaan)
 
+### 2026-11-27
+- Periode: Last 14 Days
+- Page Views: 197
+- Sessions: 71
+- Visitors: 32
+- New Visitors: 16
+- Opvallende dagen: Opvallende piek van 67 page views (hoogste in de zichtbare grafiek); verder pieken rond 27, 23, 20 en 19. Veel lagere dagen met 0-6 page views. Grafiek toont dagen 12-28 (okt/nov/dec) met wisselende activiteit.
+- Notities: Sterke stijging t.o.v. 20 nov (96 page views). Avg. Daily Page Views ~14.1 (197/14), Sessions ~5.1, Visitors ~2.3, New Visitors ~1.1. Hoogste totalen tot nu toe.
+
 ### 2026-11-20
 - Periode: Last 14 Days
 - Page Views: 96
